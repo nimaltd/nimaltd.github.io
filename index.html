@@ -54,7 +54,15 @@
 
 <header class="nav">
   <div class="wrap nav-row">
-    <a class="logo" href="#top" aria-label="NimaLTD, back to the top"><span class="chip-mark" aria-hidden="true"></span>NIMALTD</a>
+    <a class="logo" href="#top" aria-label="NimaLTD, back to the top">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
     <nav class="nav-links" id="nav-links" aria-label="Sections">
       <a href="#installers">Installers</a>
       <a href="#libraries">Libraries</a>
@@ -76,7 +84,10 @@
 <main id="main">
   <section class="hero wrap" id="top">
     <div class="hero-text">
-      <p class="tag">Nima Askari / embedded C / 20+ years</p>
+      <div class="who">
+        <img src="https://github.com/nimaltd.png?size=200" width="72" height="72" alt="Nima Askari">
+        <div><b>Nima Askari</b><span>Embedded C / 20+ years</span></div>
+      </div>
       <h1>Firmware libraries, <span>engineered to drop in.</span></h1>
       <p class="lead">Lightweight, non-blocking C libraries for STM32, and five installers that put any library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.</p>
       <div class="ctas">
@@ -340,7 +351,7 @@
     <div class="shead"><span class="n">04</span><h2>About, and support</h2></div>
     <div class="about">
       <div class="me">
-        <img src="https://github.com/nimaltd.png?size=192" width="96" height="96" alt="Nima Askari" loading="lazy">
+        <img src="https://github.com/nimaltd.png?size=240" width="120" height="120" alt="Nima Askari" loading="lazy">
         <div>
           <h3>Nima Askari</h3>
           <p>Electronics engineer and embedded developer. More than 20 years of C for STM32 microcontrollers, across embedded programming, electronics design and hardware testing, and most of it spent on one goal: libraries that are actually easy to use.</p>

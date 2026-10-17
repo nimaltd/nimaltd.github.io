@@ -120,9 +120,15 @@ code { font: .9em var(--mono); }
 
 .nav { position: sticky; top: 0; z-index: 20; background: var(--nav-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .nav-row { display: flex; align-items: center; gap: 24px; height: 68px; }
-.logo { display: flex; align-items: center; gap: 10px; font: 700 19px var(--head); letter-spacing: .04em; text-decoration: none; }
-.chip-mark { width: 26px; height: 26px; border: 2px solid var(--accent); border-radius: 5px; position: relative; }
-.chip-mark::before { content: ""; position: absolute; inset: 5px; border-radius: 2px; background: var(--accent); opacity: .85; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.mark { width: 32px; height: 32px; flex: none; color: var(--accent); transition: transform .2s ease; }
+.mark-pins { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.mark-body { fill: none; stroke: currentColor; stroke-width: 2; }
+.mark-die { fill: currentColor; }
+.mark-n { fill: none; stroke: var(--bg); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.logo:hover .mark { transform: rotate(90deg); }
+.word { font: 700 22px/1 var(--head); letter-spacing: -.01em; }
+.word em { font-style: normal; color: var(--accent); }
 .nav-links { margin-left: auto; display: flex; gap: 26px; }
 .nav-links a { font: 500 13px var(--mono); color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: .06em; padding: 8px 0; }
 .nav-links a:hover { color: var(--accent); }
@@ -137,6 +143,10 @@ code { font: .9em var(--mono); }
 /* ------------------------------------------------------------------------ */
 
 .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; align-items: center; padding-top: 84px; padding-bottom: 72px; scroll-margin-top: 80px; }
+.who { display: flex; align-items: center; gap: 16px; }
+.who img { width: 72px; height: 72px; flex: none; object-fit: cover; border-radius: 50%; padding: 3px; border: 2px solid var(--accent); background: var(--bg); }
+.who b { display: block; font: 600 20px/1.2 var(--head); }
+.who span { display: block; margin-top: 4px; font: 500 12px var(--mono); color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
 .tag { display: flex; align-items: center; gap: 10px; margin: 0; font: 500 12px var(--mono); color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
 .tag::before { content: ""; width: 28px; height: 1px; background: currentColor; }
 h1 { font: 700 clamp(38px, 5.4vw, 60px)/1.04 var(--head); letter-spacing: -.02em; margin: 18px 0 20px; text-wrap: balance; }
@@ -266,7 +276,7 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .about { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; margin-top: 24px; }
 .me, .give { padding: 28px; border-radius: var(--radius); background: var(--panel); }
 .me { display: flex; gap: 22px; border: 1px solid var(--line-2); }
-.me img { width: 96px; height: 96px; border-radius: 50%; border: 2px solid var(--line-2); flex: none; }
+.me img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 2px solid var(--line-2); flex: none; }
 .me h3, .give h3 { margin: 0 0 6px; font: 600 21px var(--head); }
 .me p, .give p { margin: 0; color: var(--muted); }
 .facts { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14.5px; }
