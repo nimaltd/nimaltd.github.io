@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nima Askari (NimaLTD) | Embedded C libraries and installers</title>
+<meta name="description" content="Lightweight, non-blocking embedded C libraries for STM32, and five installers that put a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/">
+<meta property="og:title" content="Nima Askari (NimaLTD) | Embedded C libraries and installers">
+<meta property="og:description" content="Non-blocking embedded C libraries for STM32, and one command to install them into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO projects.">
+<meta property="og:image" content="https://github.com/nimaltd.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M2.5 17a24 24 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24 24 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2M14 2v2M6 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/></symbol>
+  <symbol id="i-source" viewBox="0 0 24 24"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8M10 12h4"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-offline" viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.43a5 5 0 0 1 7 0M5 12.86a10 10 0 0 1 5.17-2.69M19 12.86a10 10 0 0 0-2-1.52M2 8.82a15 15 0 0 1 4.18-2.64M22 8.82a15 15 0 0 0-11.29-3.76M2 2l20 20"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="#top" aria-label="NimaLTD, back to the top"><span class="chip-mark" aria-hidden="true"></span>NIMALTD</a>
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="#installers">Installers</a>
+      <a href="#libraries">Libraries</a>
+      <a href="#your-library">Your library</a>
+      <a href="#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="#i-sun"/></svg><svg class="ico ico-moon"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" id="top">
+    <div class="hero-text">
+      <p class="tag">Nima Askari / embedded C / 20+ years</p>
+      <h1>Firmware libraries, <span>engineered to drop in.</span></h1>
+      <p class="lead">Lightweight, non-blocking C libraries for STM32, and five installers that put any library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.</p>
+      <div class="ctas">
+        <a class="btn amber" href="#installers">Install a library</a>
+        <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">Browse on GitHub <svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+      <dl class="meta">
+        <div><dt>stars</dt><dd data-stat="stars">4,000+</dd></div>
+        <div><dt>followers</dt><dd data-stat="followers">1,000+</dd></div>
+        <div><dt>installers</dt><dd>5</dd></div>
+      </dl>
+    </div>
+    <figure class="board" aria-label="stm32-installer installing a library into a CMake project">
+      <figcaption>U1 STM32-INSTALLER</figcaption>
+<pre><span class="p">$</span> pip install stm32-installer
+<span class="p">$</span> stm32-installer nimaltd/stm32-installer-example
+<span class="c">Fetching nimaltd/stm32-installer-example ...</span>
+
+<span class="c">Files</span>
+  written example/src/example.h
+  written example/src/example_config.h
+  written example/src/example.c
+
+<span class="c">Project</span>
+  updated CMake  Added example to CMakeLists.txt
+
+<span class="g">Done. #include "example.h" and you are away.</span></pre>
+      <div class="pins" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </figure>
+  </section>
+
+  <section class="wrap sect" id="installers">
+    <div class="shead"><span class="n">01</span><h2>One command, five platforms</h2></div>
+    <p class="sub">Each installer copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update.</p>
+
+    <div class="rail" role="tablist" aria-label="Platforms">
+      <button class="rail-tab" role="tab" id="tab-stm32" aria-controls="panel-stm32" aria-selected="true"><b>STM32</b><span>CubeIDE, CMake, Keil, IAR</span></button>
+      <button class="rail-tab" role="tab" id="tab-zephyr" aria-controls="panel-zephyr" aria-selected="false" tabindex="-1"><b>Zephyr</b><span>and nRF Connect SDK</span></button>
+      <button class="rail-tab" role="tab" id="tab-esp32" aria-controls="panel-esp32" aria-selected="false" tabindex="-1"><b>ESP-IDF</b><span>any ESP32 chip</span></button>
+      <button class="rail-tab" role="tab" id="tab-arduino" aria-controls="panel-arduino" aria-selected="false" tabindex="-1"><b>Arduino</b><span>IDE 1, IDE 2, arduino-cli</span></button>
+      <button class="rail-tab" role="tab" id="tab-pio" aria-controls="panel-pio" aria-selected="false" tabindex="-1"><b>PlatformIO</b><span>any framework, native too</span></button>
+    </div>
+
+    <div class="panels">
+      <article class="ipanel on" role="tabpanel" id="panel-stm32" aria-labelledby="tab-stm32">
+        <div class="ipanel-text">
+          <h3>stm32-installer</h3>
+          <p>For STM32 projects in CMake, STM32CubeIDE, Keil, IAR and Makefile.</p>
+          <ul>
+            <li>Adds the library to your project file, and backs the file up first</li>
+            <li>Any library it needs comes with it</li>
+            <li>An update keeps your settings</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/stm32-installer">GitHub</a>
+            <a href="https://pypi.org/project/stm32-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/stm32-installer-example">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install stm32-installer&#10;stm32-installer nimaltd/stm32-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install stm32-installer
+<span class="p">$</span> stm32-installer nimaltd/stm32-installer-example</pre>
+          <p class="cmd-note">The example blinks an LED without <code>HAL_Delay()</code>, in any STM32 project.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-zephyr" aria-labelledby="tab-zephyr">
+        <div class="ipanel-text">
+          <h3>zephyr-installer</h3>
+          <p>For Zephyr and nRF Connect SDK applications.</p>
+          <ul>
+            <li>Makes the library a Zephyr module of your application</li>
+            <li>Adds it to <code>CMakeLists.txt</code> and switches it on in <code>prj.conf</code></li>
+            <li>Its settings are in Kconfig</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/zephyr-installer">GitHub</a>
+            <a href="https://pypi.org/project/zephyr-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/zephyr-installer-example">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install zephyr-installer&#10;zephyr-installer nimaltd/zephyr-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install zephyr-installer
+<span class="p">$</span> zephyr-installer nimaltd/zephyr-installer-example</pre>
+          <p class="cmd-note">The example builds in any Zephyr application, <code>native_sim</code> included.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-esp32" aria-labelledby="tab-esp32">
+        <div class="ipanel-text">
+          <h3>esp32-installer</h3>
+          <p>For ESP-IDF projects, on any ESP32 chip.</p>
+          <ul>
+            <li>Makes the library a component in <code>components/</code>, with its own <code>CMakeLists.txt</code></li>
+            <li>Its settings are in <code>idf.py menuconfig</code></li>
+            <li>The symbols it needs go into <code>sdkconfig.defaults</code></li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/esp32-installer">GitHub</a>
+            <a href="https://pypi.org/project/esp32-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/esp32-installer-example">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install esp32-installer&#10;esp32-installer nimaltd/esp32-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install esp32-installer
+<span class="p">$</span> esp32-installer nimaltd/esp32-installer-example</pre>
+          <p class="cmd-note">The example is a period that never blocks, with its settings in menuconfig.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-arduino" aria-labelledby="tab-arduino">
+        <div class="ipanel-text">
+          <h3>arduino-installer</h3>
+          <p>For the Arduino IDE, version 1 or 2, and arduino-cli.</p>
+          <ul>
+            <li>Into your sketchbook's libraries folder, for every sketch</li>
+            <li>Or into one sketch's <code>src</code> folder, for that sketch alone</li>
+            <li>Writes the <code>library.properties</code> Arduino knows the library by</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/arduino-installer">GitHub</a>
+            <a href="https://pypi.org/project/arduino-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/arduino-installer-example">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install arduino-installer&#10;arduino-installer nimaltd/arduino-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install arduino-installer
+<span class="p">$</span> arduino-installer nimaltd/arduino-installer-example</pre>
+          <p class="cmd-note">The example builds for any board, and prints on Serial.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-pio" aria-labelledby="tab-pio">
+        <div class="ipanel-text">
+          <h3>pio-installer</h3>
+          <p>For PlatformIO, with any framework: Arduino, ESP-IDF, STM32Cube, or none at all on the native platform.</p>
+          <ul>
+            <li>Into <code>lib/</code>, with the <code>library.json</code> PlatformIO builds it by</li>
+            <li>The defines it needs go into <code>platformio.ini</code>, for every environment</li>
+            <li>Names any environment the library will not build in</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/pio-installer">GitHub</a>
+            <a href="https://pypi.org/project/pio-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/pio-installer-example">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install pio-installer&#10;pio-installer nimaltd/pio-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install pio-installer
+<span class="p">$</span> pio-installer nimaltd/pio-installer-example</pre>
+          <p class="cmd-note">The example builds with every framework, and runs on your computer with no board.</p>
+        </div>
+      </article>
+    </div>
+
+    <ul class="features" aria-label="What every installer does">
+      <li><svg class="ico"><use href="#i-source"/></svg><div><b>GitHub, a zip or a folder</b><span>By owner and name, by its address, from a downloaded zip, or from a folder on disk.</span></div></li>
+      <li><svg class="ico"><use href="#i-layers"/></svg><div><b>What it needs comes first</b><span>Everything is fetched before anything is written, so a library that cannot be had changes nothing.</span></div></li>
+      <li><svg class="ico"><use href="#i-sliders"/></svg><div><b>Your settings stay</b><span>What you write between <code>USER CODE</code> lines survives every update. Anything else of yours is saved as a <code>.bak</code>.</span></div></li>
+      <li><svg class="ico"><use href="#i-undo"/></svg><div><b>Out again with one command</b><span><code>--uninstall</code> takes the files and the project changes back out.</span></div></li>
+      <li><svg class="ico"><use href="#i-lock"/></svg><div><b>Private repositories</b><span>With a GitHub token that can read them, sent to GitHub and nowhere else.</span></div></li>
+      <li><svg class="ico"><use href="#i-offline"/></svg><div><b>Without internet</b><span>The installer is one file that needs nothing else. Give it the library's zip.</span></div></li>
+    </ul>
+  </section>
+
+  <section class="wrap sect" id="libraries">
+    <div class="shead"><span class="n">02</span><h2>Libraries</h2></div>
+    <p class="sub">Ready for stm32-installer, each with one command. The rest are moving over one by one.</p>
+    <div class="libs">
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/spif">spif</a> <span class="stars" data-repo="spif"><svg class="ico"><use href="#i-star"/></svg><span>723</span></span></h3>
+        <p>Driver for SPI NOR flash, W25Qxx and compatible, on the STM32 HAL.</p>
+        <ul class="chips"><li>SPI NOR</li><li>DMA</li><li>LittleFS</li></ul>
+        <div class="line-cmd"><code>stm32-installer nimaltd/spif</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/spif" aria-label="Copy the spif command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/ee24">ee24</a> <span class="stars" data-repo="ee24"><svg class="ico"><use href="#i-star"/></svg><span>181</span></span></h3>
+        <p>Driver for 24xx I2C EEPROMs, 24C01 to 24C512, on the STM32 HAL.</p>
+        <ul class="chips"><li>I2C</li><li>EEPROM</li><li>DMA</li></ul>
+        <div class="line-cmd"><code>stm32-installer nimaltd/ee24</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/ee24" aria-label="Copy the ee24 command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/seq">seq</a> <span class="stars" data-repo="seq"><svg class="ico"><use href="#i-star"/></svg><span>65</span></span></h3>
+        <p>Non blocking state sequencer and interrupt task queue for STM32, with no RTOS.</p>
+        <ul class="chips"><li>No RTOS</li><li>Interrupt safe</li></ul>
+        <div class="line-cmd"><code>stm32-installer nimaltd/seq</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/seq" aria-label="Copy the seq command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/osal">osal</a> <span class="stars" data-repo="osal"><svg class="ico"><use href="#i-star"/></svg><span></span></span></h3>
+        <p>OS abstraction layer for STM32: the same mutex and delay on bare metal, FreeRTOS and ThreadX.</p>
+        <ul class="chips"><li>FreeRTOS</li><li>ThreadX</li><li>Bare metal</li></ul>
+        <div class="line-cmd"><code>stm32-installer nimaltd/osal</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/osal" aria-label="Copy the osal command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/littlefs">littlefs</a></h3>
+        <p>LittleFS by the littlefs project, a fail-safe file system, ready for stm32-installer.</p>
+        <ul class="chips"><li>File system</li><li>Power loss safe</li></ul>
+        <div class="line-cmd"><code>stm32-installer nimaltd/littlefs</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/littlefs" aria-label="Copy the littlefs command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+      </article>
+      <a class="lib next" href="#your-library">
+        <h3>Your library next</h3>
+        <p>Any library with an <code>installer.yml</code> installs the same way, on all five platforms.</p>
+        <span class="next-go">How to add one <svg class="ico"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+
+    <h3 class="more-title">More on GitHub</h3>
+    <ul class="more">
+      <li><a href="https://github.com/nimaltd/ee"><b>ee</b><span>EEPROM emulation for STM32</span><em data-repo="ee">471</em></a></li>
+      <li><a href="https://github.com/nimaltd/atc"><b>atc</b><span>AT command parser for STM32</span><em data-repo="atc">322</em></a></li>
+      <li><a href="https://github.com/nimaltd/gsm_v5"><b>gsm_v5</b><span>GSM module library for STM32 LL</span><em data-repo="gsm_v5">256</em></a></li>
+      <li><a href="https://github.com/nimaltd/ds18b20"><b>ds18b20</b><span>Non blocking DS18B20 library for STM32</span><em data-repo="ds18b20">180</em></a></li>
+      <li><a href="https://github.com/nimaltd/wifi-coprocessor"><b>wifi-coprocessor</b><span>ESP32 WiFi co-processor, the complete ESP-IDF project</span><em data-repo="wifi-coprocessor">170</em></a></li>
+      <li><a href="https://github.com/nimaltd/NMEA"><b>NMEA</b><span>GPS NMEA library for STM32 LL</span><em data-repo="NMEA">141</em></a></li>
+      <li><a href="https://github.com/nimaltd/master-modbus"><b>master-modbus</b><span>Modbus master library for STM32 LL</span><em data-repo="master-modbus">114</em></a></li>
+      <li><a href="https://github.com/nimaltd/HX711"><b>HX711</b><span>HX711 load cell driver for the STM32 HAL</span><em data-repo="HX711">108</em></a></li>
+      <li><a href="https://github.com/nimaltd/ws28xx"><b>ws28xx</b><span>WS2811, WS2812 and WS2815 LEDs for STM32, PWM and DMA</span><em data-repo="ws28xx">107</em></a></li>
+    </ul>
+    <p class="all"><a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">All <span data-stat="repos">58</span> repositories <svg class="ico"><use href="#i-arrow"/></svg></a></p>
+  </section>
+
+  <section class="wrap sect" id="your-library">
+    <div class="shead"><span class="n">03</span><h2>Make your library installable</h2></div>
+    <div class="split">
+      <div class="split-text">
+        <p>The installers are not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and all five can install it: each reads its own keys and leaves the others alone.</p>
+        <p>Only <code>name</code> and <code>files</code> are required. Everything else, the libraries it needs, its options, its settings and each platform's own keys, is there when you want it.</p>
+        <p class="docs">The keys, platform by platform:</p>
+        <ul class="doc-links">
+          <li><a href="https://github.com/nimaltd/stm32-installer#for-someone-writing-a-library">stm32-installer</a></li>
+          <li><a href="https://github.com/nimaltd/zephyr-installer#for-someone-writing-a-library">zephyr-installer</a></li>
+          <li><a href="https://github.com/nimaltd/esp32-installer#for-someone-writing-a-library">esp32-installer</a></li>
+          <li><a href="https://github.com/nimaltd/arduino-installer#for-someone-writing-a-library">arduino-installer</a></li>
+          <li><a href="https://github.com/nimaltd/pio-installer#for-someone-writing-a-library">pio-installer</a></li>
+        </ul>
+      </div>
+      <figure class="board yaml" aria-label="A small installer.yml">
+        <figcaption>installer.yml</figcaption>
+        <button class="copy" type="button" data-copy="name: mylib&#10;description: Driver for the X chip&#10;repository: https://github.com/you/mylib&#10;license: Apache-2.0&#10;&#10;files:&#10;  headers:&#10;    - src/mylib.h&#10;    - src/mylib_config.h&#10;  sources:&#10;    - src/mylib.c" aria-label="Copy the installer.yml"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="k">name:</span> mylib
+<span class="k">description:</span> Driver for the X chip
+<span class="k">repository:</span> https://github.com/you/mylib
+<span class="k">license:</span> Apache-2.0
+
+<span class="k">files:</span>
+  <span class="k">headers:</span>
+    - src/mylib.h
+    - src/mylib_config.h   <span class="c"># your settings, kept on update</span>
+  <span class="k">sources:</span>
+    - src/mylib.c</pre>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="downloads">
+    <div class="shead"><span class="n">04</span><h2>Downloads</h2></div>
+    <div class="download">
+      <div>
+        <h3>SIM800C24 firmware 1418B09</h3>
+        <p>For the SIM800C, with TLS 1.2, for MQTT over a secure connection. A <code>.rar</code> of 10.4 MB.</p>
+      </div>
+      <a class="btn ghost" href="1418B09SIM800C24_TLS12.rar" download><svg class="ico"><use href="#i-download"/></svg>Download</a>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="support">
+    <div class="shead"><span class="n">05</span><h2>About, and support</h2></div>
+    <div class="about">
+      <div class="me">
+        <img src="https://github.com/nimaltd.png?size=192" width="96" height="96" alt="Nima Askari" loading="lazy">
+        <div>
+          <h3>Nima Askari</h3>
+          <p>Electronics engineer and embedded developer. More than 20 years of C for STM32 microcontrollers, across embedded programming, electronics design and hardware testing, and most of it spent on one goal: libraries that are actually easy to use.</p>
+          <ul class="facts">
+            <li>Third place, National Skills Competition of Electronic Engineering, Iran, 2003</li>
+            <li>B.Sc. in Electronic Engineering, Chamran University, Rasht</li>
+          </ul>
+        </div>
+      </div>
+      <div class="give">
+        <h3>Free and open source</h3>
+        <p>Every library and installer here is free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
+        <div class="ctas">
+          <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories"><svg class="ico"><use href="#i-star"/></svg>Star on GitHub</a>
+          <a class="btn amber" href="https://ko-fi.com/nimaltd"><svg class="ico"><use href="#i-coffee"/></svg>Buy me a coffee</a>
+        </div>
+        <ul class="social" aria-label="Elsewhere">
+          <li><a href="https://github.com/nimaltd" aria-label="GitHub"><svg class="ico"><use href="#i-github"/></svg></a></li>
+          <li><a href="https://www.youtube.com/@nimaltd" aria-label="YouTube"><svg class="ico"><use href="#i-youtube"/></svg></a></li>
+          <li><a href="https://www.instagram.com/github.nimaltd" aria-label="Instagram"><svg class="ico"><use href="#i-instagram"/></svg></a></li>
+          <li><a href="https://linkedin.com/in/nimaltd" aria-label="LinkedIn"><svg class="ico"><use href="#i-linkedin"/></svg></a></li>
+          <li><a href="mailto:nima.askari@gmail.com" aria-label="Email"><svg class="ico"><use href="#i-mail"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>Libraries and installers under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
