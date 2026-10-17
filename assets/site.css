@@ -152,7 +152,8 @@ h1 span { color: var(--accent); }
 
 .board { position: relative; margin: 0; padding: 26px 22px 20px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
 .board figcaption { position: absolute; top: -10px; left: 18px; padding: 0 8px; background: var(--bg); color: var(--accent); font: 500 11px var(--mono); letter-spacing: .1em; }
-.board pre { margin: 0; overflow-x: auto; font: 13px/1.75 var(--mono); color: var(--ink); }
+/* No code box ever scrolls sideways: at a width where a line does not fit, it wraps. */
+.board pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.75 var(--mono); color: var(--ink); }
 .p, .k { color: var(--ok); }
 .g { color: var(--amber); }
 :root[data-theme="light"] .g { color: #b45309; }
@@ -186,7 +187,7 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .rail-tab:focus-visible { outline-offset: -3px; }
 
 .panels { border: 1px solid var(--line-2); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); background: var(--panel); }
-.ipanel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; padding: 30px; }
+.ipanel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 32px; padding: 30px; }
 .js .ipanel:not(.on) { display: none; }
 .ipanel + .ipanel { border-top: 1px solid var(--line); }
 .js .ipanel + .ipanel { border-top: 0; }
@@ -200,7 +201,9 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .links a:hover { border-bottom-color: currentColor; }
 
 .cmd { position: relative; align-self: start; padding: 18px 20px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg); }
-.cmd pre { margin: 0; padding-right: 44px; overflow-x: auto; font: 14px/1.9 var(--mono); }
+.cmd pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 14px/1.9 var(--mono); }
+/* A command breaks only between words, never inside one at a hyphen. */
+.nw { white-space: nowrap; }
 .cmd-note { margin: 14px 0 0 !important; padding-top: 12px; border-top: 1px dashed var(--line-2); font-size: 14px; }
 
 .copy {
@@ -235,7 +238,7 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .lib p { margin: 8px 0 14px; font-size: 15px; color: var(--muted); }
 .chips { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .chips li { font: 500 12px var(--mono); padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); }
-.line-cmd { position: relative; margin-top: auto; padding: 10px 52px 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); overflow-x: auto; white-space: nowrap; }
+.line-cmd { position: relative; margin-top: auto; padding: 10px 52px 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); overflow-wrap: anywhere; }
 .line-cmd code { font-size: 12.5px; color: var(--ok); }
 .line-cmd .copy { top: 50%; right: 6px; width: 32px; height: 32px; transform: translateY(-50%); }
 
@@ -258,12 +261,6 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .doc-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .doc-links a { display: inline-block; padding: 7px 12px; border: 1px solid var(--line-2); border-radius: 8px; font: 500 13px var(--mono); color: var(--accent); text-decoration: none; }
 .doc-links a:hover { background: var(--raise); }
-.yaml pre { padding-right: 44px; }
-
-/* Downloads */
-.download { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 24px; padding: 24px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--panel); }
-.download h3 { margin: 0; font: 600 19px var(--head); }
-.download p { margin: 4px 0 0; color: var(--muted); }
 
 /* About and support */
 .about { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px; margin-top: 24px; }
@@ -291,6 +288,19 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 /* Smaller screens                                                          */
 /* ------------------------------------------------------------------------ */
 
+@media (max-width: 1140px) {
+  .libs, .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .ipanel { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+}
+
 @media (max-width: 1000px) {
   .rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .rail-tab { border-bottom: 1px solid var(--line); }
@@ -311,21 +321,34 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
   .nav-tools .btn span { display: none; }
 }
 
+@media (max-width: 800px) {
+  .libs { grid-template-columns: minmax(0, 1fr); }
+}
+
 @media (max-width: 600px) {
   .wrap { padding: 0 16px; }
   .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .rail-tab { padding: 14px 16px; }
   .rail-tab span { display: none; }
   .features, .libs, .more { grid-template-columns: minmax(0, 1fr); }
-  .ipanel { padding: 20px; }
+  .cmd pre, .board pre { font-size: 12.5px; }
+  .cmd { padding: 14px; }
+  /* Floated, so only the lines beside it make room for it. */
+  .cmd .copy { position: static; float: right; margin: 0 0 6px 10px; width: 34px; height: 34px; }
+  .ipanel { padding: 16px; }
+  .lib { padding: 18px; }
   .meta div { padding: 12px 14px; }
   .meta dd { font-size: 21px; }
   .me { flex-direction: column; }
-  .download { flex-direction: column; align-items: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
   .lib:hover { transform: none; }
+}
+
+/* Narrower than any whole word: then a word may break too. */
+@media (max-width: 360px) {
+  .nw { white-space: normal; }
 }
