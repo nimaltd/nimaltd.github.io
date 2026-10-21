@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nima Askari (NimaLTD) | Embedded C libraries and installers</title>
-<meta name="description" content="Lightweight, non-blocking embedded C libraries for STM32, and five installers that put a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.">
+<meta name="description" content="Lightweight, non-blocking embedded C libraries for STM32, and lib-installer, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/">
 <meta property="og:type" content="website">
@@ -89,7 +89,7 @@
         <div><b>Nima Askari</b><span>Embedded C / 20+ years</span></div>
       </div>
       <h1>Firmware libraries, <span>engineered to drop in.</span></h1>
-      <p class="lead">Lightweight, non-blocking C libraries for STM32, and five installers that put any library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.</p>
+      <p class="lead">Lightweight, non-blocking C libraries for STM32, and one installer that puts any library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.</p>
       <div class="ctas">
         <a class="btn amber" href="#installers">Install a library</a>
         <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">Browse on GitHub <svg class="ico"><use href="#i-arrow"/></svg></a>
@@ -97,14 +97,14 @@
       <dl class="meta">
         <div><dt>stars</dt><dd data-stat="stars">4,000+</dd></div>
         <div><dt>followers</dt><dd data-stat="followers">1,000+</dd></div>
-        <div><dt>installers</dt><dd>5</dd></div>
+        <div><dt>platforms</dt><dd>5</dd></div>
       </dl>
     </div>
   </section>
 
   <section class="wrap sect" id="installers">
     <div class="shead"><span class="n">01</span><h2>One command, five platforms</h2></div>
-    <p class="sub">Each installer copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update.</p>
+    <p class="sub">lib-installer copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update. The library says which platform it is for, so the command is the same on all five.</p>
 
     <div class="rail" role="tablist" aria-label="Platforms">
       <button class="rail-tab" role="tab" id="tab-stm32" aria-controls="panel-stm32" aria-selected="true"><b>STM32</b><span>CubeIDE, CMake, Keil, IAR</span></button>
@@ -117,7 +117,7 @@
     <div class="panels">
       <article class="ipanel on" role="tabpanel" id="panel-stm32" aria-labelledby="tab-stm32">
         <div class="ipanel-text">
-          <h3>stm32-installer</h3>
+          <h3>lib-installer for STM32</h3>
           <p>For STM32 projects in CMake, STM32CubeIDE, Keil, IAR and Makefile.</p>
           <ul>
             <li>Adds the library to your project file, and backs the file up first</li>
@@ -125,22 +125,22 @@
             <li>An update keeps your settings</li>
           </ul>
           <div class="links">
-            <a href="https://github.com/nimaltd/stm32-installer">GitHub</a>
-            <a href="https://pypi.org/project/stm32-installer/">PyPI</a>
-            <a href="https://github.com/nimaltd/stm32-installer-example">The example library</a>
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/stm32.md">The STM32 guide</a>
+            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/lib-installer-stm32">The example library</a>
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install stm32-installer&#10;stm32-installer nimaltd/stm32-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
-<pre><span class="p">$</span> pip install <span class="nw">stm32-installer</span>
-<span class="p">$</span> <span class="nw">stm32-installer</span> <span class="nw">nimaltd/stm32-installer-example</span></pre>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-stm32" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-stm32</span></pre>
           <p class="cmd-note">The example blinks an LED without <code>HAL_Delay()</code>, in any STM32 project.</p>
         </div>
       </article>
 
       <article class="ipanel" role="tabpanel" id="panel-zephyr" aria-labelledby="tab-zephyr">
         <div class="ipanel-text">
-          <h3>zephyr-installer</h3>
+          <h3>lib-installer for Zephyr</h3>
           <p>For Zephyr and nRF Connect SDK applications.</p>
           <ul>
             <li>Makes the library a Zephyr module of your application</li>
@@ -148,22 +148,22 @@
             <li>Its settings are in Kconfig</li>
           </ul>
           <div class="links">
-            <a href="https://github.com/nimaltd/zephyr-installer">GitHub</a>
-            <a href="https://pypi.org/project/zephyr-installer/">PyPI</a>
-            <a href="https://github.com/nimaltd/zephyr-installer-example">The example library</a>
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/zephyr.md">The Zephyr guide</a>
+            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/lib-installer-zephyr">The example library</a>
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install zephyr-installer&#10;zephyr-installer nimaltd/zephyr-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
-<pre><span class="p">$</span> pip install <span class="nw">zephyr-installer</span>
-<span class="p">$</span> <span class="nw">zephyr-installer</span> <span class="nw">nimaltd/zephyr-installer-example</span></pre>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-zephyr" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-zephyr</span></pre>
           <p class="cmd-note">The example builds in any Zephyr application, <code>native_sim</code> included.</p>
         </div>
       </article>
 
       <article class="ipanel" role="tabpanel" id="panel-esp32" aria-labelledby="tab-esp32">
         <div class="ipanel-text">
-          <h3>esp32-installer</h3>
+          <h3>lib-installer for ESP-IDF</h3>
           <p>For ESP-IDF projects, on any ESP32 chip.</p>
           <ul>
             <li>Makes the library a component in <code>components/</code>, with its own <code>CMakeLists.txt</code></li>
@@ -171,22 +171,22 @@
             <li>The symbols it needs go into <code>sdkconfig.defaults</code></li>
           </ul>
           <div class="links">
-            <a href="https://github.com/nimaltd/esp32-installer">GitHub</a>
-            <a href="https://pypi.org/project/esp32-installer/">PyPI</a>
-            <a href="https://github.com/nimaltd/esp32-installer-example">The example library</a>
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/esp32.md">The ESP-IDF guide</a>
+            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/lib-installer-esp32">The example library</a>
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install esp32-installer&#10;esp32-installer nimaltd/esp32-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
-<pre><span class="p">$</span> pip install <span class="nw">esp32-installer</span>
-<span class="p">$</span> <span class="nw">esp32-installer</span> <span class="nw">nimaltd/esp32-installer-example</span></pre>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-esp32" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-esp32</span></pre>
           <p class="cmd-note">The example is a period that never blocks, with its settings in menuconfig.</p>
         </div>
       </article>
 
       <article class="ipanel" role="tabpanel" id="panel-arduino" aria-labelledby="tab-arduino">
         <div class="ipanel-text">
-          <h3>arduino-installer</h3>
+          <h3>lib-installer for Arduino</h3>
           <p>For the Arduino IDE, version 1 or 2, and arduino-cli.</p>
           <ul>
             <li>Into your sketchbook's libraries folder, for every sketch</li>
@@ -194,22 +194,22 @@
             <li>Writes the <code>library.properties</code> Arduino knows the library by</li>
           </ul>
           <div class="links">
-            <a href="https://github.com/nimaltd/arduino-installer">GitHub</a>
-            <a href="https://pypi.org/project/arduino-installer/">PyPI</a>
-            <a href="https://github.com/nimaltd/arduino-installer-example">The example library</a>
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/arduino.md">The Arduino guide</a>
+            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/lib-installer-arduino">The example library</a>
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install arduino-installer&#10;arduino-installer nimaltd/arduino-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
-<pre><span class="p">$</span> pip install <span class="nw">arduino-installer</span>
-<span class="p">$</span> <span class="nw">arduino-installer</span> <span class="nw">nimaltd/arduino-installer-example</span></pre>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-arduino" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-arduino</span></pre>
           <p class="cmd-note">The example builds for any board, and prints on Serial.</p>
         </div>
       </article>
 
       <article class="ipanel" role="tabpanel" id="panel-pio" aria-labelledby="tab-pio">
         <div class="ipanel-text">
-          <h3>pio-installer</h3>
+          <h3>lib-installer for PlatformIO</h3>
           <p>For PlatformIO, with any framework: Arduino, ESP-IDF, STM32Cube, or none at all on the native platform.</p>
           <ul>
             <li>Into <code>lib/</code>, with the <code>library.json</code> PlatformIO builds it by</li>
@@ -217,15 +217,15 @@
             <li>Names any environment the library will not build in</li>
           </ul>
           <div class="links">
-            <a href="https://github.com/nimaltd/pio-installer">GitHub</a>
-            <a href="https://pypi.org/project/pio-installer/">PyPI</a>
-            <a href="https://github.com/nimaltd/pio-installer-example">The example library</a>
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/pio.md">The PlatformIO guide</a>
+            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+            <a href="https://github.com/nimaltd/lib-installer-pio">The example library</a>
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install pio-installer&#10;pio-installer nimaltd/pio-installer-example" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
-<pre><span class="p">$</span> pip install <span class="nw">pio-installer</span>
-<span class="p">$</span> <span class="nw">pio-installer</span> <span class="nw">nimaltd/pio-installer-example</span></pre>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-pio" aria-label="Copy the commands"><svg class="ico"><use href="#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-pio</span></pre>
           <p class="cmd-note">The example builds with every framework, and runs on your computer with no board.</p>
         </div>
       </article>
@@ -243,37 +243,37 @@
 
   <section class="wrap sect" id="libraries">
     <div class="shead"><span class="n">02</span><h2>Libraries</h2></div>
-    <p class="sub">Ready for stm32-installer, each with one command. The rest are moving over one by one.</p>
+    <p class="sub">Ready for lib-installer, each with one command. The rest are moving over one by one.</p>
     <div class="libs">
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/spif">spif</a> <span class="stars" data-repo="spif"><svg class="ico"><use href="#i-star"/></svg><span>723</span></span></h3>
         <p>Driver for SPI NOR flash, W25Qxx and compatible, on the STM32 HAL.</p>
         <ul class="chips"><li>SPI NOR</li><li>DMA</li><li>LittleFS</li></ul>
-        <div class="line-cmd"><code><span class="nw">stm32-installer</span> nimaltd/spif</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/spif" aria-label="Copy the spif command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/spif</code><button class="copy" type="button" data-copy="lib-installer nimaltd/spif" aria-label="Copy the spif command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
       </article>
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/ee24">ee24</a> <span class="stars" data-repo="ee24"><svg class="ico"><use href="#i-star"/></svg><span>181</span></span></h3>
         <p>Driver for 24xx I2C EEPROMs, 24C01 to 24C512, on the STM32 HAL.</p>
         <ul class="chips"><li>I2C</li><li>EEPROM</li><li>DMA</li></ul>
-        <div class="line-cmd"><code><span class="nw">stm32-installer</span> nimaltd/ee24</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/ee24" aria-label="Copy the ee24 command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/ee24</code><button class="copy" type="button" data-copy="lib-installer nimaltd/ee24" aria-label="Copy the ee24 command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
       </article>
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/seq">seq</a> <span class="stars" data-repo="seq"><svg class="ico"><use href="#i-star"/></svg><span>65</span></span></h3>
         <p>Non blocking state sequencer and interrupt task queue for STM32, with no RTOS.</p>
         <ul class="chips"><li>No RTOS</li><li>Interrupt safe</li></ul>
-        <div class="line-cmd"><code><span class="nw">stm32-installer</span> nimaltd/seq</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/seq" aria-label="Copy the seq command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/seq</code><button class="copy" type="button" data-copy="lib-installer nimaltd/seq" aria-label="Copy the seq command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
       </article>
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/osal">osal</a> <span class="stars" data-repo="osal"><svg class="ico"><use href="#i-star"/></svg><span></span></span></h3>
         <p>OS abstraction layer for STM32: the same mutex and delay on bare metal, FreeRTOS and ThreadX.</p>
         <ul class="chips"><li>FreeRTOS</li><li>ThreadX</li><li>Bare metal</li></ul>
-        <div class="line-cmd"><code><span class="nw">stm32-installer</span> nimaltd/osal</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/osal" aria-label="Copy the osal command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/osal</code><button class="copy" type="button" data-copy="lib-installer nimaltd/osal" aria-label="Copy the osal command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
       </article>
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/littlefs">littlefs</a></h3>
-        <p>LittleFS by the littlefs project, a fail-safe file system, ready for stm32-installer.</p>
+        <p>LittleFS by the littlefs project, a fail-safe file system, ready for lib-installer.</p>
         <ul class="chips"><li>File system</li><li>Power loss safe</li></ul>
-        <div class="line-cmd"><code><span class="nw">stm32-installer</span> nimaltd/littlefs</code><button class="copy" type="button" data-copy="stm32-installer nimaltd/littlefs" aria-label="Copy the littlefs command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/littlefs</code><button class="copy" type="button" data-copy="lib-installer nimaltd/littlefs" aria-label="Copy the littlefs command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
       </article>
       <a class="lib next" href="#your-library">
         <h3>Your library next</h3>
@@ -301,31 +301,31 @@
     <div class="shead"><span class="n">03</span><h2>Make your library installable</h2></div>
     <div class="split">
       <div class="split-text">
-        <p>The installers are not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and all five can install it: each reads its own keys and leaves the others alone.</p>
-        <p>Only <code>name</code> and <code>files</code> are required. Everything else, the libraries it needs, its options, its settings and each platform's own keys, is there when you want it.</p>
+        <p>lib-installer is not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and it installs on every platform the file names: each platform reads its own keys and leaves the others alone.</p>
+        <p>Only <code>name</code>, <code>platform</code> and its files are required. Everything else, the libraries it needs, its options, its settings and each platform's own keys, is there when you want it.</p>
         <p class="docs">The keys, platform by platform:</p>
         <ul class="doc-links">
-          <li><a href="https://github.com/nimaltd/stm32-installer#for-someone-writing-a-library">stm32-installer</a></li>
-          <li><a href="https://github.com/nimaltd/zephyr-installer#for-someone-writing-a-library">zephyr-installer</a></li>
-          <li><a href="https://github.com/nimaltd/esp32-installer#for-someone-writing-a-library">esp32-installer</a></li>
-          <li><a href="https://github.com/nimaltd/arduino-installer#for-someone-writing-a-library">arduino-installer</a></li>
-          <li><a href="https://github.com/nimaltd/pio-installer#for-someone-writing-a-library">pio-installer</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/stm32.md#for-someone-writing-a-library">STM32</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/zephyr.md#for-someone-writing-a-library">Zephyr</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/esp32.md#for-someone-writing-a-library">ESP-IDF</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/arduino.md#for-someone-writing-a-library">Arduino</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/pio.md#for-someone-writing-a-library">PlatformIO</a></li>
         </ul>
       </div>
       <figure class="board yaml" aria-label="A small installer.yml">
         <figcaption>installer.yml</figcaption>
-        <button class="copy" type="button" data-copy="name: mylib&#10;description: Driver for the X chip&#10;repository: https://github.com/you/mylib&#10;license: Apache-2.0&#10;&#10;files:&#10;  headers:&#10;    - src/mylib.h&#10;    - src/mylib_config.h&#10;  sources:&#10;    - src/mylib.c" aria-label="Copy the installer.yml"><svg class="ico"><use href="#i-copy"/></svg></button>
+        <button class="copy" type="button" data-copy="name: mylib&#10;description: Driver for the X chip&#10;repository: https://github.com/you/mylib&#10;license: Apache-2.0&#10;platform: stm32&#10;&#10;headers:&#10;  - src/mylib.h&#10;  - src/mylib_config.h&#10;sources:&#10;  - src/mylib.c" aria-label="Copy the installer.yml"><svg class="ico"><use href="#i-copy"/></svg></button>
 <pre><span class="k">name:</span> mylib
 <span class="k">description:</span> Driver for the X chip
 <span class="k">repository:</span> https://github.com/you/mylib
 <span class="k">license:</span> Apache-2.0
+<span class="k">platform:</span> stm32          <span class="c"># or a list: [stm32, zephyr]</span>
 
-<span class="k">files:</span>
-  <span class="k">headers:</span>
-    - src/mylib.h
-    - src/mylib_config.h   <span class="c"># your settings</span>
-  <span class="k">sources:</span>
-    - src/mylib.c</pre>
+<span class="k">headers:</span>
+  - src/mylib.h
+  - src/mylib_config.h   <span class="c"># your settings</span>
+<span class="k">sources:</span>
+  - src/mylib.c</pre>
       </figure>
     </div>
   </section>
