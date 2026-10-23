@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nima Askari (NimaLTD) | Embedded C libraries and installers</title>
+<title>Nima Askari (NimaLTD) | Embedded C libraries and lib-installer</title>
 <meta name="description" content="Lightweight, non-blocking embedded C libraries for STM32, and lib-installer, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/">
-<meta property="og:title" content="Nima Askari (NimaLTD) | Embedded C libraries and installers">
-<meta property="og:description" content="Non-blocking embedded C libraries for STM32, and one command to install them into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO projects.">
+<meta property="og:title" content="Nima Askari (NimaLTD) | Embedded C libraries and lib-installer">
+<meta property="og:description" content="Non-blocking embedded C libraries for STM32, and lib-installer, one command to install them into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO projects.">
 <meta property="og:image" content="https://github.com/nimaltd.png">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#071226">
@@ -64,7 +64,7 @@
       <span class="word">Nima<em>LTD</em></span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Sections">
-      <a href="#installers">Installers</a>
+      <a href="#installers">lib-installer</a>
       <a href="#libraries">Libraries</a>
       <a href="#your-library">Your library</a>
       <a href="#support">Support</a>
@@ -89,7 +89,7 @@
         <div><b>Nima Askari</b><span>Embedded C / 20+ years</span></div>
       </div>
       <h1>Firmware libraries, <span>engineered to drop in.</span></h1>
-      <p class="lead">Lightweight, non-blocking C libraries for STM32, and one installer that puts any library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.</p>
+      <p class="lead">Lightweight, non-blocking C libraries for STM32, and <span class="nw">lib-installer</span>, one installer that puts any library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.</p>
       <div class="ctas">
         <a class="btn amber" href="#installers">Install a library</a>
         <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">Browse on GitHub <svg class="ico"><use href="#i-arrow"/></svg></a>
@@ -104,7 +104,11 @@
 
   <section class="wrap sect" id="installers">
     <div class="shead"><span class="n">01</span><h2>One command, five platforms</h2></div>
-    <p class="sub">lib-installer copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update. The library says which platform it is for, so the command is the same on all five.</p>
+    <p class="sub"><span class="nw">lib-installer</span> is one installer for all five. It copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update. The library says which platform it is for, so the command is the same on all five.</p>
+    <div class="links top-links">
+      <a href="https://github.com/nimaltd/lib-installer">lib-installer on GitHub</a>
+      <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+    </div>
 
     <div class="rail" role="tablist" aria-label="Platforms">
       <button class="rail-tab" role="tab" id="tab-stm32" aria-controls="panel-stm32" aria-selected="true"><b>STM32</b><span>CubeIDE, CMake, Keil, IAR</span></button>
@@ -117,7 +121,7 @@
     <div class="panels">
       <article class="ipanel on" role="tabpanel" id="panel-stm32" aria-labelledby="tab-stm32">
         <div class="ipanel-text">
-          <h3>lib-installer for STM32</h3>
+          <h3>Into an STM32 project</h3>
           <p>For STM32 projects in CMake, STM32CubeIDE, Keil, IAR and Makefile.</p>
           <ul>
             <li>Adds the library to your project file, and backs the file up first</li>
@@ -126,7 +130,6 @@
           </ul>
           <div class="links">
             <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/stm32.md">The STM32 guide</a>
-            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
             <a href="https://github.com/nimaltd/lib-installer-example-stm32">The example library</a>
           </div>
         </div>
@@ -140,16 +143,15 @@
 
       <article class="ipanel" role="tabpanel" id="panel-zephyr" aria-labelledby="tab-zephyr">
         <div class="ipanel-text">
-          <h3>lib-installer for Zephyr</h3>
+          <h3>Into a Zephyr application</h3>
           <p>For Zephyr and nRF Connect SDK applications.</p>
           <ul>
             <li>Makes the library a Zephyr module of your application</li>
-            <li>Adds it to <code>CMakeLists.txt</code> and switches it on in <code>prj.conf</code></li>
+            <li>Adds it to <code>CMakeLists.txt</code> and switches it on in <code>prj.conf</code>, with the library's notes as comments</li>
             <li>Its settings are in Kconfig</li>
           </ul>
           <div class="links">
             <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/zephyr.md">The Zephyr guide</a>
-            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
             <a href="https://github.com/nimaltd/lib-installer-example-zephyr">The example library</a>
           </div>
         </div>
@@ -163,16 +165,15 @@
 
       <article class="ipanel" role="tabpanel" id="panel-esp32" aria-labelledby="tab-esp32">
         <div class="ipanel-text">
-          <h3>lib-installer for ESP-IDF</h3>
+          <h3>Into an ESP-IDF project</h3>
           <p>For ESP-IDF projects, on any ESP32 chip.</p>
           <ul>
             <li>Makes the library a component in <code>components/</code>, with its own <code>CMakeLists.txt</code></li>
             <li>Its settings are in <code>idf.py menuconfig</code></li>
-            <li>The symbols it needs go into <code>sdkconfig.defaults</code></li>
+            <li>The symbols it needs go into <code>sdkconfig.defaults</code>, with the library's notes as comments</li>
           </ul>
           <div class="links">
             <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/esp32.md">The ESP-IDF guide</a>
-            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
             <a href="https://github.com/nimaltd/lib-installer-example-esp32">The example library</a>
           </div>
         </div>
@@ -186,7 +187,7 @@
 
       <article class="ipanel" role="tabpanel" id="panel-arduino" aria-labelledby="tab-arduino">
         <div class="ipanel-text">
-          <h3>lib-installer for Arduino</h3>
+          <h3>Into Arduino</h3>
           <p>For the Arduino IDE, version 1 or 2, and arduino-cli.</p>
           <ul>
             <li>Into your sketchbook's libraries folder, for every sketch</li>
@@ -195,7 +196,6 @@
           </ul>
           <div class="links">
             <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/arduino.md">The Arduino guide</a>
-            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
             <a href="https://github.com/nimaltd/lib-installer-example-arduino">The example library</a>
           </div>
         </div>
@@ -209,16 +209,15 @@
 
       <article class="ipanel" role="tabpanel" id="panel-pio" aria-labelledby="tab-pio">
         <div class="ipanel-text">
-          <h3>lib-installer for PlatformIO</h3>
+          <h3>Into a PlatformIO project</h3>
           <p>For PlatformIO, with any framework: Arduino, ESP-IDF, STM32Cube, or none at all on the native platform.</p>
           <ul>
             <li>Into <code>lib/</code>, with the <code>library.json</code> PlatformIO builds it by</li>
-            <li>The defines it needs go into <code>platformio.ini</code>, for every environment</li>
+            <li>The defines and flags it needs go into <code>platformio.ini</code>, for every environment</li>
             <li>Names any environment the library will not build in</li>
           </ul>
           <div class="links">
             <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/pio.md">The PlatformIO guide</a>
-            <a href="https://pypi.org/project/lib-installer/">PyPI</a>
             <a href="https://github.com/nimaltd/lib-installer-example-pio">The example library</a>
           </div>
         </div>
@@ -231,19 +230,19 @@
       </article>
     </div>
 
-    <ul class="features" aria-label="What every installer does">
+    <ul class="features" aria-label="What lib-installer does">
       <li><svg class="ico"><use href="#i-source"/></svg><div><b>GitHub, a zip or a folder</b><span>By owner and name, by its address, from a downloaded zip, or from a folder on disk.</span></div></li>
       <li><svg class="ico"><use href="#i-layers"/></svg><div><b>What it needs comes first</b><span>Everything is fetched before anything is written, so a library that cannot be had changes nothing.</span></div></li>
       <li><svg class="ico"><use href="#i-sliders"/></svg><div><b>Your settings stay</b><span>What you write between <code>USER CODE</code> lines survives every update. Anything else of yours is saved as a <code>.bak</code>.</span></div></li>
       <li><svg class="ico"><use href="#i-undo"/></svg><div><b>Out again with one command</b><span><code>--uninstall</code> takes the files and the project changes back out.</span></div></li>
       <li><svg class="ico"><use href="#i-lock"/></svg><div><b>Private repositories</b><span>With a GitHub token that can read them, sent to GitHub and nowhere else.</span></div></li>
-      <li><svg class="ico"><use href="#i-offline"/></svg><div><b>Without internet</b><span>The installer is one file that needs nothing else. Give it the library's zip.</span></div></li>
+      <li><svg class="ico"><use href="#i-offline"/></svg><div><b>Without internet</b><span><code>pip download lib-installer</code> saves it as one file that needs nothing else. Give it the library's zip.</span></div></li>
     </ul>
   </section>
 
   <section class="wrap sect" id="libraries">
     <div class="shead"><span class="n">02</span><h2>Libraries</h2></div>
-    <p class="sub">Ready for lib-installer, each with one command. The rest are moving over one by one.</p>
+    <p class="sub">Ready for <span class="nw">lib-installer</span>, each with one command. The rest are moving over one by one.</p>
     <div class="libs">
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/spif">spif</a> <span class="stars" data-repo="spif"><svg class="ico"><use href="#i-star"/></svg><span>723</span></span></h3>
@@ -271,7 +270,7 @@
       </article>
       <article class="lib">
         <h3><a href="https://github.com/nimaltd/littlefs">littlefs</a></h3>
-        <p>LittleFS by the littlefs project, a fail-safe file system, ready for lib-installer.</p>
+        <p>LittleFS by the littlefs project, a fail-safe file system, ready for <span class="nw">lib-installer</span>.</p>
         <ul class="chips"><li>File system</li><li>Power loss safe</li></ul>
         <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/littlefs</code><button class="copy" type="button" data-copy="lib-installer nimaltd/littlefs" aria-label="Copy the littlefs command"><svg class="ico"><use href="#i-copy"/></svg></button></div>
       </article>
@@ -301,7 +300,7 @@
     <div class="shead"><span class="n">03</span><h2>Make your library installable</h2></div>
     <div class="split">
       <div class="split-text">
-        <p>lib-installer is not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and it installs on every platform the file names: each platform reads its own keys and leaves the others alone.</p>
+        <p><span class="nw">lib-installer</span> is not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and it installs on every platform the file names: each platform reads its own keys and leaves the others alone.</p>
         <p>Only <code>name</code>, <code>platform</code> and its files are required. Everything else, the libraries it needs, its options, its settings and each platform's own keys, is there when you want it.</p>
         <p class="docs">The keys, platform by platform:</p>
         <ul class="doc-links">
@@ -346,7 +345,7 @@
       </div>
       <div class="give">
         <h3>Free and open source</h3>
-        <p>Every library and installer here is free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
+        <p>Every library here, and <span class="nw">lib-installer</span>, is free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
         <div class="ctas">
           <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories"><svg class="ico"><use href="#i-star"/></svg>Star on GitHub</a>
           <a class="btn amber" href="https://ko-fi.com/nimaltd"><svg class="ico"><use href="#i-coffee"/></svg>Buy me a coffee</a>
@@ -366,7 +365,7 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
-    <span>Libraries and installers under the Apache License 2.0</span>
+    <span>The libraries and lib-installer under the Apache License 2.0</span>
   </div>
 </footer>
 

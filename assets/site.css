@@ -208,6 +208,7 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; }
 .links a { font: 500 14px var(--mono); color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
 .links a:hover { border-bottom-color: currentColor; }
+.sub + .top-links { margin: -14px 0 28px; }
 
 .cmd { position: relative; align-self: start; padding: 18px 20px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg); }
 .cmd pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 14px/1.9 var(--mono); }

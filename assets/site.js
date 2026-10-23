@@ -1,7 +1,7 @@
 /*
- * nimaltd.github.io: the theme switch, the menu on phones, the installer
+ * nimaltd.github.io: the theme switch, the menu on phones, the platform
  * picker, the copy buttons, and live numbers from GitHub. The page works
- * without any of it: every installer is then listed one under another, and
+ * without any of it: every platform is then listed one under another, and
  * the numbers in the HTML stay as they are.
  */
 
@@ -72,7 +72,7 @@
   });
 
   /* ---------------------------------------------------------------------- */
-  /* Installer picker: a tab list, with the arrow keys, Home and End        */
+  /* Platform picker: a tab list, with the arrow keys, Home and End         */
   /* ---------------------------------------------------------------------- */
 
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".rail-tab"));
@@ -116,7 +116,7 @@
     });
   });
 
-  /* A link such as nimaltd.github.io/#zephyr opens on that installer. */
+  /* A link such as nimaltd.github.io/#zephyr opens on that platform. */
   var wanted = document.getElementById("tab-" + location.hash.slice(1));
 
   if (wanted && tabs.indexOf(wanted) >= 0) {
