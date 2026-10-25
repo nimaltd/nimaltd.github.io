@@ -1,8 +1,9 @@
 /*
  * nimaltd.github.io: the theme switch, the menu on phones, the platform
- * picker, the copy buttons, and live numbers from GitHub. The page works
- * without any of it: every platform is then listed one under another, and
- * the numbers in the HTML stay as they are.
+ * picker, the copy buttons, terNIMA's download for this computer, and live
+ * numbers and links from GitHub. The page works without any of it: every
+ * platform is then listed one under another, and the numbers and the
+ * download links in the HTML stay as they are.
  */
 
 (function () {
@@ -186,6 +187,39 @@
   });
 
   /* ---------------------------------------------------------------------- */
+  /* terNIMA: the download for this computer first                          */
+  /* ---------------------------------------------------------------------- */
+
+  /* Phones and tablets get no pick: terNIMA is for a computer. */
+  function thisComputer() {
+    var platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+
+    if (/android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
+      return "";
+    }
+
+    if (/win/i.test(platform)) {
+      return "windows";
+    } else if (/mac/i.test(platform)) {
+      return "mac";
+    } else if (/linux/i.test(platform)) {
+      return "linux";
+    }
+
+    return "";
+  }
+
+  var mine = document.querySelector('.os [data-os="' + thisComputer() + '"]');
+
+  if (mine) {
+    var first = mine.querySelector(".btn");
+    mine.classList.add("mine");
+    first.classList.remove("ghost");
+    first.classList.add("amber");
+    mine.parentNode.insertBefore(mine, mine.parentNode.firstChild);
+  }
+
+  /* ---------------------------------------------------------------------- */
   /* Live numbers from GitHub                                               */
   /* ---------------------------------------------------------------------- */
 
@@ -226,8 +260,24 @@
     });
   }
 
+  /* terNIMA's latest release, so a new version's files are linked without
+     the page changing. When it fails, the links in the HTML stay. */
+  function latestRelease() {
+    return getJson("https://api.github.com/repos/" + USER + "/ternima/releases/latest").then(function (release) {
+      return {
+        version: release.tag_name.replace(/^v/, ""),
+        date: release.published_at,
+        files: release.assets.map(function (asset) {
+          return { name: asset.name, url: asset.browser_download_url };
+        })
+      };
+    }, function () {
+      return null;
+    });
+  }
+
   function fetchNumbers() {
-    return Promise.all([getJson("https://api.github.com/users/" + USER), allRepos(1, [])]).then(function (answers) {
+    return Promise.all([getJson("https://api.github.com/users/" + USER), allRepos(1, []), latestRelease()]).then(function (answers) {
       var stars = {};
       var total = 0;
 
@@ -239,7 +289,7 @@
         stars[repo.name] = repo.stargazers_count;
       });
 
-      var data = { at: Date.now(), followers: answers[0].followers, repos: answers[0].public_repos, total: total, stars: stars };
+      var data = { at: Date.now(), followers: answers[0].followers, repos: answers[0].public_repos, total: total, stars: stars, release: answers[2] };
       remember(data);
       return data;
     });
@@ -271,6 +321,33 @@
         (el.querySelector("span") || el).textContent = format(count);
       }
     });
+
+    if (data.release) {
+      showRelease(data.release);
+    }
+  }
+
+  /* Each link names the end of its file's name, such as ".msi". A link whose
+     file the release does not have keeps the address it had. */
+  function showRelease(release) {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-asset]"), function (link) {
+      var end = link.getAttribute("data-asset");
+      var file = release.files.filter(function (f) { return f.name.slice(-end.length) === end; })[0];
+
+      if (file) {
+        link.href = file.url;
+      }
+    });
+
+    document.querySelector('[data-ternima="version"]').textContent = release.version;
+
+    var date = document.querySelector('[data-ternima="date"]');
+    var published = new Date(release.date || "");
+
+    if (!isNaN(published)) {
+      date.setAttribute("datetime", release.date.slice(0, 10));
+      date.textContent = published.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    }
   }
 
   var known = cached();

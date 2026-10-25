@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nima Askari (NimaLTD) | Embedded C libraries and lib-installer</title>
-<meta name="description" content="Lightweight, non-blocking embedded C libraries for STM32, and lib-installer, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command.">
+<title>Nima Askari (NimaLTD) | Embedded C libraries, lib-installer and terNIMA</title>
+<meta name="description" content="Lightweight, non-blocking embedded C libraries for STM32, lib-installer, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command, and terNIMA, a serial, RTT and Zephyr terminal for Windows, macOS and Linux.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/">
-<meta property="og:title" content="Nima Askari (NimaLTD) | Embedded C libraries and lib-installer">
-<meta property="og:description" content="Non-blocking embedded C libraries for STM32, and lib-installer, one command to install them into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO projects.">
+<meta property="og:title" content="Nima Askari (NimaLTD) | Embedded C libraries, lib-installer and terNIMA">
+<meta property="og:description" content="Non-blocking embedded C libraries for STM32, lib-installer, one command to install them into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO projects, and terNIMA, a terminal for embedded developers.">
 <meta property="og:image" content="https://github.com/nimaltd.png">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#071226">
@@ -48,6 +48,13 @@
   <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
   <symbol id="i-offline" viewBox="0 0 24 24"><path d="M12 20h.01M8.5 16.43a5 5 0 0 1 7 0M5 12.86a10 10 0 0 1 5.17-2.69M19 12.86a10 10 0 0 0-2-1.52M2 8.82a15 15 0 0 1 4.18-2.64M22 8.82a15 15 0 0 0-11.29-3.76M2 2l20 20"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-binary" viewBox="0 0 24 24"><rect width="4" height="6" x="14" y="14" rx="2"/><rect width="4" height="6" x="6" y="4" rx="2"/><path d="M6 20h4M14 10h4M6 14h2v6M14 4h2v6"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24"><rect width="6" height="6" x="16" y="16" rx="1"/><rect width="6" height="6" x="2" y="16" rx="1"/><rect width="6" height="6" x="9" y="2" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/></symbol>
 </svg>
 
 <a class="skip" href="#main">Skip to the content</a>
@@ -65,6 +72,7 @@
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Sections">
       <a href="#installers">lib-installer</a>
+      <a href="#ternima">terNIMA</a>
       <a href="#libraries">Libraries</a>
       <a href="#your-library">Your library</a>
       <a href="#support">Support</a>
@@ -84,6 +92,7 @@
 <main id="main">
   <section class="hero wrap" id="top">
     <div class="hero-text">
+      <a class="news" href="#ternima"><b>New</b><span>terNIMA 1.0, a terminal for embedded developers</span><svg class="ico"><use href="#i-arrow"/></svg></a>
       <div class="who">
         <img src="https://github.com/nimaltd.png?size=200" width="72" height="72" alt="Nima Askari">
         <div><b>Nima Askari</b><span>Embedded C / 20+ years</span></div>
@@ -240,8 +249,75 @@
     </ul>
   </section>
 
+  <section class="wrap sect" id="ternima">
+    <div class="shead"><span class="n">02</span><h2>terNIMA, a terminal for embedded developers</h2></div>
+    <p class="sub">Serial, RTT, SWO and TCP in one window, the same on Windows, macOS and Linux. It remembers every tab when you close it, finds your board again when its COM number changes, and reconnects when you plug it back in.</p>
+    <div class="links top-links">
+      <a href="https://github.com/nimaltd/ternima">terNIMA on GitHub</a>
+      <a href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md">What changed</a>
+    </div>
+
+    <div class="tn">
+      <figure class="shot">
+        <img src="assets/ternima-logs.png" width="1200" height="735" alt="terNIMA showing Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them" loading="lazy">
+        <figcaption>Zephyr logs, by level and module, with warnings and errors highlighted</figcaption>
+      </figure>
+
+      <div class="get">
+        <div class="get-head">
+          <h3>Download <span data-ternima="version">1.0.0</span></h3>
+          <span class="stars" data-repo="ternima"><svg class="ico"><use href="#i-star"/></svg><span></span></span>
+        </div>
+        <p>Released <time data-ternima="date" datetime="2026-10-25">25 October 2026</time>. Free, under the Apache License 2.0.</p>
+        <ul class="os">
+          <li data-os="windows">
+            <div><b>Windows</b><span>10 and 11, x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/terNIMA_1.0.0_x64-setup.exe" aria-label="terNIMA for Windows, the .exe installer"><svg class="ico"><use href="#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" data-asset=".msi" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/terNIMA_1.0.0_x64_en-US.msi" aria-label="terNIMA for Windows, the .msi installer">.msi</a>
+            </div>
+          </li>
+          <li data-os="mac">
+            <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/terNIMA_1.0.0_universal.dmg" aria-label="terNIMA for macOS, the .dmg"><svg class="ico"><use href="#i-download"/></svg>.dmg</a>
+            </div>
+          </li>
+          <li data-os="linux">
+            <div><b>Linux</b><span>x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/ternima_1.0.0_amd64.AppImage" aria-label="terNIMA for Linux, the AppImage"><svg class="ico"><use href="#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" data-asset=".deb" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/ternima_1.0.0_amd64.deb" aria-label="terNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" data-asset=".rpm" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/ternima-1.0.0-1.x86_64.rpm" aria-label="terNIMA for Linux, the .rpm package">.rpm</a>
+            </div>
+          </li>
+        </ul>
+        <details class="unsigned">
+          <summary>Not signed yet: opening it the first time</summary>
+          <ul>
+            <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>.</li>
+            <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/terNIMA.app</code> in Terminal.</li>
+            <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>, and to use serial ports, add yourself to the <code>dialout</code> group (<code>uucp</code> on Arch).</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/nimaltd/ternima/releases/latest">Every file, and the notes</a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="features" aria-label="What terNIMA does">
+      <li><svg class="ico"><use href="#i-cpu"/></svg><div><b>Serial, RTT, SWO and TCP</b><span>Every serial option, RTT through CMSIS-DAP, J-Link and ST-Link probes with no vendor software, SWO, and TCP or Telnet.</span></div></li>
+      <li><svg class="ico"><use href="#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark.</span></div></li>
+      <li><svg class="ico"><use href="#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger, Arduino Serial Plotter format included.</span></div></li>
+      <li><svg class="ico"><use href="#i-binary"/></svg><div><b>Frames, split and checked</b><span>Your own layout with a CRC, COBS, SLIP, NMEA and Modbus, read field by field.</span></div></li>
+      <li><svg class="ico"><use href="#i-network"/></svg><div><b>A Modbus tester</b><span>RTU, ASCII and TCP, as a master that polls and plots, or as a slave that answers.</span></div></li>
+      <li><svg class="ico"><use href="#i-history"/></svg><div><b>Record and replay</b><span>Save a session with its timing and play it back later, faster or slower, from any point.</span></div></li>
+    </ul>
+  </section>
+
   <section class="wrap sect" id="libraries">
-    <div class="shead"><span class="n">02</span><h2>Libraries</h2></div>
+    <div class="shead"><span class="n">03</span><h2>Libraries</h2></div>
     <p class="sub">Ready for <span class="nw">lib-installer</span>, each with one command. The rest are moving over one by one.</p>
     <div class="libs">
       <article class="lib">
@@ -297,7 +373,7 @@
   </section>
 
   <section class="wrap sect" id="your-library">
-    <div class="shead"><span class="n">03</span><h2>Make your library installable</h2></div>
+    <div class="shead"><span class="n">04</span><h2>Make your library installable</h2></div>
     <div class="split">
       <div class="split-text">
         <p><span class="nw">lib-installer</span> is not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and it installs on every platform the file names: each platform reads its own keys and leaves the others alone.</p>
@@ -330,7 +406,7 @@
   </section>
 
   <section class="wrap sect" id="support">
-    <div class="shead"><span class="n">04</span><h2>About, and support</h2></div>
+    <div class="shead"><span class="n">05</span><h2>About, and support</h2></div>
     <div class="about">
       <div class="me">
         <img src="https://github.com/nimaltd.png?size=240" width="120" height="120" alt="Nima Askari" loading="lazy">
@@ -345,7 +421,7 @@
       </div>
       <div class="give">
         <h3>Free and open source</h3>
-        <p>Every library here, and <span class="nw">lib-installer</span>, is free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
+        <p>Every library here, <span class="nw">lib-installer</span> and terNIMA are free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
         <div class="ctas">
           <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories"><svg class="ico"><use href="#i-star"/></svg>Star on GitHub</a>
           <a class="btn amber" href="https://ko-fi.com/nimaltd"><svg class="ico"><use href="#i-coffee"/></svg>Buy me a coffee</a>
@@ -365,7 +441,7 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
-    <span>The libraries and lib-installer under the Apache License 2.0</span>
+    <span>The libraries, lib-installer and terNIMA under the Apache License 2.0</span>
   </div>
 </footer>
 
