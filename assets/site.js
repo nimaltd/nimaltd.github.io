@@ -1,9 +1,10 @@
 /*
  * nimaltd.github.io: the theme switch, the menu on phones, the platform
- * picker, the copy buttons, terNIMA's download for this computer, and live
- * numbers and links from GitHub. The page works without any of it: every
- * platform is then listed one under another, and the numbers and the
- * download links in the HTML stay as they are.
+ * picker, the copy buttons, terNIMA's screenshots one after another and its
+ * download for this computer, and live numbers and links from GitHub. The
+ * page works without any of it: every platform is then listed one under
+ * another, the first screenshot stays, and the numbers and the download
+ * links in the HTML stay as they are.
  */
 
 (function () {
@@ -185,6 +186,89 @@
       say("Could not copy. Select the text instead.");
     });
   });
+
+  /* ---------------------------------------------------------------------- */
+  /* terNIMA's screenshots: the next one every 2 seconds                    */
+  /* ---------------------------------------------------------------------- */
+
+  var SLIDE_MS = 2000;
+  var shots = document.getElementById("shots");
+
+  if (shots) {
+    var slides = Array.prototype.slice.call(shots.querySelectorAll(".slide"));
+    var slideCaption = shots.querySelector(".slide-caption");
+    var slideTools = shots.querySelector(".slide-tools");
+    var current = 0;
+    var slideTimer = 0;
+    /* Paused by its button; from the start for those who ask for less motion. */
+    var paused = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    /* Held while the pointer or the keyboard is on it, and while it is off screen. */
+    var hovered = false;
+    var focused = false;
+    var onScreen = true;
+
+    var dots = slides.map(function (slide, index) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "slide-dot";
+      dot.setAttribute("aria-label", "Show " + slide.getAttribute("data-caption"));
+      dot.addEventListener("click", function () {
+        show(index);
+        run();
+      });
+      slideTools.appendChild(dot);
+      return dot;
+    });
+
+    var pauseButton = document.createElement("button");
+    pauseButton.type = "button";
+    pauseButton.className = "slide-pause";
+    pauseButton.innerHTML = '<svg class="ico"><use href="#i-pause"/></svg>';
+    pauseButton.addEventListener("click", function () {
+      paused = !paused;
+      showPaused();
+      run();
+    });
+    slideTools.appendChild(pauseButton);
+
+    function showPaused() {
+      pauseButton.setAttribute("aria-label", paused ? "Play the screenshots" : "Pause the screenshots");
+      pauseButton.querySelector("use").setAttribute("href", paused ? "#i-play" : "#i-pause");
+    }
+
+    function show(index) {
+      slides[current].classList.remove("on");
+      dots[current].removeAttribute("aria-current");
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add("on");
+      dots[current].setAttribute("aria-current", "true");
+      slideCaption.textContent = slides[current].getAttribute("data-caption");
+    }
+
+    /* Starts the clock again, if nothing holds it. */
+    function run() {
+      clearInterval(slideTimer);
+      if (!paused && !hovered && !focused && onScreen) {
+        slideTimer = setInterval(function () { show(current + 1); }, SLIDE_MS);
+      }
+    }
+
+    shots.addEventListener("mouseenter", function () { hovered = true; run(); });
+    shots.addEventListener("mouseleave", function () { hovered = false; run(); });
+    shots.addEventListener("focusin", function () { focused = true; run(); });
+    shots.addEventListener("focusout", function () { focused = false; run(); });
+
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        run();
+      }).observe(shots);
+    }
+
+    show(0);
+    showPaused();
+    run();
+  }
 
   /* ---------------------------------------------------------------------- */
   /* terNIMA: the download for this computer first                          */

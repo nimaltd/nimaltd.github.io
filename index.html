@@ -54,6 +54,8 @@
   <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
   <symbol id="i-binary" viewBox="0 0 24 24"><rect width="4" height="6" x="14" y="14" rx="2"/><rect width="4" height="6" x="6" y="4" rx="2"/><path d="M6 20h4M14 10h4M6 14h2v6M14 4h2v6"/></symbol>
   <symbol id="i-network" viewBox="0 0 24 24"><rect width="6" height="6" x="16" y="16" rx="1"/><rect width="6" height="6" x="2" y="16" rx="1"/><rect width="6" height="6" x="9" y="2" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect width="4" height="16" x="6" y="4" rx="1"/><rect width="4" height="16" x="14" y="4" rx="1"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9V3z"/></symbol>
   <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M12 7v5l4 2"/></symbol>
 </svg>
 
@@ -258,9 +260,20 @@
     </div>
 
     <div class="tn">
-      <figure class="shot">
-        <img src="assets/ternima-logs.png" width="1200" height="735" alt="terNIMA showing Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them" loading="lazy">
-        <figcaption>Zephyr logs, by level and module, with warnings and errors highlighted</figcaption>
+      <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="terNIMA, feature by feature">
+        <div class="slides">
+          <img class="slide on" src="assets/ternima-logs.png" width="1200" height="760" loading="lazy" data-caption="Zephyr logs, by level and module, with highlights" alt="terNIMA's Lines view: Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them">
+          <img class="slide" src="assets/ternima-rtt.png" width="1200" height="760" loading="lazy" data-caption="RTT through an ST-LINK, with no vendor software" alt="An RTT tab on an STM32H503RB through an ST-LINK: the firmware's shell, with help, colors and uptime typed into it">
+          <img class="slide" src="assets/ternima-plot.png" width="1200" height="760" loading="lazy" data-caption="A live plot of the numbers in the lines, with stats" alt="The Plot view: temperature, humidity, a sine and RSSI read from text lines and drawn over the last 10 seconds, with the last, min, max, mean and deviation of each">
+          <img class="slide" src="assets/ternima-fft.png" width="1200" height="760" loading="lazy" data-caption="FFT, with its peak; XY, histogram and a trigger too" alt="The Plot view's FFT: a signal's spectrum in dB, peaks at 50 and 120 Hz, the peak at 50 Hz named below">
+          <img class="slide" src="assets/ternima-modbus.png" width="1200" height="760" loading="lazy" data-caption="A Modbus RTU master, polling three units" alt="The Modbus view's Tester as a master on COM6: requests to units 1, 2 and 3 with what each got and how long it took, unit 3 with no answer, and the log of every frame below">
+          <img class="slide" src="assets/ternima-traffic.png" width="1200" height="760" loading="lazy" data-caption="Every Modbus frame, each response under its request" alt="The Modbus view's Traffic: each request with its response under it and the time it took, and the frame picked below with its bytes colored by part and each register's value">
+          <img class="slide" src="assets/ternima-replay.png" width="1200" height="760" loading="lazy" data-caption="A recording played back, with its timing" alt="A recording played back at its own speed, with Pause, Restart, the speed and the position, and its numbers drawn as they come">
+        </div>
+        <figcaption>
+          <span class="slide-caption">Zephyr logs, by level and module, with highlights</span>
+          <span class="slide-tools"></span>
+        </figcaption>
       </figure>
 
       <div class="get">
