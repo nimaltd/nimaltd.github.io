@@ -94,7 +94,7 @@
 <main id="main">
   <section class="hero wrap" id="top">
     <div class="hero-text">
-      <a class="news" href="#ternima"><b>New</b><span>terNIMA 1.0, a terminal for embedded developers</span><svg class="ico"><use href="#i-arrow"/></svg></a>
+      <a class="news" href="#ternima"><b>New</b><span>terNIMA <span data-ternima="version">1.1.0</span>, a terminal for embedded developers</span><svg class="ico"><use href="#i-arrow"/></svg></a>
       <div class="who">
         <img src="https://github.com/nimaltd.png?size=200" width="72" height="72" alt="Nima Askari">
         <div><b>Nima Askari</b><span>Embedded C / 20+ years</span></div>
@@ -253,7 +253,7 @@
 
   <section class="wrap sect" id="ternima">
     <div class="shead"><span class="n">02</span><h2>terNIMA, a terminal for embedded developers</h2></div>
-    <p class="sub">Serial, RTT, SWO and TCP in one window, the same on Windows, macOS and Linux. It remembers every tab when you close it, finds your board again when its COM number changes, and reconnects when you plug it back in.</p>
+    <p class="sub">Serial, RTT, SWO and TCP in one window, the same on Windows, macOS and Linux. It remembers every tab, the closed ones too, finds your board again when its COM number changes, and reconnects when you plug it back in.</p>
     <div class="links top-links">
       <a href="https://github.com/nimaltd/ternima">terNIMA on GitHub</a>
       <a href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md">What changed</a>
@@ -264,7 +264,9 @@
         <div class="slides">
           <img class="slide on" src="assets/ternima-logs.png" width="1200" height="760" loading="lazy" data-caption="Zephyr logs, by level and module, with highlights" alt="terNIMA's Lines view: Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them">
           <img class="slide" src="assets/ternima-rtt.png" width="1200" height="760" loading="lazy" data-caption="RTT through an ST-LINK, with no vendor software" alt="An RTT tab on an STM32H503RB through an ST-LINK: the firmware's shell, with help, colors and uptime typed into it">
+          <img class="slide" src="assets/ternima-sequences.png" width="1200" height="760" loading="lazy" data-caption="Macros, and sequences of them sent again and again" alt="The Macros dialog: three macros, Reboot, Version and Temperature, and a sequence, Soak test, that sends Temperature then Version every 2 seconds until it is stopped, with their buttons under the terminal">
           <img class="slide" src="assets/ternima-plot.png" width="1200" height="760" loading="lazy" data-caption="A live plot of the numbers in the lines, with stats" alt="The Plot view: temperature, humidity, a sine and RSSI read from text lines and drawn over the last 10 seconds, with the last, min, max, mean and deviation of each">
+          <img class="slide" src="assets/ternima-axis.png" width="1200" height="760" loading="lazy" data-caption="A series far from the others, on a right axis of its own" alt="The Plot view: humidity and temperature on the left axis, from 20 to 45, and a sine on a right axis of its own, from -1 to 1, over the same 10 seconds; R by a series in the table puts it on the right">
           <img class="slide" src="assets/ternima-fft.png" width="1200" height="760" loading="lazy" data-caption="FFT, with its peak; XY, histogram and a trigger too" alt="The Plot view's FFT: a signal's spectrum in dB, peaks at 50 and 120 Hz, the peak at 50 Hz named below">
           <img class="slide" src="assets/ternima-modbus.png" width="1200" height="760" loading="lazy" data-caption="A Modbus RTU master, polling three units" alt="The Modbus view's Tester as a master on COM6: requests to units 1, 2 and 3 with what each got and how long it took, unit 3 with no answer, and the log of every frame below">
           <img class="slide" src="assets/ternima-traffic.png" width="1200" height="760" loading="lazy" data-caption="Every Modbus frame, each response under its request" alt="The Modbus view's Traffic: each request with its response under it and the time it took, and the frame picked below with its bytes colored by part and each register's value">
@@ -278,30 +280,30 @@
 
       <div class="get">
         <div class="get-head">
-          <h3>Download <span data-ternima="version">1.0.0</span></h3>
+          <h3>Download <span data-ternima="version">1.1.0</span></h3>
           <span class="stars" data-repo="ternima"><svg class="ico"><use href="#i-star"/></svg><span></span></span>
         </div>
-        <p>Released <time data-ternima="date" datetime="2026-10-25">25 October 2026</time>. Free, under the Apache License 2.0.</p>
+        <p>Released <time data-ternima="date" datetime="2026-10-30">30 October 2026</time>. Free, under the Apache License 2.0.</p>
         <ul class="os">
           <li data-os="windows">
             <div><b>Windows</b><span>10 and 11, x64</span></div>
             <div class="os-files">
-              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/terNIMA_1.0.0_x64-setup.exe" aria-label="terNIMA for Windows, the .exe installer"><svg class="ico"><use href="#i-download"/></svg>.exe</a>
-              <a class="btn ghost small" data-asset=".msi" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/terNIMA_1.0.0_x64_en-US.msi" aria-label="terNIMA for Windows, the .msi installer">.msi</a>
+              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .exe installer"><svg class="ico"><use href="#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" data-asset=".msi" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .msi installer">.msi</a>
             </div>
           </li>
           <li data-os="mac">
             <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
             <div class="os-files">
-              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/terNIMA_1.0.0_universal.dmg" aria-label="terNIMA for macOS, the .dmg"><svg class="ico"><use href="#i-download"/></svg>.dmg</a>
+              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for macOS, the .dmg"><svg class="ico"><use href="#i-download"/></svg>.dmg</a>
             </div>
           </li>
           <li data-os="linux">
             <div><b>Linux</b><span>x64</span></div>
             <div class="os-files">
-              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/ternima_1.0.0_amd64.AppImage" aria-label="terNIMA for Linux, the AppImage"><svg class="ico"><use href="#i-download"/></svg>.AppImage</a>
-              <a class="btn ghost small" data-asset=".deb" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/ternima_1.0.0_amd64.deb" aria-label="terNIMA for Linux, the .deb package">.deb</a>
-              <a class="btn ghost small" data-asset=".rpm" href="https://github.com/nimaltd/ternima/releases/download/v1.0.0/ternima-1.0.0-1.x86_64.rpm" aria-label="terNIMA for Linux, the .rpm package">.rpm</a>
+              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the AppImage"><svg class="ico"><use href="#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" data-asset=".deb" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" data-asset=".rpm" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the .rpm package">.rpm</a>
             </div>
           </li>
         </ul>
@@ -322,10 +324,13 @@
     <ul class="features" aria-label="What terNIMA does">
       <li><svg class="ico"><use href="#i-cpu"/></svg><div><b>Serial, RTT, SWO and TCP</b><span>Every serial option, RTT through CMSIS-DAP, J-Link and ST-Link probes with no vendor software, SWO, and TCP or Telnet.</span></div></li>
       <li><svg class="ico"><use href="#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark.</span></div></li>
-      <li><svg class="ico"><use href="#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger, Arduino Serial Plotter format included.</span></div></li>
+      <li><svg class="ico"><use href="#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger and a right axis for values far apart, Arduino Serial Plotter format included.</span></div></li>
       <li><svg class="ico"><use href="#i-network"/></svg><div><b>A Modbus tester</b><span>RTU and ASCII on a serial port, as a master that polls and plots, or as a slave that answers.</span></div></li>
       <li><svg class="ico"><use href="#i-binary"/></svg><div><b>Modbus traffic</b><span>Every frame on the bus in a table, each response under its request, checked, with the time it took.</span></div></li>
       <li><svg class="ico"><use href="#i-history"/></svg><div><b>Record and replay</b><span>Save a session with its timing and play it back later, faster or slower, from any point.</span></div></li>
+      <li><svg class="ico"><use href="#i-copy"/></svg><div><b>Copy, paste and Scroll lock</b><span>Select to copy and right-click to paste, as in PuTTY. Scroll lock keeps the screen still while lines keep coming.</span></div></li>
+      <li><svg class="ico"><use href="#i-play"/></svg><div><b>Macros and sequences</b><span>Macros on Alt+1 to Alt+9, and sequences of them sent with a wait, a number of times or until you stop them.</span></div></li>
+      <li><svg class="ico"><use href="#i-layers"/></svg><div><b>RTT while you debug</b><span>Read RTT from J-Link's or OpenOCD's own server while your IDE keeps the probe.</span></div></li>
     </ul>
   </section>
 

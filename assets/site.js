@@ -361,7 +361,15 @@
   }
 
   function fetchNumbers() {
-    return Promise.all([getJson("https://api.github.com/users/" + USER), allRepos(1, []), latestRelease()]).then(function (answers) {
+    // The release on its own as well, so it shows even when the numbers do not come.
+    var release = latestRelease();
+    release.then(function (found) {
+      if (found) {
+        showRelease(found);
+      }
+    });
+
+    return Promise.all([getJson("https://api.github.com/users/" + USER), allRepos(1, []), release]).then(function (answers) {
       var stars = {};
       var total = 0;
 
@@ -423,7 +431,9 @@
       }
     });
 
-    document.querySelector('[data-ternima="version"]').textContent = release.version;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ternima="version"]'), function (el) {
+      el.textContent = release.version;
+    });
 
     var date = document.querySelector('[data-ternima="date"]');
     var published = new Date(release.date || "");
