@@ -24,6 +24,7 @@
   --comment: #7088ad;
   --nav-bg: rgba(7, 18, 38, .82);
   --shadow: 0 1px 0 rgba(255, 255, 255, .03) inset;
+  --menu-shadow: 0 14px 34px rgba(0, 0, 0, .35);
 
   --head: "Outfit", system-ui, sans-serif;
   --sans: "Inter", system-ui, sans-serif;
@@ -55,6 +56,7 @@
   --comment: #64748b;
   --nav-bg: rgba(243, 247, 252, .86);
   --shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 6px 20px rgba(15, 23, 42, .05);
+  --menu-shadow: 0 14px 34px rgba(15, 23, 42, .16);
   color-scheme: light;
 }
 
@@ -78,7 +80,12 @@ body {
     linear-gradient(90deg, var(--grid-small) 1px, transparent 1px);
   background-size: auto, auto, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
   background-attachment: fixed;
+  /* A short page, as one still to come, keeps its footer at the bottom. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+main { flex: 1; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
 code { font: .9em var(--mono); }
@@ -129,10 +136,23 @@ code { font: .9em var(--mono); }
 .logo:hover .mark { transform: rotate(90deg); }
 .word { font: 700 22px/1 var(--head); letter-spacing: -.01em; }
 .word em { font-style: normal; color: var(--accent); }
-.nav-links { margin-left: auto; display: flex; gap: 26px; }
-.nav-links a { font: 500 13px var(--mono); color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: .06em; padding: 8px 0; }
-.nav-links a:hover { color: var(--accent); }
-.nav-tools { display: flex; align-items: center; gap: 10px; }
+/* The menu, at the left beside the logo: Products opens the list of them. */
+.nav-links { display: flex; align-items: center; gap: 26px; margin-left: 12px; }
+.nav-links a, .menu-products summary { font: 500 13px var(--mono); color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: .06em; padding: 8px 0; }
+.nav-links a:hover, .menu-products summary:hover, .nav-links a[aria-current="page"], .menu-products.current summary { color: var(--accent); }
+.nav-tools { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.menu-products { position: relative; }
+.menu-products summary { display: flex; align-items: center; gap: 8px; cursor: pointer; list-style: none; }
+.menu-products summary::-webkit-details-marker { display: none; }
+.menu-products summary::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-2px) rotate(45deg); transition: transform .15s ease; }
+.menu-products[open] summary::after { transform: translateY(1px) rotate(-135deg); }
+.menu-products-list { position: absolute; top: calc(100% + 16px); left: -14px; z-index: 30; width: 330px; margin: 0; padding: 6px; list-style: none; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--panel-solid); box-shadow: var(--menu-shadow); }
+.nav-links .menu-products-list a { display: block; padding: 10px 12px; border-radius: 8px; text-transform: none; letter-spacing: 0; }
+.nav-links .menu-products-list a:hover, .nav-links .menu-products-list a[aria-current="page"] { background: var(--raise); }
+.menu-products-list b { display: flex; align-items: center; gap: 8px; font: 600 16px var(--head); color: var(--ink); }
+.menu-products-list span { display: block; margin-top: 2px; font: 13.5px/1.4 var(--sans); color: var(--muted); }
+.soon { padding: 1px 8px; border: 1px solid var(--amber); border-radius: 999px; font: 500 10.5px/1.6 var(--mono); font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); }
+:root[data-theme="light"] .soon { color: #b45309; border-color: #b45309; }
 .menu-btn { display: none; }
 .ico-sun { display: none; }
 :root[data-theme="light"] .ico-sun { display: block; }
@@ -159,9 +179,16 @@ code { font: .9em var(--mono); }
 .who span { display: block; margin-top: 4px; font: 500 12px var(--mono); color: var(--accent); letter-spacing: .12em; text-transform: uppercase; }
 h1 { font: 700 clamp(38px, 5.4vw, 60px)/1.04 var(--head); letter-spacing: -.02em; margin: 18px 0 20px; text-wrap: balance; }
 h1 span { color: var(--accent); }
+/* A name kept on one line keeps the title's own color. */
+h1 span.nw { color: inherit; }
 .lead { margin: 0 auto; max-width: 38em; font-size: 18px; color: var(--muted); text-wrap: balance; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .hero .ctas { justify-content: center; }
+/* A product's own page: its name and what it is, then its sections. */
+.page-hero { padding-top: 64px; padding-bottom: 24px; }
+.page-hero h1 { font-size: clamp(34px, 4.8vw, 54px); }
+span.news { cursor: default; }
+span.news:hover { border-color: var(--line-2); }
 
 .meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 40px auto 0; width: 100%; max-width: 560px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); }
 .meta div { padding: 14px 20px; display: flex; flex-direction: column-reverse; }
@@ -275,6 +302,20 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 .get .links { margin-top: 14px; }
 .tn + .features { margin-top: 16px; }
 
+/* Products, on the home page: a card each, the ones still to come dashed. */
+.product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.product { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); text-decoration: none; transition: border-color .15s ease, transform .15s ease; }
+.product:hover { border-color: var(--accent); transform: translateY(-2px); }
+.product.later { border-style: dashed; background: transparent; box-shadow: none; }
+.product-icon { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--raise); color: var(--accent); }
+.product-icon .ico { width: 22px; height: 22px; }
+.product h3 { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 0; font: 600 23px var(--head); }
+.product p { margin: 8px 0 18px; font-size: 15px; color: var(--muted); }
+.product .next-go { margin-top: auto; }
+.tag { padding: 2px 10px; border: 1px solid var(--line-2); border-radius: 999px; font: 500 12px var(--mono); color: var(--muted); }
+#libraries .ctas { margin-top: 0; }
+.get { scroll-margin-top: 84px; }
+
 /* Libraries */
 .libs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .lib { display: flex; flex-direction: column; padding: 22px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); box-shadow: var(--shadow); transition: border-color .15s ease, transform .15s ease; }
@@ -362,17 +403,19 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
   .hero { padding-top: 48px; padding-bottom: 40px; }
   .menu-btn { display: inline-grid; }
   .nav-links {
-    display: none; position: absolute; left: 0; right: 0; top: 68px; flex-direction: column; gap: 0;
-    padding: 8px 24px 16px; background: var(--bg); border-bottom: 1px solid var(--line-2);
+    display: none; position: absolute; left: 0; right: 0; top: 68px; flex-direction: column; align-items: stretch; gap: 0;
+    margin-left: 0; padding: 8px 24px 16px; background: var(--bg); border-bottom: 1px solid var(--line-2);
   }
   .nav-links.open { display: flex; }
-  .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
-  .nav-tools { margin-left: auto; }
+  .nav-links > a, .menu-products summary { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  /* Products opens in place, under its name. */
+  .menu-products-list { position: static; width: auto; margin: 4px 0 6px; padding: 0; border: 0; background: transparent; box-shadow: none; }
   .nav-tools .btn span { display: none; }
+  .page-hero { padding-top: 40px; padding-bottom: 8px; }
 }
 
 @media (max-width: 800px) {
-  .libs { grid-template-columns: minmax(0, 1fr); }
+  .libs, .product-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 600px) {
@@ -400,7 +443,7 @@ h2 { margin: 0; font: 700 clamp(26px, 3.4vw, 34px)/1.2 var(--head); letter-spaci
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
-  .lib:hover { transform: none; }
+  .lib:hover, .product:hover { transform: none; }
 }
 
 /* Narrower than any whole word: then a word may break too. */

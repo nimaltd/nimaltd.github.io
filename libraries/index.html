@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Libraries | Non-blocking embedded C libraries for STM32, by NimaLTD</title>
+<meta name="description" content="Lightweight, non-blocking C libraries for STM32: spif, ee24, seq, osal, littlefs and more, each into any project with one lib-installer command.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/libraries/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/libraries/">
+<meta property="og:title" content="Libraries | Non-blocking embedded C libraries for STM32, by NimaLTD">
+<meta property="og:description" content="Lightweight, non-blocking C libraries for STM32: spif, ee24, seq, osal, littlefs and more, each into any project with one lib-installer command.">
+<meta property="og:image" content="https://github.com/nimaltd.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<!-- The same header is on every page: a change to the menu goes into each. -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="/" aria-label="NimaLTD, the home page">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Site">
+      <details class="menu-products">
+        <summary>Products</summary>
+        <ul class="menu-products-list">
+          <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
+          <li><a href="/lib-installer/"><b>lib-installer</b><span>A library into any project, with one command</span></a></li>
+          <li><a href="/libnima/"><b>libNIMA <em class="soon">Soon</em></b><span>lib-installer with a window</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+        </ul>
+      </details>
+      <a href="/libraries/" aria-current="page">Libraries</a>
+      <a href="/#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="/assets/icons.svg#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="/assets/icons.svg#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap page-hero" id="top">
+    <div class="hero-text">
+      <h1>Libraries, <span>engineered to drop in.</span></h1>
+      <p class="lead">Lightweight, non-blocking C libraries for STM32. Those ready for <span class="nw">lib-installer</span> go into any project with one command, and the rest are moving over one by one.</p>
+      <div class="ctas">
+        <a class="btn amber" href="/lib-installer/">Install with lib-installer</a>
+        <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">Browse on GitHub <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="ready">
+    <div class="shead"><span class="n">01</span><h2>Ready for lib-installer</h2></div>
+    <div class="libs">
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/spif">spif</a> <span class="stars" data-repo="spif"><svg class="ico"><use href="/assets/icons.svg#i-star"/></svg><span>723</span></span></h3>
+        <p>Driver for SPI NOR flash, W25Qxx and compatible, on the STM32 HAL.</p>
+        <ul class="chips"><li>SPI NOR</li><li>DMA</li><li>LittleFS</li></ul>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/spif</code><button class="copy" type="button" data-copy="lib-installer nimaltd/spif" aria-label="Copy the spif command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/ee24">ee24</a> <span class="stars" data-repo="ee24"><svg class="ico"><use href="/assets/icons.svg#i-star"/></svg><span>181</span></span></h3>
+        <p>Driver for 24xx I2C EEPROMs, 24C01 to 24C512, on the STM32 HAL.</p>
+        <ul class="chips"><li>I2C</li><li>EEPROM</li><li>DMA</li></ul>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/ee24</code><button class="copy" type="button" data-copy="lib-installer nimaltd/ee24" aria-label="Copy the ee24 command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/seq">seq</a> <span class="stars" data-repo="seq"><svg class="ico"><use href="/assets/icons.svg#i-star"/></svg><span>65</span></span></h3>
+        <p>Non blocking state sequencer and interrupt task queue for STM32, with no RTOS.</p>
+        <ul class="chips"><li>No RTOS</li><li>Interrupt safe</li></ul>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/seq</code><button class="copy" type="button" data-copy="lib-installer nimaltd/seq" aria-label="Copy the seq command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/osal">osal</a> <span class="stars" data-repo="osal"><svg class="ico"><use href="/assets/icons.svg#i-star"/></svg><span></span></span></h3>
+        <p>OS abstraction layer for STM32: the same mutex and delay on bare metal, FreeRTOS and ThreadX.</p>
+        <ul class="chips"><li>FreeRTOS</li><li>ThreadX</li><li>Bare metal</li></ul>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/osal</code><button class="copy" type="button" data-copy="lib-installer nimaltd/osal" aria-label="Copy the osal command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button></div>
+      </article>
+      <article class="lib">
+        <h3><a href="https://github.com/nimaltd/littlefs">littlefs</a></h3>
+        <p>LittleFS by the littlefs project, a fail-safe file system, ready for <span class="nw">lib-installer</span>.</p>
+        <ul class="chips"><li>File system</li><li>Power loss safe</li></ul>
+        <div class="line-cmd"><code><span class="nw">lib-installer</span> nimaltd/littlefs</code><button class="copy" type="button" data-copy="lib-installer nimaltd/littlefs" aria-label="Copy the littlefs command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button></div>
+      </article>
+      <a class="lib next" href="/lib-installer/#your-library">
+        <h3>Your library next</h3>
+        <p>Any library with an <code>installer.yml</code> installs the same way, on all five platforms.</p>
+        <span class="next-go">How to add one <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></span>
+      </a>
+    </div>
+
+  </section>
+
+  <section class="wrap sect" id="more">
+    <div class="shead"><span class="n">02</span><h2>More on GitHub</h2></div>
+    <p class="sub">The rest, with the most stars first.</p>
+    <ul class="more">
+      <li><a href="https://github.com/nimaltd/ee"><b>ee</b><span>EEPROM emulation for STM32</span><em data-repo="ee">471</em></a></li>
+      <li><a href="https://github.com/nimaltd/atc"><b>atc</b><span>AT command parser for STM32</span><em data-repo="atc">322</em></a></li>
+      <li><a href="https://github.com/nimaltd/gsm_v5"><b>gsm_v5</b><span>GSM module library for STM32 LL</span><em data-repo="gsm_v5">256</em></a></li>
+      <li><a href="https://github.com/nimaltd/ds18b20"><b>ds18b20</b><span>Non blocking DS18B20 library for STM32</span><em data-repo="ds18b20">180</em></a></li>
+      <li><a href="https://github.com/nimaltd/wifi-coprocessor"><b>wifi-coprocessor</b><span>ESP32 WiFi co-processor, the complete ESP-IDF project</span><em data-repo="wifi-coprocessor">170</em></a></li>
+      <li><a href="https://github.com/nimaltd/NMEA"><b>NMEA</b><span>GPS NMEA library for STM32 LL</span><em data-repo="NMEA">141</em></a></li>
+      <li><a href="https://github.com/nimaltd/master-modbus"><b>master-modbus</b><span>Modbus master library for STM32 LL</span><em data-repo="master-modbus">114</em></a></li>
+      <li><a href="https://github.com/nimaltd/HX711"><b>HX711</b><span>HX711 load cell driver for the STM32 HAL</span><em data-repo="HX711">108</em></a></li>
+      <li><a href="https://github.com/nimaltd/ws28xx"><b>ws28xx</b><span>WS2811, WS2812 and WS2815 LEDs for STM32, PWM and DMA</span><em data-repo="ws28xx">107</em></a></li>
+    </ul>
+    <p class="all"><a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">All <span data-stat="repos">58</span> repositories <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>terNIMA, lib-installer and the libraries under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7024038399630106"
+     crossorigin="anonymous"></script>
+</body>
+</html>

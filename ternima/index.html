@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>terNIMA | A serial, RTT, SWO and TCP terminal for embedded developers</title>
+<meta name="description" content="terNIMA: serial, RTT, SWO and TCP in one window on Windows, macOS and Linux, with Zephyr logs, live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/ternima/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/ternima/">
+<meta property="og:title" content="terNIMA | A serial, RTT, SWO and TCP terminal for embedded developers">
+<meta property="og:description" content="terNIMA: serial, RTT, SWO and TCP in one window on Windows, macOS and Linux, with Zephyr logs, live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
+<meta property="og:image" content="https://nimaltd.github.io/assets/ternima-logs.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<!-- The same header is on every page: a change to the menu goes into each. -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="/" aria-label="NimaLTD, the home page">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Site">
+      <details class="menu-products current">
+        <summary>Products</summary>
+        <ul class="menu-products-list">
+          <li><a href="/ternima/" aria-current="page"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
+          <li><a href="/lib-installer/"><b>lib-installer</b><span>A library into any project, with one command</span></a></li>
+          <li><a href="/libnima/"><b>libNIMA <em class="soon">Soon</em></b><span>lib-installer with a window</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+        </ul>
+      </details>
+      <a href="/libraries/">Libraries</a>
+      <a href="/#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="/assets/icons.svg#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="/assets/icons.svg#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap page-hero" id="top">
+    <div class="hero-text">
+      <a class="news" href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md"><b>New</b><span>terNIMA <span data-ternima="version">1.3.0</span>: what changed</span><svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+      <h1>terNIMA, <span>a terminal for embedded developers.</span></h1>
+      <p class="lead">Serial, RTT, SWO and TCP in one window, the same on Windows, macOS and Linux. It remembers every tab, the closed ones too, finds your board again when its COM number changes, and reconnects when you plug it back in.</p>
+      <div class="ctas">
+        <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="https://github.com/nimaltd/ternima">terNIMA on GitHub <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="get">
+    <div class="shead"><span class="n">01</span><h2>See it, and get it</h2></div>
+    <div class="tn">
+      <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="terNIMA, feature by feature">
+        <div class="slides">
+          <img class="slide on" src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" data-caption="Zephyr logs, by level and module, with highlights" alt="terNIMA's Lines view: Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them">
+          <img class="slide" src="/assets/ternima-rtt.png" width="1200" height="760" loading="lazy" data-caption="RTT through an ST-LINK, with no vendor software" alt="An RTT tab on an STM32H503RB through an ST-LINK: the firmware's shell, with help, colors and uptime typed into it">
+          <img class="slide" src="/assets/ternima-watch.png" width="1200" height="760" loading="lazy" data-caption="Live variables beside the RTT shell, read as the chip runs" alt="An RTT tab on an STM32H503RB: the firmware's shell at the left, and at the right its variables, a temperature, a sine, a sample count and the uptime, read live through the probe">
+          <img class="slide" src="/assets/ternima-sequences.png" width="1200" height="760" loading="lazy" data-caption="Macros, and sequences of them sent again and again" alt="The Macros dialog: three macros, Reboot, Version and Temperature, and a sequence, Soak test, that sends Temperature then Version every 2 seconds until it is stopped, with their buttons under the terminal">
+          <img class="slide" src="/assets/ternima-plot.png" width="1200" height="760" loading="lazy" data-caption="A live plot of the numbers in the lines, with stats" alt="The Plot view: temperature, humidity, a sine and RSSI read from text lines and drawn over the last 10 seconds, with the last, min, max, mean and deviation of each">
+          <img class="slide" src="/assets/ternima-axis.png" width="1200" height="760" loading="lazy" data-caption="A series far from the others, on a right axis of its own" alt="The Plot view: humidity and temperature on the left axis, from 20 to 45, and a sine on a right axis of its own, from -1 to 1, over the same 10 seconds; R by a series in the table puts it on the right">
+          <img class="slide" src="/assets/ternima-fft.png" width="1200" height="760" loading="lazy" data-caption="FFT, with its peak; XY, histogram and a trigger too" alt="The Plot view's FFT: a signal's spectrum in dB, peaks at 50 and 120 Hz, the peak at 50 Hz named below">
+          <img class="slide" src="/assets/ternima-modbus.png" width="1200" height="760" loading="lazy" data-caption="A Modbus RTU master, polling three units" alt="The Modbus view's Tester as a master on COM6: requests to units 1, 2 and 3 with what each got and how long it took, unit 3 with no answer, and the log of every frame below">
+          <img class="slide" src="/assets/ternima-traffic.png" width="1200" height="760" loading="lazy" data-caption="Every Modbus frame, each response under its request" alt="The Modbus view's Traffic: each request with its response under it and the time it took, and the frame picked below with its bytes colored by part and each register's value">
+          <img class="slide" src="/assets/ternima-replay.png" width="1200" height="760" loading="lazy" data-caption="A recording played back, with its timing" alt="A recording played back at its own speed, with Pause, Restart, the speed and the position, and its numbers drawn as they come">
+        </div>
+        <figcaption>
+          <span class="slide-caption">Zephyr logs, by level and module, with highlights</span>
+          <span class="slide-tools"></span>
+        </figcaption>
+      </figure>
+
+      <div class="get" id="download">
+        <div class="get-head">
+          <h3>Download <span data-ternima="version">1.3.0</span></h3>
+          <span class="stars" data-repo="ternima"><svg class="ico"><use href="/assets/icons.svg#i-star"/></svg><span></span></span>
+        </div>
+        <p>Released <time data-ternima="date" datetime="2026-10-31">31 October 2026</time>. Free, under the Apache License 2.0.</p>
+        <ul class="os">
+          <li data-os="windows">
+            <div><b>Windows</b><span>10 and 11, x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" data-asset=".msi" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .msi installer">.msi</a>
+            </div>
+          </li>
+          <li data-os="mac">
+            <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg#i-download"/></svg>.dmg</a>
+            </div>
+          </li>
+          <li data-os="linux">
+            <div><b>Linux</b><span>x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" data-asset=".deb" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" data-asset=".rpm" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the .rpm package">.rpm</a>
+            </div>
+          </li>
+        </ul>
+        <details class="unsigned">
+          <summary>Not signed yet: opening it the first time</summary>
+          <ul>
+            <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>.</li>
+            <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/terNIMA.app</code> in Terminal.</li>
+            <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>, and to use serial ports, add yourself to the <code>dialout</code> group (<code>uucp</code> on Arch).</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/nimaltd/ternima/releases/latest">Every file, and the notes</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="wrap sect" id="features">
+    <div class="shead"><span class="n">02</span><h2>What it does</h2></div>
+    <ul class="features" aria-label="What terNIMA does">
+      <li><svg class="ico"><use href="/assets/icons.svg#i-cpu"/></svg><div><b>Serial, RTT, SWO and TCP</b><span>Every serial option, RTT through CMSIS-DAP, J-Link and ST-Link probes with no vendor software, SWO, and TCP or Telnet.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-gauge"/></svg><div><b>Live variables</b><span>The firmware's globals, struct members and array elements by name from its ELF, read as the chip runs, beside the terminal or plotted.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger and a right axis for values far apart, Arduino Serial Plotter format included.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-network"/></svg><div><b>Modbus, and its traffic</b><span>RTU and ASCII as a master that polls and plots, or a slave that answers, and every frame on the bus, each response under its request.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-history"/></svg><div><b>Record and replay</b><span>Save a session with its timing and play it back later, faster or slower, from any point.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg><div><b>Copy, paste and Scroll lock</b><span>Select to copy and right-click to paste, as in PuTTY. Scroll lock keeps the screen still while lines keep coming.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-play"/></svg><div><b>Macros and sequences</b><span>Macros on Alt+1 to Alt+9, and sequences of them sent with a wait, a number of times or until you stop them.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-layers"/></svg><div><b>RTT and variables while you debug</b><span>RTT from J-Link's or OpenOCD's own server, and the variables through OpenOCD, while your IDE keeps the probe.</span></div></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>terNIMA, lib-installer and the libraries under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7024038399630106"
+     crossorigin="anonymous"></script>
+</body>
+</html>

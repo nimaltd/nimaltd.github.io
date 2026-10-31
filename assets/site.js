@@ -1,16 +1,19 @@
 /*
- * nimaltd.github.io: the theme switch, the menu on phones, the platform
- * picker, the copy buttons, terNIMA's screenshots one after another and its
- * download for this computer, and live numbers and links from GitHub. The
- * page works without any of it: every platform is then listed one under
- * another, the first screenshot stays, and the numbers and the download
- * links in the HTML stay as they are.
+ * nimaltd.github.io, on every page: the theme switch, the menu on phones and
+ * its Products list, the platform picker, the copy buttons, terNIMA's
+ * screenshots one after another and its download for this computer, and live
+ * numbers and links from GitHub. Each part does nothing on a page without
+ * what it works on. The pages work without any of it: every platform is then
+ * listed one under another, the first screenshot stays, and the numbers and
+ * the download links in the HTML stay as they are.
  */
 
 (function () {
   "use strict";
 
   var root = document.documentElement;
+  /* Every page's icons, as <use href="/assets/icons.svg#i-copy"/>. */
+  var ICONS = "/assets/icons.svg";
 
   /* Storage can throw, in a private window or with site data blocked. */
   function load(key) {
@@ -72,6 +75,25 @@
       menuButton.focus();
     }
   });
+
+  /* Products: a list that opens under its name, and closes on a click
+     anywhere else or with Escape. Without the script it still opens. */
+  var products = document.querySelector(".menu-products");
+
+  if (products) {
+    document.addEventListener("click", function (event) {
+      if (products.open && !products.contains(event.target)) {
+        products.open = false;
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && products.open) {
+        products.open = false;
+        products.querySelector("summary").focus();
+      }
+    });
+  }
 
   /* ---------------------------------------------------------------------- */
   /* Platform picker: a tab list, with the arrow keys, Home and End         */
@@ -175,12 +197,12 @@
     copyText(button.getAttribute("data-copy")).then(function () {
       var use = button.querySelector("use");
       button.classList.add("done");
-      use.setAttribute("href", "#i-check");
+      use.setAttribute("href", ICONS + "#i-check");
       say("Copied");
 
       setTimeout(function () {
         button.classList.remove("done");
-        use.setAttribute("href", "#i-copy");
+        use.setAttribute("href", ICONS + "#i-copy");
       }, 1600);
     }, function () {
       say("Could not copy. Select the text instead.");
@@ -223,7 +245,7 @@
     var pauseButton = document.createElement("button");
     pauseButton.type = "button";
     pauseButton.className = "slide-pause";
-    pauseButton.innerHTML = '<svg class="ico"><use href="#i-pause"/></svg>';
+    pauseButton.innerHTML = '<svg class="ico"><use href="' + ICONS + '#i-pause"/></svg>';
     pauseButton.addEventListener("click", function () {
       paused = !paused;
       showPaused();
@@ -233,7 +255,7 @@
 
     function showPaused() {
       pauseButton.setAttribute("aria-label", paused ? "Play the screenshots" : "Pause the screenshots");
-      pauseButton.querySelector("use").setAttribute("href", paused ? "#i-play" : "#i-pause");
+      pauseButton.querySelector("use").setAttribute("href", ICONS + (paused ? "#i-play" : "#i-pause"));
     }
 
     function show(index) {
@@ -435,10 +457,11 @@
       el.textContent = release.version;
     });
 
+    /* On terNIMA's own page only. */
     var date = document.querySelector('[data-ternima="date"]');
     var published = new Date(release.date || "");
 
-    if (!isNaN(published)) {
+    if (date && !isNaN(published)) {
       date.setAttribute("datetime", release.date.slice(0, 10));
       date.textContent = published.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     }

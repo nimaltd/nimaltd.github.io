@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lib-installer | One command puts a library into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO</title>
+<meta name="description" content="lib-installer puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command: it adds it to the build, brings what it needs, and keeps your settings through every update.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/lib-installer/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/lib-installer/">
+<meta property="og:title" content="lib-installer | One command puts a library into STM32, Zephyr, ESP-IDF, Arduino and PlatformIO">
+<meta property="og:description" content="lib-installer puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command: it adds it to the build, brings what it needs, and keeps your settings through every update.">
+<meta property="og:image" content="https://github.com/nimaltd.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<!-- The same header is on every page: a change to the menu goes into each. -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="/" aria-label="NimaLTD, the home page">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Site">
+      <details class="menu-products current">
+        <summary>Products</summary>
+        <ul class="menu-products-list">
+          <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
+          <li><a href="/lib-installer/" aria-current="page"><b>lib-installer</b><span>A library into any project, with one command</span></a></li>
+          <li><a href="/libnima/"><b>libNIMA <em class="soon">Soon</em></b><span>lib-installer with a window</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+        </ul>
+      </details>
+      <a href="/libraries/">Libraries</a>
+      <a href="/#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="/assets/icons.svg#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="/assets/icons.svg#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap page-hero" id="top">
+    <div class="hero-text">
+      <a class="news" href="/libnima/"><b>Soon</b><span>libNIMA, lib-installer with a window, takes its place</span><svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+      <h1><span class="nw">lib-installer</span>, <span>one command, five platforms.</span></h1>
+      <p class="lead">One installer for STM32, Zephyr, ESP-IDF, Arduino and PlatformIO. It copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update.</p>
+      <div class="ctas">
+        <a class="btn amber" href="#installers">Install a library</a>
+        <a class="btn ghost" href="https://github.com/nimaltd/lib-installer">lib-installer on GitHub <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="installers">
+    <div class="shead"><span class="n">01</span><h2>Install a library</h2></div>
+    <p class="sub">The library says which platform it is for, so the command is the same on all five.</p>
+    <div class="links top-links">
+      <a href="https://github.com/nimaltd/lib-installer">lib-installer on GitHub</a>
+      <a href="https://pypi.org/project/lib-installer/">PyPI</a>
+    </div>
+
+    <div class="rail" role="tablist" aria-label="Platforms">
+      <button class="rail-tab" role="tab" id="tab-stm32" aria-controls="panel-stm32" aria-selected="true"><b>STM32</b><span>CubeIDE, CMake, Keil, IAR</span></button>
+      <button class="rail-tab" role="tab" id="tab-zephyr" aria-controls="panel-zephyr" aria-selected="false" tabindex="-1"><b>Zephyr</b><span>and nRF Connect SDK</span></button>
+      <button class="rail-tab" role="tab" id="tab-esp32" aria-controls="panel-esp32" aria-selected="false" tabindex="-1"><b>ESP-IDF</b><span>any ESP32 chip</span></button>
+      <button class="rail-tab" role="tab" id="tab-arduino" aria-controls="panel-arduino" aria-selected="false" tabindex="-1"><b>Arduino</b><span>IDE 1, IDE 2, arduino-cli</span></button>
+      <button class="rail-tab" role="tab" id="tab-pio" aria-controls="panel-pio" aria-selected="false" tabindex="-1"><b>PlatformIO</b><span>any framework, native too</span></button>
+    </div>
+
+    <div class="panels">
+      <article class="ipanel on" role="tabpanel" id="panel-stm32" aria-labelledby="tab-stm32">
+        <div class="ipanel-text">
+          <h3>Into an STM32 project</h3>
+          <p>For STM32 projects in CMake, STM32CubeIDE, Keil, IAR and Makefile.</p>
+          <ul>
+            <li>Adds the library to your project file, and backs the file up first</li>
+            <li>Any library it needs comes with it</li>
+            <li>An update keeps your settings</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/stm32.md">The STM32 guide</a>
+            <a href="https://github.com/nimaltd/lib-installer-example-stm32">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-stm32" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-stm32</span></pre>
+          <p class="cmd-note">The example blinks an LED without <code>HAL_Delay()</code>, in any STM32 project.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-zephyr" aria-labelledby="tab-zephyr">
+        <div class="ipanel-text">
+          <h3>Into a Zephyr application</h3>
+          <p>For Zephyr and nRF Connect SDK applications.</p>
+          <ul>
+            <li>Makes the library a Zephyr module of your application</li>
+            <li>Adds it to <code>CMakeLists.txt</code> and switches it on in <code>prj.conf</code>, with the library's notes as comments</li>
+            <li>Its settings are in Kconfig</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/zephyr.md">The Zephyr guide</a>
+            <a href="https://github.com/nimaltd/lib-installer-example-zephyr">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-zephyr" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-zephyr</span></pre>
+          <p class="cmd-note">The example builds in any Zephyr application, <code>native_sim</code> included.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-esp32" aria-labelledby="tab-esp32">
+        <div class="ipanel-text">
+          <h3>Into an ESP-IDF project</h3>
+          <p>For ESP-IDF projects, on any ESP32 chip.</p>
+          <ul>
+            <li>Makes the library a component in <code>components/</code>, with its own <code>CMakeLists.txt</code></li>
+            <li>Its settings are in <code>idf.py menuconfig</code></li>
+            <li>The symbols it needs go into <code>sdkconfig.defaults</code>, with the library's notes as comments</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/esp32.md">The ESP-IDF guide</a>
+            <a href="https://github.com/nimaltd/lib-installer-example-esp32">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-esp32" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-esp32</span></pre>
+          <p class="cmd-note">The example is a period that never blocks, with its settings in menuconfig.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-arduino" aria-labelledby="tab-arduino">
+        <div class="ipanel-text">
+          <h3>Into Arduino</h3>
+          <p>For the Arduino IDE, version 1 or 2, and arduino-cli.</p>
+          <ul>
+            <li>Into your sketchbook's libraries folder, for every sketch</li>
+            <li>Or into one sketch's <code>src</code> folder, for that sketch alone</li>
+            <li>Writes the <code>library.properties</code> Arduino knows the library by</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/arduino.md">The Arduino guide</a>
+            <a href="https://github.com/nimaltd/lib-installer-example-arduino">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-arduino" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-arduino</span></pre>
+          <p class="cmd-note">The example builds for any board, and prints on Serial.</p>
+        </div>
+      </article>
+
+      <article class="ipanel" role="tabpanel" id="panel-pio" aria-labelledby="tab-pio">
+        <div class="ipanel-text">
+          <h3>Into a PlatformIO project</h3>
+          <p>For PlatformIO, with any framework: Arduino, ESP-IDF, STM32Cube, or none at all on the native platform.</p>
+          <ul>
+            <li>Into <code>lib/</code>, with the <code>library.json</code> PlatformIO builds it by</li>
+            <li>The defines and flags it needs go into <code>platformio.ini</code>, for every environment</li>
+            <li>Names any environment the library will not build in</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/nimaltd/lib-installer/blob/main/docs/pio.md">The PlatformIO guide</a>
+            <a href="https://github.com/nimaltd/lib-installer-example-pio">The example library</a>
+          </div>
+        </div>
+        <div class="cmd">
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-pio" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
+<span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-pio</span></pre>
+          <p class="cmd-note">The example builds with every framework, and runs on your computer with no board.</p>
+        </div>
+      </article>
+    </div>
+
+    <ul class="features" aria-label="What lib-installer does">
+      <li><svg class="ico"><use href="/assets/icons.svg#i-source"/></svg><div><b>GitHub, a zip or a folder</b><span>By owner and name, by its address, from a downloaded zip, or from a folder on disk.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-layers"/></svg><div><b>What it needs comes first</b><span>Everything is fetched before anything is written, so a library that cannot be had changes nothing.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-sliders"/></svg><div><b>Your settings stay</b><span>What you write between <code>USER CODE</code> lines survives every update. Anything else of yours is saved as a <code>.bak</code>.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-undo"/></svg><div><b>Out again with one command</b><span><code>--uninstall</code> takes the files and the project changes back out.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-lock"/></svg><div><b>Private repositories</b><span>With a GitHub token that can read them, sent to GitHub and nowhere else.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg#i-offline"/></svg><div><b>Without internet</b><span><code>pip download lib-installer</code> saves it as one file that needs nothing else. Give it the library's zip.</span></div></li>
+    </ul>
+  </section>
+
+  <section class="wrap sect" id="your-library">
+    <div class="shead"><span class="n">02</span><h2>Make your library installable</h2></div>
+    <div class="split">
+      <div class="split-text">
+        <p><span class="nw">lib-installer</span> is not only for my libraries. Put one <code>installer.yml</code> at the root of any library's repository, and it installs on every platform the file names: each platform reads its own keys and leaves the others alone.</p>
+        <p>Only <code>name</code>, <code>platform</code> and its files are required. Everything else, the libraries it needs, its options, its settings and each platform's own keys, is there when you want it.</p>
+        <p class="docs">The keys, platform by platform:</p>
+        <ul class="doc-links">
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/stm32.md#for-someone-writing-a-library">STM32</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/zephyr.md#for-someone-writing-a-library">Zephyr</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/esp32.md#for-someone-writing-a-library">ESP-IDF</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/arduino.md#for-someone-writing-a-library">Arduino</a></li>
+          <li><a href="https://github.com/nimaltd/lib-installer/blob/main/docs/pio.md#for-someone-writing-a-library">PlatformIO</a></li>
+        </ul>
+      </div>
+      <figure class="board yaml" aria-label="A small installer.yml">
+        <figcaption>installer.yml</figcaption>
+        <button class="copy" type="button" data-copy="name: mylib&#10;description: Driver for the X chip&#10;repository: https://github.com/you/mylib&#10;license: Apache-2.0&#10;platform: stm32&#10;&#10;headers:&#10;  - src/mylib.h&#10;  - src/mylib_config.h&#10;sources:&#10;  - src/mylib.c" aria-label="Copy the installer.yml"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="k">name:</span> mylib
+<span class="k">description:</span> Driver for the X chip
+<span class="k">repository:</span> https://github.com/you/mylib
+<span class="k">license:</span> Apache-2.0
+<span class="k">platform:</span> stm32          <span class="c"># or a list: [stm32, zephyr]</span>
+
+<span class="k">headers:</span>
+  - src/mylib.h
+  - src/mylib_config.h   <span class="c"># your settings</span>
+<span class="k">sources:</span>
+  - src/mylib.c</pre>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>terNIMA, lib-installer and the libraries under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7024038399630106"
+     crossorigin="anonymous"></script>
+</body>
+</html>
