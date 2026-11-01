@@ -86,6 +86,18 @@ body {
   min-height: 100vh;
 }
 main { flex: 1; }
+/* The Faravahar on a circuit board, from faravahar.svg, faint behind every page with its edges fading out.
+   It stays in place as the page scrolls: in the middle of a short window, behind the home page's title in a
+   tall one, and under all of the page as long as no box it is in has a z-index, a transform or a filter.
+   Never much wider than the screen, so a phone shows it whole. */
+.faravahar {
+  position: fixed; z-index: -1; left: 50%; top: min(420px, 50%); width: min(1500px, 106vw); transform: translate(-50%, -50%);
+  color: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; font-family: var(--mono);
+  opacity: .18; pointer-events: none;
+  -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent);
+  mask-image: radial-gradient(closest-side, #000 62%, transparent);
+}
+:root[data-theme="light"] .faravahar { opacity: .126; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
 code { font: .9em var(--mono); }
@@ -163,19 +175,6 @@ code { font: .9em var(--mono); }
 /* ------------------------------------------------------------------------ */
 
 .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 88px; padding-bottom: 72px; scroll-margin-top: 80px; }
-/* The Faravahar on a circuit board, faint behind the home page, its edges fading out. It stays in place as
-   the page scrolls, behind the title when the page opens, and under the whole page as long as no box it is
-   in has a z-index, a transform or a filter. */
-.hero-art {
-  position: fixed; z-index: -1; left: 50%; top: 420px; width: min(1500px, 190vw); transform: translate(-50%, -50%);
-  fill: none; stroke: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
-  opacity: .18; pointer-events: none;
-  -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent);
-  mask-image: radial-gradient(closest-side, #000 62%, transparent);
-}
-:root[data-theme="light"] .hero-art { opacity: .126; }
-/* The names of the parts on the board. */
-.hero-art text { fill: var(--accent); stroke: none; font: 7px var(--mono); }
 .hero-text { display: flex; flex-direction: column; align-items: center; max-width: 820px; }
 .news {
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; padding: 6px 14px 6px 6px;
@@ -454,8 +453,6 @@ kbd { display: inline-block; min-width: 1.7em; padding: 0 6px; border: 1px solid
 @media (max-width: 860px) {
   .ipanel, .split, .about { grid-template-columns: minmax(0, 1fr); }
   .hero { padding-top: 48px; padding-bottom: 40px; }
-  /* The title is higher here, its section shorter. */
-  .hero-art { top: 380px; }
   .menu-btn { display: inline-grid; }
   .nav-links {
     display: none; position: absolute; left: 0; right: 0; top: 68px; flex-direction: column; align-items: stretch; gap: 0;
@@ -483,6 +480,12 @@ kbd { display: inline-block; min-width: 1.7em; padding: 0 6px; border: 1px solid
   .wrap { padding-left: 16px; padding-right: 16px; }
   .sect { padding-top: 40px; padding-bottom: 40px; }
   .hero { padding-bottom: 24px; }
+  /* The Faravahar is small on a phone: bolder lines, and less of it fading out, so it still shows. */
+  .faravahar {
+    stroke-width: 2.6;
+    -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent);
+    mask-image: radial-gradient(closest-side, #000 78%, transparent);
+  }
   .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .rail-tab { padding: 14px 16px; }
   .rail-tab span { display: none; }
