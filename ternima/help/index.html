@@ -23,13 +23,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
+<!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
+<link rel="stylesheet" href="/assets/site.css?v=2">
+<script src="/assets/site.js?v=2" defer></script>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to the content</a>
-<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg#faravahar"/></svg>
+<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=2#faravahar"/></svg>
 
 <!-- The same header is on every page: a change to the menu goes into each. -->
 <header class="nav">
@@ -58,11 +59,11 @@
     </nav>
     <div class="nav-tools">
       <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
-        <svg class="ico ico-sun"><use href="/assets/icons.svg#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg#i-moon"/></svg>
+        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=2#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=2#i-moon"/></svg>
       </button>
-      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg#i-github"/></svg><span>GitHub</span></a>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=2#i-github"/></svg><span>GitHub</span></a>
       <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
-        <svg class="ico"><use href="/assets/icons.svg#i-menu"/></svg>
+        <svg class="ico"><use href="/assets/icons.svg?v=2#i-menu"/></svg>
       </button>
     </div>
   </div>
@@ -74,8 +75,8 @@
       <h1>terNIMA <span>help</span></h1>
       <p class="lead">Every part of terNIMA, step by step, with what you see on the screen. The screenshots are of an STM32H503 through its ST-LINK.</p>
       <div class="ctas">
-        <a class="btn amber" href="/ternima/#download"><svg class="ico"><use href="/assets/icons.svg#i-download"/></svg>Download</a>
-        <a class="btn ghost" href="/ternima/">terNIMA <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+        <a class="btn amber" href="/ternima/#download"><svg class="ico"><use href="/assets/icons.svg?v=2#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/ternima/">terNIMA <svg class="ico"><use href="/assets/icons.svg?v=2#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -160,7 +161,7 @@
 <p>J-Link's software serves RTT on port <b>19021</b> while it is connected to the chip: the GDB Server your IDE starts, Ozone, J-Link Commander or RTT Viewer. Pick <b>J-Link's RTT server</b>, <code>localhost</code> and 19021. There is nothing to set up.</p>
 <h3>OpenOCD</h3>
 <p>OpenOCD serves RTT once it is told to, after the firmware has set RTT up. Type this in OpenOCD's telnet console, or after <code>monitor</code> in GDB's, with your chip's RAM address and size:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="rtt setup 0x20000000 0x10000 &quot;SEGGER RTT&quot;&#10;rtt start&#10;rtt server start 9090 0" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="rtt setup 0x20000000 0x10000 &quot;SEGGER RTT&quot;&#10;rtt start&#10;rtt server start 9090 0" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">&gt;</span> rtt setup 0x20000000 0x10000 &quot;SEGGER RTT&quot;
 <span class="p">&gt;</span> rtt start
 <span class="p">&gt;</span> rtt server start 9090 0</pre></div>

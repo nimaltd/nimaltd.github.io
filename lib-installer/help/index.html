@@ -23,13 +23,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
-<script src="/assets/site.js" defer></script>
+<!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
+<link rel="stylesheet" href="/assets/site.css?v=2">
+<script src="/assets/site.js?v=2" defer></script>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to the content</a>
-<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg#faravahar"/></svg>
+<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=2#faravahar"/></svg>
 
 <!-- The same header is on every page: a change to the menu goes into each. -->
 <header class="nav">
@@ -58,11 +59,11 @@
     </nav>
     <div class="nav-tools">
       <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
-        <svg class="ico ico-sun"><use href="/assets/icons.svg#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg#i-moon"/></svg>
+        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=2#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=2#i-moon"/></svg>
       </button>
-      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg#i-github"/></svg><span>GitHub</span></a>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=2#i-github"/></svg><span>GitHub</span></a>
       <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
-        <svg class="ico"><use href="/assets/icons.svg#i-menu"/></svg>
+        <svg class="ico"><use href="/assets/icons.svg?v=2#i-menu"/></svg>
       </button>
     </div>
   </div>
@@ -75,7 +76,7 @@
       <p class="lead">Installing lib-installer, putting a library into your project, updating it and taking it out, with what it prints.</p>
       <div class="ctas">
         <a class="btn amber" href="/lib-installer/#installers">Install a library</a>
-        <a class="btn ghost" href="/lib-installer/"><span class="nw">lib-installer</span> <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+        <a class="btn ghost" href="/lib-installer/"><span class="nw">lib-installer</span> <svg class="ico"><use href="/assets/icons.svg?v=2#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -100,10 +101,10 @@
         <h2>Installing lib-installer</h2>
 
 <p>lib-installer is a Python program, on PyPI, and needs nothing but Python 3.8 or newer. Install it with pip, and see which version you have:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="pip install lib-installer" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="pip install lib-installer" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib-installer</span></pre></div>
 
-<div class="cmd"><button class="copy" type="button" data-copy="lib-installer --version" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="lib-installer --version" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">--version</span>
 <span class="out">lib-installer 4.0.1</span></pre></div>
 
@@ -114,12 +115,12 @@
         <h2>Installing a library</h2>
 
 <p>Open a terminal in your project's folder, and name the library: by its owner and name on GitHub, its address, a downloaded <code>.zip</code>, or a folder.</p>
-<div class="cmd"><button class="copy" type="button" data-copy="lib-installer nimaltd/spif" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="lib-installer nimaltd/spif" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> <span class="nw">lib-installer</span> nimaltd/spif</pre></div>
 
 <p>lib-installer reads the platform from the library's <code>installer.yml</code>, fetches the library and those it needs before anything is written, copies it into your project, and adds it to the build. It asks what is yours to choose: the folder it goes into, the library's options, such as <code>littlefs</code> for spif, and the steps it runs once it is in. <b>Enter</b> takes the answer offered, and <code>--yes</code> takes them all, for a script.</p>
 <p>This is the Arduino example library going into a sketch, Blink, with its <code>uptime</code> option, run from the sketch's folder:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="lib-installer nimaltd/lib-installer-example-arduino --into sketch --with uptime --yes" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="lib-installer nimaltd/lib-installer-example-arduino --into sketch --with uptime --yes" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-arduino</span> <span class="nw">--into</span> sketch <span class="nw">--with</span> uptime <span class="nw">--yes</span>
 <span class="out">Fetching nimaltd/lib-installer-example-arduino ...
 
@@ -166,7 +167,7 @@ Done. #include &quot;src/example/src/example.h&quot; and you are away.</span></p
         <h2>Updating a library</h2>
 
 <p>Run the same command again. Every file of the library is replaced, and what you wrote between its <code>USER CODE BEGIN</code> and <code>USER CODE END</code> lines is kept, the way STM32CubeMX keeps your code when it generates again:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="lib-installer nimaltd/lib-installer-example-arduino --into sketch --yes" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="lib-installer nimaltd/lib-installer-example-arduino --into sketch --yes" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-arduino</span> <span class="nw">--into</span> sketch <span class="nw">--yes</span>
 <span class="out">Fetching nimaltd/lib-installer-example-arduino ...
 
@@ -211,7 +212,7 @@ This was an update. The library replaced, what was yours kept.</span></pre></div
         <h2>Taking a library out</h2>
 
 <p>Name it after <code>--uninstall</code>. Its files come out, and its place in the build; what you wrote in it is saved beside it first, and its folder stays for that:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="lib-installer --uninstall example" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="lib-installer --uninstall example" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">--uninstall</span> example
 <span class="out">
 example 1.4.0
@@ -238,7 +239,7 @@ src/example stays, for what was saved above. Delete it once you have taken what 
         <h2>A private repository</h2>
 
 <p>With a GitHub token that can read it, given with <code>--key</code>:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="lib-installer you/private-lib --key github_pat_..." aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="lib-installer you/private-lib --key github_pat_..." aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">you/private-lib</span> <span class="nw">--key</span> github_pat_...</pre></div>
 
 <p>or once in <code>GITHUB_TOKEN</code>, which keeps it out of your shell's history. The token is sent to GitHub and nowhere else. How to make one, with only the <b>Contents: Read-only</b> permission it needs, is in <a href="https://github.com/nimaltd/lib-installer#a-private-repository">the README</a>.</p>
@@ -247,11 +248,11 @@ src/example stays, for what was saved above. Delete it once you have taken what 
         <h2>Without internet</h2>
 
 <p>On a computer with internet, save the installer as a file, and download the library from its GitHub page: <b>Code</b>, then <b>Download ZIP</b>.</p>
-<div class="cmd"><button class="copy" type="button" data-copy="pip download lib-installer" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="pip download lib-installer" aria-label="Copy the command"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip download <span class="nw">lib-installer</span></pre></div>
 
 <p>That saves one file, such as <code>lib_installer-4.0.1-py3-none-any.whl</code>. Copy both to the computer without internet, then from your project:</p>
-<div class="cmd"><button class="copy" type="button" data-copy="pip install lib_installer-4.0.1-py3-none-any.whl&#10;lib-installer D:/Downloads/example-main.zip" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<div class="cmd"><button class="copy" type="button" data-copy="pip install lib_installer-4.0.1-py3-none-any.whl&#10;lib-installer D:/Downloads/example-main.zip" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib_installer-4.0.1-py3-none-any.whl</span>
 <span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">D:/Downloads/example-main.zip</span></pre></div>
 
