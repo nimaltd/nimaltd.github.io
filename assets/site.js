@@ -12,8 +12,8 @@
   "use strict";
 
   var root = document.documentElement;
-  /* Every page's icons, as <use href="/assets/icons.svg?v=2#i-copy"/>: the same version as the pages'. */
-  var ICONS = "/assets/icons.svg?v=2";
+  /* Every page's icons, as <use href="/assets/icons.svg?v=3#i-copy"/>: the same version as the pages'. */
+  var ICONS = "/assets/icons.svg?v=3";
 
   /* Storage can throw, in a private window or with site data blocked. */
   function load(key) {

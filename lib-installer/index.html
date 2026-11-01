@@ -24,13 +24,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
 <!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
-<link rel="stylesheet" href="/assets/site.css?v=2">
-<script src="/assets/site.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<script src="/assets/site.js?v=3" defer></script>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to the content</a>
-<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=2#faravahar"/></svg>
+<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=3#faravahar"/></svg>
 
 <!-- The same header is on every page: a change to the menu goes into each. -->
 <header class="nav">
@@ -59,11 +59,11 @@
     </nav>
     <div class="nav-tools">
       <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
-        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=2#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=2#i-moon"/></svg>
+        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=3#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=3#i-moon"/></svg>
       </button>
-      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=2#i-github"/></svg><span>GitHub</span></a>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=3#i-github"/></svg><span>GitHub</span></a>
       <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
-        <svg class="ico"><use href="/assets/icons.svg?v=2#i-menu"/></svg>
+        <svg class="ico"><use href="/assets/icons.svg?v=3#i-menu"/></svg>
       </button>
     </div>
   </div>
@@ -72,13 +72,13 @@
 <main id="main">
   <section class="hero wrap page-hero" id="top">
     <div class="hero-text">
-      <a class="news" href="/libnima/"><b>Soon</b><span>libNIMA, lib-installer with a window, takes its place</span><svg class="ico"><use href="/assets/icons.svg?v=2#i-arrow"/></svg></a>
+      <a class="news" href="/libnima/"><b>Soon</b><span>libNIMA, lib-installer with a window, takes its place</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <h1><span class="nw">lib-installer</span>, <span>one command, five platforms.</span></h1>
       <p class="lead">One installer for STM32, Zephyr, ESP-IDF, Arduino and PlatformIO. It copies the library into your project, adds it to the build, brings what it needs, and keeps your settings through every update.</p>
       <div class="ctas">
         <a class="btn amber" href="#installers">Install a library</a>
-        <a class="btn ghost" href="/lib-installer/help/"><svg class="ico"><use href="/assets/icons.svg?v=2#i-book"/></svg>Help</a>
-        <a class="btn ghost" href="https://github.com/nimaltd/lib-installer">lib-installer on GitHub <svg class="ico"><use href="/assets/icons.svg?v=2#i-arrow"/></svg></a>
+        <a class="btn ghost" href="/lib-installer/help/"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
+        <a class="btn ghost" href="https://github.com/nimaltd/lib-installer">lib-installer on GitHub <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-stm32" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-stm32" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
 <span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-stm32</span></pre>
           <p class="cmd-note">The example blinks an LED without <code>HAL_Delay()</code>, in any STM32 project.</p>
@@ -137,7 +137,7 @@
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-zephyr" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-zephyr" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
 <span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-zephyr</span></pre>
           <p class="cmd-note">The example builds in any Zephyr application, <code>native_sim</code> included.</p>
@@ -159,7 +159,7 @@
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-esp32" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-esp32" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
 <span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-esp32</span></pre>
           <p class="cmd-note">The example is a period that never blocks, with its settings in menuconfig.</p>
@@ -181,7 +181,7 @@
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-arduino" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-arduino" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
 <span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-arduino</span></pre>
           <p class="cmd-note">The example builds for any board, and prints on Serial.</p>
@@ -203,7 +203,7 @@
           </div>
         </div>
         <div class="cmd">
-          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-pio" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
+          <button class="copy" type="button" data-copy="pip install lib-installer&#10;lib-installer nimaltd/lib-installer-example-pio" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
 <pre><span class="p">$</span> pip install <span class="nw">lib-installer</span>
 <span class="p">$</span> <span class="nw">lib-installer</span> <span class="nw">nimaltd/lib-installer-example-pio</span></pre>
           <p class="cmd-note">The example builds with every framework, and runs on your computer with no board.</p>
@@ -212,12 +212,12 @@
     </div>
 
     <ul class="features" aria-label="What lib-installer does">
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-source"/></svg><div><b>GitHub, a zip or a folder</b><span>By owner and name, by its address, from a downloaded zip, or from a folder on disk.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-layers"/></svg><div><b>What it needs comes first</b><span>Everything is fetched before anything is written, so a library that cannot be had changes nothing.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-sliders"/></svg><div><b>Your settings stay</b><span>What you write between <code>USER CODE</code> lines survives every update. Anything else of yours is saved as a <code>.bak</code>.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-undo"/></svg><div><b>Out again with one command</b><span><code>--uninstall</code> takes the files and the project changes back out.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-lock"/></svg><div><b>Private repositories</b><span>With a GitHub token that can read them, sent to GitHub and nowhere else.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-offline"/></svg><div><b>Without internet</b><span><code>pip download lib-installer</code> saves it as one file that needs nothing else. Give it the library's zip.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-source"/></svg><div><b>GitHub, a zip or a folder</b><span>By owner and name, by its address, from a downloaded zip, or from a folder on disk.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-layers"/></svg><div><b>What it needs comes first</b><span>Everything is fetched before anything is written, so a library that cannot be had changes nothing.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-sliders"/></svg><div><b>Your settings stay</b><span>What you write between <code>USER CODE</code> lines survives every update. Anything else of yours is saved as a <code>.bak</code>.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-undo"/></svg><div><b>Out again with one command</b><span><code>--uninstall</code> takes the files and the project changes back out.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-lock"/></svg><div><b>Private repositories</b><span>With a GitHub token that can read them, sent to GitHub and nowhere else.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-offline"/></svg><div><b>Without internet</b><span><code>pip download lib-installer</code> saves it as one file that needs nothing else. Give it the library's zip.</span></div></li>
     </ul>
   </section>
 
@@ -238,7 +238,7 @@
       </div>
       <figure class="board yaml" aria-label="A small installer.yml">
         <figcaption>installer.yml</figcaption>
-        <button class="copy" type="button" data-copy="name: mylib&#10;description: Driver for the X chip&#10;repository: https://github.com/you/mylib&#10;license: Apache-2.0&#10;platform: stm32&#10;&#10;headers:&#10;  - src/mylib.h&#10;  - src/mylib_config.h&#10;sources:&#10;  - src/mylib.c" aria-label="Copy the installer.yml"><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg></button>
+        <button class="copy" type="button" data-copy="name: mylib&#10;description: Driver for the X chip&#10;repository: https://github.com/you/mylib&#10;license: Apache-2.0&#10;platform: stm32&#10;&#10;headers:&#10;  - src/mylib.h&#10;  - src/mylib_config.h&#10;sources:&#10;  - src/mylib.c" aria-label="Copy the installer.yml"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
 <pre><span class="k">name:</span> mylib
 <span class="k">description:</span> Driver for the X chip
 <span class="k">repository:</span> https://github.com/you/mylib

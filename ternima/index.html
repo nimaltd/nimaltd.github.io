@@ -24,13 +24,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
 <!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
-<link rel="stylesheet" href="/assets/site.css?v=2">
-<script src="/assets/site.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<script src="/assets/site.js?v=3" defer></script>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to the content</a>
-<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=2#faravahar"/></svg>
+<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=3#faravahar"/></svg>
 
 <!-- The same header is on every page: a change to the menu goes into each. -->
 <header class="nav">
@@ -59,11 +59,11 @@
     </nav>
     <div class="nav-tools">
       <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
-        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=2#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=2#i-moon"/></svg>
+        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=3#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=3#i-moon"/></svg>
       </button>
-      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=2#i-github"/></svg><span>GitHub</span></a>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=3#i-github"/></svg><span>GitHub</span></a>
       <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
-        <svg class="ico"><use href="/assets/icons.svg?v=2#i-menu"/></svg>
+        <svg class="ico"><use href="/assets/icons.svg?v=3#i-menu"/></svg>
       </button>
     </div>
   </div>
@@ -72,13 +72,13 @@
 <main id="main">
   <section class="hero wrap page-hero" id="top">
     <div class="hero-text">
-      <a class="news" href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md"><b>New</b><span>terNIMA <span data-ternima="version">1.3.0</span>: what changed</span><svg class="ico"><use href="/assets/icons.svg?v=2#i-arrow"/></svg></a>
+      <a class="news" href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md"><b>New</b><span>terNIMA <span data-ternima="version">1.3.0</span>: what changed</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <h1>terNIMA, <span>a terminal for embedded developers.</span></h1>
       <p class="lead">One window for everything your board says: serial and TCP, plus RTT and SWO straight from your debug probe, with no vendor software. Watch your firmware's variables change as it runs, plot them, and follow its Zephyr logs. Free and open source, on Windows, macOS and Linux.</p>
       <div class="ctas">
-        <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=2#i-download"/></svg>Download</a>
-        <a class="btn ghost" href="/ternima/help/"><svg class="ico"><use href="/assets/icons.svg?v=2#i-book"/></svg>Help</a>
-        <a class="btn ghost" href="https://github.com/nimaltd/ternima">terNIMA on GitHub <svg class="ico"><use href="/assets/icons.svg?v=2#i-arrow"/></svg></a>
+        <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/ternima/help/"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
+        <a class="btn ghost" href="https://github.com/nimaltd/ternima">terNIMA on GitHub <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -108,27 +108,27 @@
       <div class="get" id="download">
         <div class="get-head">
           <h3>Download <span data-ternima="version">1.3.0</span></h3>
-          <span class="stars" data-repo="ternima"><svg class="ico"><use href="/assets/icons.svg?v=2#i-star"/></svg><span></span></span>
+          <span class="stars" data-repo="ternima"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
         </div>
         <p>Released <time data-ternima="date" datetime="2026-10-31">31 October 2026</time>. Free, under the Apache License 2.0.</p>
         <ul class="os">
           <li data-os="windows">
             <div><b>Windows</b><span>10 and 11, x64</span></div>
             <div class="os-files">
-              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=2#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
               <a class="btn ghost small" data-asset=".msi" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Windows, the .msi installer">.msi</a>
             </div>
           </li>
           <li data-os="mac">
             <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
             <div class="os-files">
-              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=2#i-download"/></svg>.dmg</a>
+              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
             </div>
           </li>
           <li data-os="linux">
             <div><b>Linux</b><span>x64</span></div>
             <div class="os-files">
-              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=2#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
               <a class="btn ghost small" data-asset=".deb" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the .deb package">.deb</a>
               <a class="btn ghost small" data-asset=".rpm" href="https://github.com/nimaltd/ternima/releases/latest" aria-label="terNIMA for Linux, the .rpm package">.rpm</a>
             </div>
@@ -153,15 +153,15 @@
   <section class="wrap sect" id="features">
     <div class="shead"><span class="n">02</span><h2>What it does</h2></div>
     <ul class="features" aria-label="What terNIMA does">
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-cpu"/></svg><div><b>Serial, RTT, SWO and TCP</b><span>Every serial option, RTT through CMSIS-DAP, J-Link and ST-Link probes with no vendor software, SWO, and TCP or Telnet.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-gauge"/></svg><div><b>Live variables</b><span>The firmware's globals, struct members and array elements by name from its ELF, read as the chip runs, beside the terminal or plotted.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger and a right axis for values far apart, Arduino Serial Plotter format included.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-network"/></svg><div><b>Modbus, and its traffic</b><span>RTU and ASCII as a master that polls and plots, or a slave that answers, and every frame on the bus, each response under its request.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-history"/></svg><div><b>Record and replay</b><span>Save a session with its timing and play it back later, faster or slower, from any point.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-copy"/></svg><div><b>Copy, paste and Scroll lock</b><span>Select to copy and right-click to paste, as in PuTTY. Scroll lock keeps the screen still while lines keep coming.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-play"/></svg><div><b>Macros and sequences</b><span>Macros on Alt+1 to Alt+9, and sequences of them sent with a wait, a number of times or until you stop them.</span></div></li>
-      <li><svg class="ico"><use href="/assets/icons.svg?v=2#i-layers"/></svg><div><b>RTT and variables while you debug</b><span>RTT from J-Link's or OpenOCD's own server, and the variables through OpenOCD, while your IDE keeps the probe.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-cpu"/></svg><div><b>Serial, RTT, SWO and TCP</b><span>Every serial option, RTT through CMSIS-DAP, J-Link and ST-Link probes with no vendor software, SWO, and TCP or Telnet.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-gauge"/></svg><div><b>Live variables</b><span>The firmware's globals, struct members and array elements by name from its ELF, read as the chip runs, beside the terminal or plotted.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger and a right axis for values far apart, Arduino Serial Plotter format included.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-network"/></svg><div><b>Modbus, and its traffic</b><span>RTU and ASCII as a master that polls and plots, or a slave that answers, and every frame on the bus, each response under its request.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-history"/></svg><div><b>Record and replay</b><span>Save a session with its timing and play it back later, faster or slower, from any point.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg><div><b>Copy, paste and Scroll lock</b><span>Select to copy and right-click to paste, as in PuTTY. Scroll lock keeps the screen still while lines keep coming.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-play"/></svg><div><b>Macros and sequences</b><span>Macros on Alt+1 to Alt+9, and sequences of them sent with a wait, a number of times or until you stop them.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-layers"/></svg><div><b>RTT and variables while you debug</b><span>RTT from J-Link's or OpenOCD's own server, and the variables through OpenOCD, while your IDE keeps the probe.</span></div></li>
     </ul>
   </section>
 </main>

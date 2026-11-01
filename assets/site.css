@@ -93,7 +93,7 @@ main { flex: 1; }
 .faravahar {
   position: fixed; z-index: -1; left: 50%; top: min(420px, 50%); width: min(1500px, 106vw); transform: translate(-50%, -50%);
   color: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; font-family: var(--mono);
-  opacity: .18; pointer-events: none;
+  opacity: .1; pointer-events: none;
   -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent);
   mask-image: radial-gradient(closest-side, #000 62%, transparent);
 }
