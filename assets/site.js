@@ -475,5 +475,41 @@
     fetchNumbers().then(show, function () { /* the numbers in the HTML stay */ });
   }
 
+  /* A help page's contents mark the section being read: the last one whose top
+     has come up under the header, or the last of all at the end of the page. */
+  var toc = document.querySelector(".help-toc");
+
+  if (toc) {
+    var links = Array.prototype.slice.call(toc.querySelectorAll('a[href^="#"]'));
+    var sections = links.map(function (link) { return document.getElementById(link.getAttribute("href").slice(1)); });
+
+    var mark = function () {
+      var current = 0;
+
+      sections.forEach(function (section, i) {
+        if (section && section.getBoundingClientRect().top <= 120) {
+          current = i;
+        }
+      });
+
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = links.length - 1;
+      }
+
+      links.forEach(function (link, i) {
+        if (i === current) {
+          link.setAttribute("aria-current", "true");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    /* A scroll event comes at most once a frame, so this is all it takes. */
+    window.addEventListener("scroll", mark, { passive: true });
+
+    mark();
+  }
+
   document.getElementById("year").textContent = String(new Date().getFullYear());
 })();

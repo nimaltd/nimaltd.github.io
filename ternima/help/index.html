@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>terNIMA help | Serial, RTT, SWO, Watch, Plot and Modbus, step by step</title>
+<meta name="description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, the terminal, the hex view, Zephyr logs, live variables, the plot, Modbus, logs and recordings, with screenshots.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/ternima/help/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/ternima/help/">
+<meta property="og:title" content="terNIMA help | Serial, RTT, SWO, Watch, Plot and Modbus, step by step">
+<meta property="og:description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, the terminal, the hex view, Zephyr logs, live variables, the plot, Modbus, logs and recordings, with screenshots.">
+<meta property="og:image" content="https://nimaltd.github.io/assets/ternima-logs.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<!-- The same header is on every page: a change to the menu goes into each. -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="/" aria-label="NimaLTD, the home page">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Site">
+      <details class="menu-products current">
+        <summary>Products</summary>
+        <ul class="menu-products-list">
+          <li><a href="/ternima/" aria-current="true"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
+          <li><a href="/lib-installer/"><b>lib-installer</b><span>A library into any project, with one command</span></a></li>
+          <li><a href="/libnima/"><b>libNIMA <em class="soon">Soon</em></b><span>lib-installer with a window</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+        </ul>
+      </details>
+      <a href="/libraries/">Libraries</a>
+      <a href="/#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="/assets/icons.svg#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="/assets/icons.svg#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap page-hero" id="top">
+    <div class="hero-text">
+      <h1>terNIMA <span>help</span></h1>
+      <p class="lead">Every part of terNIMA, step by step, with what you see on the screen. The screenshots are of an STM32H503 through its ST-LINK.</p>
+      <div class="ctas">
+        <a class="btn amber" href="/ternima/#download"><svg class="ico"><use href="/assets/icons.svg#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/ternima/">terNIMA <svg class="ico"><use href="/assets/icons.svg#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap help">
+    <nav class="help-toc" aria-label="On this page">
+      <b>On this page</b>
+      <ol>
+        <li><a href="#start">Getting started</a></li>
+        <li><a href="#sessions">Opening a session</a></li>
+        <li><a href="#serial">Serial port</a></li>
+        <li><a href="#rtt">RTT through a debug probe</a></li>
+        <li><a href="#server">RTT through a debugger's server</a></li>
+        <li><a href="#swo">SWO through a debug probe</a></li>
+        <li><a href="#tcp">TCP or Telnet</a></li>
+        <li><a href="#terminal">The terminal</a></li>
+        <li><a href="#hex">Hex view</a></li>
+        <li><a href="#zephyr">Zephyr log</a></li>
+        <li><a href="#watch">Watch: live variables</a></li>
+        <li><a href="#plot">Plot</a></li>
+        <li><a href="#modbus">Modbus</a></li>
+        <li><a href="#log">Log, record and replay</a></li>
+        <li><a href="#settings">Settings and the keyboard</a></li>
+        <li><a href="#trouble">When something goes wrong</a></li>
+      </ol>
+    </nav>
+    <article class="help-body">
+      <section id="start">
+        <h2>Getting started</h2>
+
+<p>Download terNIMA for your computer from <a href="/ternima/#download">its page</a>: the <code>-setup.exe</code> or the <code>.msi</code> for Windows 10 and 11, the <code>.dmg</code> for macOS on Apple Silicon and Intel, and the AppImage, <code>.deb</code> or <code>.rpm</code> for Linux.</p>
+<div class="note"><p><b>Not signed yet.</b> Windows may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. macOS may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/terNIMA.app</code> in Terminal. On Linux, make the AppImage runnable with <code>chmod +x</code>, and to use serial ports, add yourself to the <code>dialout</code> group (<code>uucp</code> on Arch).</p></div>
+<p>Each connection is a <b>tab</b> of its own. Above it, the toolbar has the tab's settings and its views; below it, the status bar says what the tab is connected to, for how long, and how many bytes went in and out.</p>
+<p>terNIMA remembers its tabs. Close it, and it opens them again as they were, connected if they were, with the window where it was (File &gt; Settings, Startup). When it starts, it looks on GitHub for a new version; Help &gt; Check for updates looks at any time.</p>
+      </section>
+      <section id="sessions">
+        <h2>Opening a session</h2>
+
+<p>The <b>+</b> at the end of the tabs, or File &gt; New session, opens one of six kinds:</p>
+<figure><img src="/assets/help/ternima-new-session.png" width="1200" height="760" loading="lazy" decoding="async" alt="The menu under the + of the tab bar: Serial port, RTT through a debug probe, RTT through a debugger&#x27;s server, SWO through a debug probe, TCP or Telnet, and A recording, each with a line on what it is for"><figcaption>+ in the tab bar: the six kinds of session</figcaption></figure>
+
+<ul>
+<li><b>Serial port</b>: a UART, a USB serial adapter, or a board's virtual COM port.</li>
+<li><b>RTT through a debug probe</b>: terNIMA opens a CMSIS-DAP, J-Link or ST-Link probe itself.</li>
+<li><b>RTT through a debugger's server</b>: while your IDE debugs, from J-Link's or OpenOCD's own RTT server.</li>
+<li><b>SWO through a debug probe</b>: ITM output on the chip's trace pin, such as printf.</li>
+<li><b>TCP or Telnet</b>: a device on the network, a serial bridge, or a shell.</li>
+<li><b>A recording</b>: plays back what a tab recorded, with its timing.</li>
+</ul>
+<p>A tab you closed is under <b>Closed tabs</b> in the File menu, to open again as it was, connected if it was. A new serial session for a device seen before gets the settings its tab had, found by the device's USB serial number.</p>
+      </section>
+      <section id="serial">
+        <h2>Serial port</h2>
+
+<figure><img src="/assets/help/ternima-serial-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New serial session dialog: COM6, an ST-LINK&#x27;s virtual COM port, picked in the list, then 115200 baud, 8 data bits, no parity, 1 stop bit, no flow control, Enter sends CR, DTR and RTS on, and the tab&#x27;s name"><figcaption>A board's virtual COM port, and its settings</figcaption></figure>
+
+<p>Pick the port. The list shows each port's name, what it is and its USB ids, and follows ports being plugged in and out. Then its settings: any baud rate, 5 to 8 data bits, parity, stop bits and flow control, DTR and RTS, what <b>Enter</b> sends (CR, LF or CR LF), local echo for devices that do not echo, and whether LF alone starts a new line.</p>
+<p>Unplug the board, and the tab waits for it; plug it back in, and it connects by itself, even on another COM number. DTR, RTS and Break in the toolbar, also in the Connection menu, work on the port as it runs, and Tools &gt; Send file sends a file, paced for the baud rate.</p>
+      </section>
+      <section id="rtt">
+        <h2>RTT through a debug probe</h2>
+
+<p>RTT is SEGGER's Real Time Transfer: the firmware writes into buffers in its own RAM, and the probe reads them while the chip runs, without stopping it. terNIMA reads it through CMSIS-DAP, J-Link and ST-Link probes with probe-rs: no vendor software is needed.</p>
+<figure><img src="/assets/help/ternima-rtt-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New RTT session dialog: the STLink V3 probe picked, the chip STM32H503RB, an empty ELF field with Browse, up and down channel 0, the control block address left to the search, SWD speed, Enter sends, and the Read RTT, Local echo and New line on LF boxes"><figcaption>Pick the probe and the chip; the ELF file helps, and is optional</figcaption></figure>
+
+<ol>
+<li><b>Pick the probe.</b> One already open in another tab says so.</li>
+<li><b>The chip</b>, as probe-rs names it: type part of its name and pick it from the list, or press <b>Detect</b>.</li>
+<li><b>The firmware's ELF file</b>, if you have it: terNIMA finds the control block at once from its <code>_SEGGER_RTT</code> symbol, and the Watch view finds the variables in it. Without it, RAM is searched.</li>
+<li><b>Connect.</b></li>
+</ol>
+<p>The <b>up channel</b> is the one shown, the <b>down channel</b> the one typed into; channel 0 is the terminal. <b>Control block address</b> skips the search. <b>Connect under reset</b> is for firmware that sleeps or turns the debug pins off. With <b>Read RTT</b> off, the tab reads only the variables in the Watch view, for firmware without RTT. <b>Reset target</b> in the toolbar resets the chip, and RTT is found again.</p>
+<figure><img src="/assets/help/ternima-terminal.png" width="1200" height="760" loading="lazy" decoding="async" alt="An RTT tab on an STM32H503RB: the firmware&#x27;s shell, with help, uptime and colors typed into it, the colors shown, and its variables beside the terminal"><figcaption>The firmware's shell over RTT, its variables beside it</figcaption></figure>
+
+<div class="note"><p>A probe has one owner: while your IDE debugs through it, terNIMA cannot open it. Read RTT through the debugger's own server then, as below.</p></div>
+      </section>
+      <section id="server">
+        <h2>RTT through a debugger's server</h2>
+
+<p>Your IDE keeps the probe, and terNIMA reads RTT from the server the debugger opens. Both work at once.</p>
+<h3>J-Link</h3>
+<p>J-Link's software serves RTT on port <b>19021</b> while it is connected to the chip: the GDB Server your IDE starts, Ozone, J-Link Commander or RTT Viewer. Pick <b>J-Link's RTT server</b>, <code>localhost</code> and 19021. There is nothing to set up.</p>
+<h3>OpenOCD</h3>
+<p>OpenOCD serves RTT once it is told to, after the firmware has set RTT up. Type this in OpenOCD's telnet console, or after <code>monitor</code> in GDB's, with your chip's RAM address and size:</p>
+<div class="cmd"><button class="copy" type="button" data-copy="rtt setup 0x20000000 0x10000 &quot;SEGGER RTT&quot;&#10;rtt start&#10;rtt server start 9090 0" aria-label="Copy the commands"><svg class="ico"><use href="/assets/icons.svg#i-copy"/></svg></button>
+<pre><span class="p">&gt;</span> rtt setup 0x20000000 0x10000 &quot;SEGGER RTT&quot;
+<span class="p">&gt;</span> rtt start
+<span class="p">&gt;</span> rtt server start 9090 0</pre></div>
+
+<p>Then pick <b>OpenOCD's RTT server</b>, <code>localhost</code> and 9090.</p>
+<figure><img src="/assets/help/ternima-server-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New TCP session dialog set for OpenOCD&#x27;s RTT server: localhost, port 9090, the Tcl port 6666 for Watch, and a line on the OpenOCD commands that start the server"><figcaption>OpenOCD's RTT server, and its Tcl port for Watch</figcaption></figure>
+
+<p>With OpenOCD, the Watch view reads the variables through OpenOCD's <b>Tcl port</b>, 6666 unless OpenOCD is told otherwise. The chip runs on, and the debugger keeps working. J-Link's server gives no way to read them.</p>
+      </section>
+      <section id="swo">
+        <h2>SWO through a debug probe</h2>
+
+<figure><img src="/assets/help/ternima-swo-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New SWO session dialog: the probe, the chip, the core clock in Hz, the SWO baud rate, the ITM stimulus port with 0 for printf, and the All ports box"><figcaption>SWO: the core clock, the baud rate, the ITM port</figcaption></figure>
+
+<p>SWO is the chip's trace pin: what the firmware writes to the ITM, such as printf. Give the chip's <b>core clock</b> in Hz and the <b>SWO baud rate</b>, which must divide it exactly, and the ITM <b>stimulus port</b> shown (0 is printf), or <b>All ports</b>. The trace pin, often PB3 on STM32, must be wired to the probe; on STM32H5 terNIMA turns it on itself. SWO tabs have the Watch view too, read through the same probe.</p>
+      </section>
+      <section id="tcp">
+        <h2>TCP or Telnet</h2>
+
+<p>A TCP socket, plain bytes both ways, as from a serial to network bridge or a device's own socket; or a Telnet server, whose option talk terNIMA answers and keeps out of the terminal. Give the host and the port. The tab waits for the other end, and connects again when the connection is lost.</p>
+      </section>
+      <section id="terminal">
+        <h2>The terminal</h2>
+
+<p>A full VT100 terminal with 24-bit color, as a firmware's shell expects it. Above it:</p>
+<ul>
+<li><b>Clear</b> (<kbd>Ctrl+Shift+K</kbd>) empties the screen.</li>
+<li><b>Scroll lock</b> keeps the screen still while lines keep coming below it; the Scroll Lock key does too. Turn it off, or type, and it follows the newest line again.</li>
+<li><b>New line after</b> starts a new line when data comes after a pause, for devices that send messages without line endings.</li>
+<li><b>Enter</b> picks what Enter sends, and <b>Echo</b> shows what you type, for devices that do not echo it.</li>
+</ul>
+<h3>Copy and paste</h3>
+<p>As in PuTTY: selecting text copies it, and a right-click pastes. <kbd>Ctrl+C</kbd> copies while text is selected, and goes to the device as Ctrl+C when nothing is; <kbd>Ctrl+V</kbd> and <kbd>Shift+Insert</kbd> paste. Settings can turn either mouse action off. Edit &gt; Find (<kbd>Ctrl+Shift+F</kbd>, then <kbd>F3</kbd>) searches the output, and File &gt; Save output as (<kbd>Ctrl+Shift+S</kbd>) saves it.</p>
+<h3>The send box, macros and sequences</h3>
+<p>The send box under the terminal sends a whole line at once: text, which can hold <code>\r</code>, <code>\n</code>, <code>\t</code>, <code>\e</code>, <code>\0</code> and <code>\xHH</code>, or hex bytes such as <code>AA 55 01</code>. <kbd>↑</kbd> and <kbd>↓</kbd> bring back what was sent.</p>
+<figure><img src="/assets/ternima-sequences.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Macros dialog: three macros and a sequence that sends two of them every 2 seconds until it is stopped, with their buttons under the terminal"><figcaption>Macros, and a sequence of them</figcaption></figure>
+
+<p>Tools &gt; Macros keeps named commands, as buttons under the send box and on <kbd>Alt+1</kbd> to <kbd>Alt+9</kbd>. A <b>sequence</b> sends macros one after another with a wait after each, a number of times or until it is stopped.</p>
+<h3>Two tabs at once</h3>
+<p>View &gt; Split right (<kbd>Ctrl+Shift+E</kbd>) or Split down (<kbd>Ctrl+Shift+D</kbd>) shows two tabs side by side; a click or <kbd>F6</kbd> gives the keyboard to the other one.</p>
+      </section>
+      <section id="hex">
+        <h2>Hex view</h2>
+
+<figure><img src="/assets/help/ternima-hex.png" width="1200" height="760" loading="lazy" decoding="async" alt="The hex view: the bytes received from the shell in rows of 16, with their offsets and the bytes as characters"><figcaption>Every byte, with offsets and characters</figcaption></figure>
+
+<p>View &gt; Hex (<kbd>Ctrl+Shift+H</kbd>) shows every byte sent (TX) and received (RX), with offsets and the bytes as characters. A line holds 8, 16 or 32 bytes, and a new one starts when the direction changes or after a chosen byte such as <code>0A</code>. The terminal keeps everything while the hex view is shown.</p>
+      </section>
+      <section id="zephyr">
+        <h2>Zephyr log</h2>
+
+<figure><img src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Zephyr log view: log lines with their time, level and module, the warnings and errors highlighted, and a count of each level above them"><figcaption>Zephyr logs, by level and module</figcaption></figure>
+
+<p>View &gt; Zephyr log (<kbd>Ctrl+Shift+J</kbd>) lists every received line, with Zephyr's log lines read into time, level and module. The level chips and the module list show or hide lines, the search marks matches or keeps only them, Tools &gt; Highlight rules colors the lines that match, and bookmarks (<kbd>Ctrl+F2</kbd>, then <kbd>F2</kbd> and <kbd>Shift+F2</kbd>) mark lines to come back to.</p>
+      </section>
+      <section id="watch">
+        <h2>Watch: live variables</h2>
+
+<p>Watch reads the firmware's variables as the chip runs, without stopping it: globals and statics, a struct's members as <code>sensor.temp</code>, an array's elements as <code>buf[2]</code>, found by name in the ELF file's debug information. Build the firmware with debug information (<code>-g</code>).</p>
+<ol>
+<li><b>Choose the ELF file</b> in the Watch view, or in the tab's settings.</li>
+<li><b>Click the box</b> for all the variables in the file, or type part of a name. <kbd>↑</kbd>, <kbd>↓</kbd> and <kbd>Enter</kbd> add one.</li>
+<li><b>Every</b> sets how often they are read, 10 ms to 1 s.</li>
+</ol>
+<figure><img src="/assets/help/ternima-watch-list.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Watch view with its box clicked: the list of the ELF file&#x27;s variables, each with its type and address, over the table of the variables watched"><figcaption>A click on the box lists the ELF file's variables</figcaption></figure>
+
+<figure><img src="/assets/help/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Watch view: four variables of an STM32H503RB, a temperature, a sine, a sample count and the uptime, each with its type, address, value, min and max"><figcaption>Each variable's value, min and max, as the chip runs</figcaption></figure>
+
+<p>The table has each variable's value, min and max; <b>Reset min/max</b> starts them again. <b>Plot them</b> draws them over time, and <b>Beside the terminal</b> shows them at the right of the terminal, the hex view and the Zephyr log, so what the firmware prints and its variables are in view together:</p>
+<figure><img src="/assets/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The firmware&#x27;s RTT shell at the left, and its variables at the right of it, read live"><figcaption>Watch beside the terminal</figcaption></figure>
+
+<p>Watch works on <b>RTT tabs</b>, with Read RTT off for firmware without RTT; on <b>SWO tabs</b>; and on <b>RTT through OpenOCD's server</b> while you debug. Statics of one name in two source files are named as GDB names them, <code>'uart.c'::state</code>. After the firmware is built anew, <b>Reload</b> reads the ELF file again.</p>
+      </section>
+      <section id="plot">
+        <h2>Plot</h2>
+
+<figure><img src="/assets/ternima-plot.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Plot view: temperature, humidity, a sine and RSSI drawn over the last 10 seconds, with each one&#x27;s last, min, max, mean and deviation"><figcaption>Numbers from the lines, over time</figcaption></figure>
+
+<p>View &gt; Plot (<kbd>Ctrl+Shift+G</kbd>) draws numbers over time. <b>Read</b> picks where they come from: <b>Numbers</b> reads named values such as <code>temp=21.5</code>, the Arduino Serial Plotter's <code>temp:21.5,hum:40</code>, plain numbers and JSON lines; <b>Regex</b> takes the numbers your pattern captures; <b>Modbus</b> the values a serial tab's Modbus view reads; <b>Variables</b> the ones Watch reads.</p>
+<p>Four charts: <b>Time</b>, <b>XY</b>, <b>Histogram</b> and <b>FFT</b>. Drag or the wheel zooms, <kbd>Shift</kbd>+wheel moves, <kbd>Space</kbd> pauses, and a double-click follows the newest values again. Clicks place the cursors A and B: the time between them, as a period and a frequency, and each series' value at both; the table under the chart has each one's min, max and mean between them. <b>R</b> by a series puts it on a right axis of its own, for values far from the others. The <b>trigger</b> shows the time around a series crossing a level, rising, falling or either way, as a scope does, and <b>Single</b> holds the first crossing until <b>Arm</b>. <b>CSV...</b> and <b>PNG...</b> save the data and the chart.</p>
+<figure><img src="/assets/ternima-axis.png" width="1200" height="760" loading="lazy" decoding="async" alt="Humidity and temperature on the left axis and a sine on a right axis of its own, over the same 10 seconds"><figcaption>A series far from the others, on a right axis</figcaption></figure>
+
+<figure><img src="/assets/ternima-fft.png" width="1200" height="760" loading="lazy" decoding="async" alt="The FFT of a signal in dB, its peaks at 50 and 120 Hz"><figcaption>FFT, with its peak</figcaption></figure>
+
+      </section>
+      <section id="modbus">
+        <h2>Modbus</h2>
+
+<p>On serial tabs, View &gt; Modbus (<kbd>Ctrl+Shift+M</kbd>) speaks Modbus RTU or ASCII on the tab's own port.</p>
+<figure><img src="/assets/ternima-modbus.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Modbus Tester as a master: requests to units 1, 2 and 3 with what each got and how long it took, unit 3 with no answer, and every frame below"><figcaption>Tester: a master polling three units</figcaption></figure>
+
+<p><b>Tester</b>: as a master, a list of requests, functions 1 to 6, 15 and 16, sent one by one or polled; each shows what came back and how long it took, or the exception, or that no answer came. <b>Scan units</b> finds the units that answer. As a slave, it answers a master from tables of registers and coils you can edit.</p>
+<figure><img src="/assets/ternima-traffic.png" width="1200" height="760" loading="lazy" decoding="async" alt="Modbus Traffic: each request with its response under it and the time it took, and the frame picked with its bytes colored by part"><figcaption>Traffic: every frame on the line</figcaption></figure>
+
+<p><b>Traffic</b> reads every frame on the line, also between two other devices: each response under its request, checked, with the time it took, the bytes of a frame by part, and CSV.</p>
+      </section>
+      <section id="log">
+        <h2>Log, record and replay</h2>
+
+<p><b>Log</b> in the toolbar (<kbd>Ctrl+Shift+L</kbd>) writes what the tab receives to a new file in the log folder, named after the tab and the time: as text, with the colors taken out and the date and time at the start of each line, or raw, every byte as it came. <b>Rec</b> records every byte both ways, with its timing. File &gt; New session &gt; A recording (<kbd>Ctrl+Shift+O</kbd>), or <b>A recording</b> under the <b>+</b>, plays one back in a tab of its own, at 0.25× to 100×, from any point.</p>
+<figure><img src="/assets/ternima-replay.png" width="1200" height="760" loading="lazy" decoding="async" alt="A recording played back: Pause, Restart, the speed and the position, and its numbers drawn as they come"><figcaption>A recording, played back with its timing</figcaption></figure>
+
+      </section>
+      <section id="settings">
+        <h2>Settings and the keyboard</h2>
+
+<figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme and text size, the mouse in the terminal, what terNIMA brings back at startup, logging with its folder and format, and the update check"><figcaption>File > Settings</figcaption></figure>
+
+<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme and the text size, what the mouse does in the terminal, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
+<figure><img src="/assets/help/ternima-palette.png" width="1200" height="760" loading="lazy" decoding="async" alt="The command palette with watch typed: the Watch view and Watch beside the terminal"><figcaption>The command palette finds any command</figcaption></figure>
+
+<p>View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name. The keys:</p>
+<table>
+<tr><th>Do</th><th>Keys</th></tr>
+<tr><td>New serial, RTT, TCP session</td><td><kbd>Ctrl+Shift+N</kbd> <kbd>Ctrl+Shift+R</kbd> <kbd>Ctrl+Shift+T</kbd></td></tr>
+<tr><td>Open a recording</td><td><kbd>Ctrl+Shift+O</kbd></td></tr>
+<tr><td>Next, previous tab; close it</td><td><kbd>Ctrl+Tab</kbd> <kbd>Ctrl+Shift+Tab</kbd> <kbd>Ctrl+Shift+W</kbd></td></tr>
+<tr><td>Copy, paste, select all</td><td><kbd>Ctrl+Shift+C</kbd> <kbd>Ctrl+Shift+V</kbd> <kbd>Ctrl+Shift+A</kbd></td></tr>
+<tr><td>Find, next, previous</td><td><kbd>Ctrl+Shift+F</kbd> <kbd>F3</kbd> <kbd>Shift+F3</kbd></td></tr>
+<tr><td>Clear the screen</td><td><kbd>Ctrl+Shift+K</kbd></td></tr>
+<tr><td>Hex, Zephyr log, Plot, Modbus</td><td><kbd>Ctrl+Shift+H</kbd> <kbd>Ctrl+Shift+J</kbd> <kbd>Ctrl+Shift+G</kbd> <kbd>Ctrl+Shift+M</kbd></td></tr>
+<tr><td>Split right, down; the other pane</td><td><kbd>Ctrl+Shift+E</kbd> <kbd>Ctrl+Shift+D</kbd> <kbd>F6</kbd></td></tr>
+<tr><td>Bookmark a line; next, previous</td><td><kbd>Ctrl+F2</kbd> <kbd>F2</kbd> <kbd>Shift+F2</kbd></td></tr>
+<tr><td>Log the tab; save the output</td><td><kbd>Ctrl+Shift+L</kbd> <kbd>Ctrl+Shift+S</kbd></td></tr>
+<tr><td>Macros 1 to 9</td><td><kbd>Alt+1</kbd> … <kbd>Alt+9</kbd></td></tr>
+<tr><td>Bigger, smaller, normal text</td><td><kbd>Ctrl+=</kbd> <kbd>Ctrl+-</kbd> <kbd>Ctrl+0</kbd></td></tr>
+<tr><td>Settings; command palette</td><td><kbd>Ctrl+,</kbd> <kbd>Ctrl+Shift+P</kbd></td></tr>
+</table>
+<p>On macOS, Cmd takes the place of Ctrl, and of Alt for the macros. A new serial session, a recording, closing a tab, copy, paste, select all, find and clear take Cmd alone: <kbd>Cmd+N</kbd> <kbd>Cmd+O</kbd> <kbd>Cmd+W</kbd> <kbd>Cmd+C</kbd> <kbd>Cmd+V</kbd> <kbd>Cmd+A</kbd> <kbd>Cmd+F</kbd> <kbd>Cmd+K</kbd>.</p>
+      </section>
+      <section id="trouble">
+        <h2>When something goes wrong</h2>
+
+<ul>
+<li><b>The probe does not open.</b> Another program has it: a debugger in an IDE, STM32CubeProgrammer, or another tab. Close it, or read RTT through the debugger's server. If nothing has it, unplug it and plug it in again. The message in the status bar says why.</li>
+<li><b>No RTT control block.</b> Is RTT on in the firmware, and has it started? Give the ELF file, or the control block's address. For firmware without RTT, turn <b>Read RTT</b> off and use Watch.</li>
+<li><b>A serial port is in use.</b> Another program has it open: close it, and terNIMA connects by itself.</li>
+<li><b>A variable is "not in the ELF".</b> The firmware was built anew: press <b>Reload</b>. Build it with debug information.</li>
+<li><b>Anything else</b>: <a href="https://github.com/nimaltd/ternima/issues/new">ask, or report a bug on GitHub</a>.</li>
+</ul>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>terNIMA, lib-installer and the libraries under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7024038399630106"
+     crossorigin="anonymous"></script>
+</body>
+</html>
