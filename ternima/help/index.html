@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>terNIMA help | Serial, RTT, SWO, Watch, Plot and Modbus, step by step</title>
-<meta name="description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, the terminal, the hex view, Zephyr logs, live variables, the plot, Modbus, logs and recordings, with screenshots.">
+<title>terNIMA help | Serial, RTT, SWO, SSH, crash decoding, Watch, Plot and Modbus, step by step</title>
+<meta name="description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, SSH, the terminal, the hex view, Zephyr logs, crash decoding, live variables, the plot, Modbus, logs and recordings, with screenshots.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/ternima/help/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/ternima/help/">
 <meta property="og:title" content="terNIMA help | Serial, RTT, SWO, Watch, Plot and Modbus, step by step">
-<meta property="og:description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, the terminal, the hex view, Zephyr logs, live variables, the plot, Modbus, logs and recordings, with screenshots.">
+<meta property="og:description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, SSH, the terminal, the hex view, Zephyr logs, crash decoding, live variables, the plot, Modbus, logs and recordings, with screenshots.">
 <meta property="og:image" content="https://nimaltd.github.io/assets/ternima-logs.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071226">
@@ -92,9 +92,11 @@
         <li><a href="#server">RTT through a debugger's server</a></li>
         <li><a href="#swo">SWO through a debug probe</a></li>
         <li><a href="#tcp">TCP or Telnet</a></li>
+        <li><a href="#ssh">SSH</a></li>
         <li><a href="#terminal">The terminal</a></li>
         <li><a href="#hex">Hex view</a></li>
         <li><a href="#zephyr">Zephyr log</a></li>
+        <li><a href="#crash">Crash decoding</a></li>
         <li><a href="#watch">Watch: live variables</a></li>
         <li><a href="#plot">Plot</a></li>
         <li><a href="#modbus">Modbus</a></li>
@@ -115,8 +117,8 @@
       <section id="sessions">
         <h2>Opening a session</h2>
 
-<p>The <b>+</b> at the end of the tabs, or File &gt; New session, opens one of six kinds:</p>
-<figure><img src="/assets/help/ternima-new-session.png" width="1200" height="760" loading="lazy" decoding="async" alt="The menu under the + of the tab bar: Serial port, RTT through a debug probe, RTT through a debugger&#x27;s server, SWO through a debug probe, TCP or Telnet, and A recording, each with a line on what it is for"><figcaption>+ in the tab bar: the six kinds of session</figcaption></figure>
+<p>The <b>+</b> at the end of the tabs, or File &gt; New session, opens one of seven kinds:</p>
+<figure><img src="/assets/help/ternima-new-session.png" width="1200" height="760" loading="lazy" decoding="async" alt="The menu under the + of the tab bar: Serial port, RTT through a debug probe, RTT through a debugger&#x27;s server, SWO through a debug probe, TCP or Telnet, SSH, and A recording, each with a line on what it is for"><figcaption>+ in the tab bar: the six kinds of session</figcaption></figure>
 
 <ul>
 <li><b>Serial port</b>: a UART, a USB serial adapter, or a board's virtual COM port.</li>
@@ -124,6 +126,7 @@
 <li><b>RTT through a debugger's server</b>: while your IDE debugs, from J-Link's or OpenOCD's own RTT server.</li>
 <li><b>SWO through a debug probe</b>: ITM output on the chip's trace pin, such as printf.</li>
 <li><b>TCP or Telnet</b>: a device on the network, a serial bridge, or a shell.</li>
+<li><b>SSH</b>: a shell on a Linux board or a server, in a real terminal.</li>
 <li><b>A recording</b>: plays back what a tab recorded, with its timing.</li>
 </ul>
 <p>A tab you closed is under <b>Closed tabs</b> in the File menu, to open again as it was, connected if it was. A new serial session for a device seen before gets the settings its tab had, found by the device's USB serial number.</p>
@@ -134,6 +137,7 @@
 <figure><img src="/assets/help/ternima-serial-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New serial session dialog: COM6, an ST-LINK&#x27;s virtual COM port, picked in the list, then 115200 baud, 8 data bits, no parity, 1 stop bit, no flow control, Enter sends CR, DTR and RTS on, and the tab&#x27;s name"><figcaption>A board's virtual COM port, and its settings</figcaption></figure>
 
 <p>Pick the port. The list shows each port's name, what it is and its USB ids, and follows ports being plugged in and out. Then its settings: any baud rate, 5 to 8 data bits, parity, stop bits and flow control, DTR and RTS, what <b>Enter</b> sends (CR, LF or CR LF), local echo for devices that do not echo, and whether LF alone starts a new line.</p>
+<p>The firmware's ELF file is optional. With it, the addresses of a crash get their function, file and line: see <a href="#crash">Crash decoding</a>.</p>
 <p>Unplug the board, and the tab waits for it; plug it back in, and it connects by itself, even on another COM number. DTR, RTS and Break in the toolbar, also in the Connection menu, work on the port as it runs, and Tools &gt; Send file sends a file, paced for the baud rate.</p>
       </section>
       <section id="rtt">
@@ -183,6 +187,25 @@
 
 <p>A TCP socket, plain bytes both ways, as from a serial to network bridge or a device's own socket; or a Telnet server, whose option talk terNIMA answers and keeps out of the terminal. Give the host and the port. The tab waits for the other end, and connects again when the connection is lost.</p>
       </section>
+      <section id="ssh">
+        <h2>SSH</h2>
+
+<figure><img src="/assets/help/ternima-ssh-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New SSH session dialog: host board.local, port 22, user root, and logging in with a password asked each time and never saved"><figcaption>File &gt; New session &gt; SSH</figcaption></figure>
+
+<p>A shell on a Linux board or a server, in a real terminal: colors, <code>vim</code> and <code>htop</code> work, and the size follows the tab. Give the host, the port and the user, and how to log in:</p>
+<ul>
+<li><b>A key file</b>: OpenSSH's or PuTTY's. A passphrase on it is asked each time, and never saved.</li>
+<li><b>The SSH agent</b>: OpenSSH's, or Pageant on Windows.</li>
+<li><b>A password</b>: asked each time you connect, and never saved. A server that asks its own questions is answered the same way.</li>
+</ul>
+<figure><img src="/assets/help/ternima-ssh-trust.png" width="1200" height="760" loading="lazy" decoding="async" alt="The question Trust this server: the server has no key in known_hosts yet, with its key type and fingerprint, and the buttons Cancel and Trust and connect"><figcaption>The first time, the server's key is shown and asked about</figcaption></figure>
+
+<p>Check the fingerprint with <code>ssh-keygen -lf</code> on the server. A key you trust is kept in <code>known_hosts</code> in your <code>.ssh</code> folder, the file <code>ssh</code> itself uses. A key that changed is refused, with both fingerprints and the command that takes the old one out, for when you know why, as with a board flashed again.</p>
+<figure><img src="/assets/help/ternima-ssh.png" width="1200" height="760" loading="lazy" decoding="async" alt="An SSH tab with htop running in it, with its colors, its bars and its F key menu"><figcaption>htop in an SSH tab</figcaption></figure>
+
+<p>A connection that breaks connects again by itself, and <code>exit</code> ends the session. A login that fails is not tried again by itself, so that an account does not get locked. Log, record and replay, macros, sequences, find and split view work as on the other tabs. A recording keeps all that is typed in the shell, even a <code>sudo</code> password, but never the login itself.</p>
+<p>While a full screen program such as <code>vim</code> or <code>htop</code> runs, it gets the F keys, Alt with another key and Ctrl+V for itself, on every kind of tab. Back at the prompt, they are terNIMA's again.</p>
+      </section>
       <section id="terminal">
         <h2>The terminal</h2>
 
@@ -216,6 +239,22 @@
 <figure><img src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Zephyr log view: log lines with their time, level and module, the warnings and errors highlighted, and a count of each level above them"><figcaption>Zephyr logs, by level and module</figcaption></figure>
 
 <p>View &gt; Zephyr log (<kbd>Ctrl+Shift+J</kbd>) lists every received line, with Zephyr's log lines read into time, level and module. The level chips and the module list show or hide lines, the search marks matches or keeps only them, Tools &gt; Highlight rules colors the lines that match, and bookmarks (<kbd>Ctrl+F2</kbd>, then <kbd>F2</kbd> and <kbd>Shift+F2</kbd>) mark lines to come back to.</p>
+      </section>
+      <section id="crash">
+        <h2>Crash decoding</h2>
+
+<p>When firmware crashes, it prints addresses. With the firmware's ELF file in the tab, terNIMA writes the function, the file and the line under each address that is in the code:</p>
+<figure><img src="/assets/help/ternima-crash.png" width="1200" height="760" loading="lazy" decoding="async" alt="A HardFault on an STM32H503RB over RTT: under the line with r14/lr, src/main.rs:237 in __cortex_m_rt_main, and under the faulting instruction address, src/asm.rs:76 in read_sensor"><figcaption>A HardFault: the LR and the PC decoded, the other values left alone</figcaption></figure>
+
+<p>It reads any line with an address written as <code>0x08001234</code>, as in a Zephyr fatal error, a HardFault handler's print or an ESP32 backtrace. On a line that speaks of the PC, the LR, a fault or a backtrace, <code>08001234</code> without the <code>0x</code> counts too. Only addresses inside the ELF file's functions count, so RAM addresses and other numbers stay as they are. A return address, as in the LR, gives the line of the call.</p>
+<ul>
+<li><b>Where the ELF file goes:</b> in the settings of a serial, RTT or SWO tab; for a TCP tab, in its Watch view. It needs no probe, and works on a plain serial port.</li>
+<li><b>Debug information:</b> a firmware built with it, as with <code>-g</code>, gives the file and the line. Without it you get the function, from the symbol table. A stripped file has neither, and the tab says so.</li>
+<li><b>The right file:</b> it must be the firmware that runs, or the addresses point somewhere else. A file built again is read again by itself.</li>
+<li><b>The Zephyr view</b> shows them at the end of the line. The hex view and log files keep only what the device sent.</li>
+<li><b>Settings &gt; Crashes</b> turns it off.</li>
+</ul>
+<figure><img src="/assets/help/ternima-crash-lines.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Zephyr view of the same crash: the function, file and line at the end of the lines with the LR and the PC"><figcaption>The same crash in the Zephyr view</figcaption></figure>
       </section>
       <section id="watch">
         <h2>Watch: live variables</h2>
@@ -268,9 +307,9 @@
       <section id="settings">
         <h2>Settings and the keyboard</h2>
 
-<figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme and text size, the mouse in the terminal, what terNIMA brings back at startup, logging with its folder and format, and the update check"><figcaption>File > Settings</figcaption></figure>
+<figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme and text size, the mouse in the terminal, crash decoding, what terNIMA brings back at startup, logging with its folder and format, and the update check"><figcaption>File > Settings</figcaption></figure>
 
-<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme and the text size, what the mouse does in the terminal, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
+<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme and the text size, what the mouse does in the terminal, crash decoding, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
 <figure><img src="/assets/help/ternima-palette.png" width="1200" height="760" loading="lazy" decoding="async" alt="The command palette with watch typed: the Watch view and Watch beside the terminal"><figcaption>The command palette finds any command</figcaption></figure>
 
 <p>View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name. The keys:</p>
@@ -300,6 +339,8 @@
 <li><b>No RTT control block.</b> Is RTT on in the firmware, and has it started? Give the ELF file, or the control block's address. For firmware without RTT, turn <b>Read RTT</b> off and use Watch.</li>
 <li><b>A serial port is in use.</b> Another program has it open: close it, and terNIMA connects by itself.</li>
 <li><b>A variable is "not in the ELF".</b> The firmware was built anew: press <b>Reload</b>. Build it with debug information.</li>
+<li><b>A crash shows no function or line.</b> Is the ELF file in the tab the firmware that runs, and was it built with debug information? Is Settings &gt; Crashes on?</li>
+<li><b>SSH says a server's key changed.</b> After flashing a board this is expected: the message has the command that takes the old key out. Otherwise, find out why first.</li>
 <li><b>Anything else</b>: <a href="https://github.com/nimaltd/ternima/issues/new">ask, or report a bug on GitHub</a>.</li>
 </ul>
       </section>

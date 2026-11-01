@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>terNIMA | A serial, RTT, SWO and TCP terminal for embedded developers</title>
-<meta name="description" content="terNIMA: serial, RTT, SWO and TCP in one window on Windows, macOS and Linux, with Zephyr logs, live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
+<meta name="description" content="terNIMA: serial, RTT, SWO, TCP and SSH in one window on Windows, macOS and Linux, with Zephyr logs, crash decoding and live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/ternima/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/ternima/">
 <meta property="og:title" content="terNIMA | A serial, RTT, SWO and TCP terminal for embedded developers">
-<meta property="og:description" content="terNIMA: serial, RTT, SWO and TCP in one window on Windows, macOS and Linux, with Zephyr logs, live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
+<meta property="og:description" content="terNIMA: serial, RTT, SWO, TCP and SSH in one window on Windows, macOS and Linux, with Zephyr logs, crash decoding and live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
 <meta property="og:image" content="https://nimaltd.github.io/assets/ternima-logs.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071226">
@@ -72,9 +72,9 @@
 <main id="main">
   <section class="hero wrap page-hero" id="top">
     <div class="hero-text">
-      <a class="news" href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md"><b>New</b><span>terNIMA <span data-ternima="version">1.3.0</span>: what changed</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
+      <a class="news" href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md"><b>New</b><span>terNIMA <span data-ternima="version">1.4.0</span>: what changed</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <h1>terNIMA, <span>a terminal for embedded developers.</span></h1>
-      <p class="lead">One window for everything your board says: serial and TCP, plus RTT and SWO straight from your debug probe, with no vendor software. Watch your firmware's variables change as it runs, plot them, and follow its Zephyr logs. Free and open source, on Windows, macOS and Linux.</p>
+      <p class="lead">One window for everything your board says: serial, TCP and SSH, plus RTT and SWO straight from your debug probe, with no vendor software. Watch your firmware's variables change as it runs, plot them, follow its Zephyr logs, and see the file and line of a crash. Free and open source, on Windows, macOS and Linux.</p>
       <div class="ctas">
         <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
         <a class="btn ghost" href="/ternima/help/"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
@@ -89,6 +89,8 @@
       <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="terNIMA, feature by feature">
         <div class="slides">
           <img class="slide on" src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" data-caption="Zephyr logs, by level and module, with highlights" alt="terNIMA's Lines view: Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them">
+          <img class="slide" src="/assets/ternima-crash.png" width="1200" height="760" loading="lazy" data-caption="A real HardFault, with the function, file and line under each address" alt="An RTT tab on an STM32H503RB after a HardFault: under the lines with the LR and the PC, the function, file and line of each address">
+          <img class="slide" src="/assets/ternima-ssh.png" width="1200" height="760" loading="lazy" data-caption="SSH in a real terminal: htop on a Linux machine" alt="An SSH tab with htop running in it, with its colors, its bars and its F key menu">
           <img class="slide" src="/assets/ternima-rtt.png" width="1200" height="760" loading="lazy" data-caption="RTT through an ST-LINK, with no vendor software" alt="An RTT tab on an STM32H503RB through an ST-LINK: the firmware's shell, with help, colors and uptime typed into it">
           <img class="slide" src="/assets/ternima-watch.png" width="1200" height="760" loading="lazy" data-caption="Live variables beside the RTT shell, read as the chip runs" alt="An RTT tab on an STM32H503RB: the firmware's shell at the left, and at the right its variables, a temperature, a sine, a sample count and the uptime, read live through the probe">
           <img class="slide" src="/assets/ternima-sequences.png" width="1200" height="760" loading="lazy" data-caption="Macros, and sequences of them sent again and again" alt="The Macros dialog: three macros, Reboot, Version and Temperature, and a sequence, Soak test, that sends Temperature then Version every 2 seconds until it is stopped, with their buttons under the terminal">
@@ -107,10 +109,10 @@
 
       <div class="get" id="download">
         <div class="get-head">
-          <h3>Download <span data-ternima="version">1.3.0</span></h3>
+          <h3>Download <span data-ternima="version">1.4.0</span></h3>
           <span class="stars" data-repo="ternima"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
         </div>
-        <p>Released <time data-ternima="date" datetime="2026-10-31">31 October 2026</time>. Free, under the Apache License 2.0.</p>
+        <p>Released <time data-ternima="date" datetime="2026-11-01">1 November 2026</time>. Free, under the Apache License 2.0.</p>
         <ul class="os">
           <li data-os="windows">
             <div><b>Windows</b><span>10 and 11, x64</span></div>
@@ -154,7 +156,9 @@
     <div class="shead"><span class="n">02</span><h2>What it does</h2></div>
     <ul class="features" aria-label="What terNIMA does">
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-cpu"/></svg><div><b>Serial, RTT, SWO and TCP</b><span>Every serial option, RTT through CMSIS-DAP, J-Link and ST-Link probes with no vendor software, SWO, and TCP or Telnet.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-lock"/></svg><div><b>SSH</b><span>A shell on a Linux board or a server in a real terminal, with vim and htop: a key file, the SSH agent or a password that is never saved, and the server's key checked.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-binary"/></svg><div><b>Crash decoding</b><span>Under a code address in the output, as in a Zephyr fatal error, a HardFault or an ESP32 backtrace, its function, file and line from the ELF, on plain serial too.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-gauge"/></svg><div><b>Live variables</b><span>The firmware's globals, struct members and array elements by name from its ELF, read as the chip runs, beside the terminal or plotted.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger and a right axis for values far apart, Arduino Serial Plotter format included.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-network"/></svg><div><b>Modbus, and its traffic</b><span>RTU and ASCII as a master that polls and plots, or a slave that answers, and every frame on the bus, each response under its request.</span></div></li>
