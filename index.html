@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nima Askari (NimaLTD) | terNIMA, lib-installer and embedded C libraries</title>
-<meta name="description" content="terNIMA, a serial, RTT, SWO and TCP terminal for embedded developers, lib-installer, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command, and non-blocking C libraries for STM32. libNIMA and netNIMA are coming.">
+<title>Nima Askari (NimaLTD) | terNIMA, libNIMA and embedded C libraries</title>
+<meta name="description" content="terNIMA, a serial, RTT, SWO and TCP terminal for embedded developers, libNIMA, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command, and non-blocking C libraries for STM32. libNIMA and netNIMA are coming.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/">
-<meta property="og:title" content="Nima Askari (NimaLTD) | terNIMA, lib-installer and embedded C libraries">
-<meta property="og:description" content="terNIMA, a serial, RTT, SWO and TCP terminal for embedded developers, lib-installer, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command, and non-blocking C libraries for STM32. libNIMA and netNIMA are coming.">
+<meta property="og:title" content="Nima Askari (NimaLTD) | terNIMA, libNIMA and embedded C libraries">
+<meta property="og:description" content="terNIMA, a serial, RTT, SWO and TCP terminal for embedded developers, libNIMA, which puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project with one command, and non-blocking C libraries for STM32. libNIMA and netNIMA are coming.">
 <meta property="og:image" content="https://github.com/nimaltd.png">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#071226">
@@ -23,9 +23,9 @@
 <script>
   /* Each product had its part of this page before: its old links lead to its own page now. */
   (function () {
-    var moved = { ternima: "/ternima/", installers: "/lib-installer/", "your-library": "/lib-installer/#your-library",
-      stm32: "/lib-installer/#stm32", zephyr: "/lib-installer/#zephyr", esp32: "/lib-installer/#esp32",
-      arduino: "/lib-installer/#arduino", pio: "/lib-installer/#pio" };
+    var moved = { ternima: "/ternima/", installers: "/libnima/", "your-library": "/libnima/",
+      stm32: "/libnima/", zephyr: "/libnima/", esp32: "/libnima/",
+      arduino: "/libnima/", pio: "/libnima/" };
     var to = moved[location.hash.slice(1)];
     if (to) location.replace(to);
   })();
@@ -59,7 +59,6 @@
         <summary>Products</summary>
         <ul class="menu-products-list">
           <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
-          <li><a href="/lib-installer/"><b>lib-installer</b><span>A library into any project, with one command</span></a></li>
           <li><a href="/libnima/"><b>libNIMA</b><span>A library into any project, from a window or a command</span></a></li>
           <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
         </ul>
@@ -108,16 +107,10 @@
         <p>A terminal for embedded developers: serial, RTT, SWO, TCP and SSH in one window, Zephyr logs, crash decoding, live variables, a plotter and a Modbus tester, on Windows, macOS and Linux.</p>
         <span class="next-go">See terNIMA <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></span>
       </a>
-      <a class="product" href="/lib-installer/">
-        <span class="product-icon"><svg class="ico"><use href="/assets/icons.svg?v=3#i-layers"/></svg></span>
-        <h3>lib-installer <span class="tag">PyPI</span></h3>
-        <p>One command puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project, and keeps your settings through every update. libNIMA takes its place.</p>
-        <span class="next-go">See lib-installer <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></span>
-      </a>
       <a class="product" href="/libnima/">
         <span class="product-icon"><svg class="ico"><use href="/assets/icons.svg?v=3#i-source"/></svg></span>
         <h3>libNIMA <span class="tag">New</span></h3>
-        <p>lib-installer with a window: the libraries into the same five platforms, from a window or from the <span class="nw">libnima</span> command, with no Python.</p>
+        <p>Puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project, from a window or from one command, and keeps your settings through every update.</p>
         <span class="next-go">More on libNIMA <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></span>
       </a>
       <a class="product later" href="/netnima/">
@@ -131,7 +124,7 @@
 
   <section class="wrap sect" id="libraries">
     <div class="shead"><span class="n">02</span><h2>Libraries</h2></div>
-    <p class="sub">Lightweight, non-blocking C libraries for STM32. spif, ee24, seq, osal and littlefs install with <span class="nw">lib-installer</span> in one command, and the rest are moving over one by one.</p>
+    <p class="sub">Lightweight, non-blocking C libraries for STM32. spif, ee24, seq, osal and littlefs install with <span class="nw">libNIMA</span> in one command, and the rest are moving over one by one.</p>
     <div class="ctas">
       <a class="btn ghost" href="/libraries/">See the libraries <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories">All <span data-stat="repos">58</span> repositories <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
@@ -154,7 +147,7 @@
       </div>
       <div class="give">
         <h3>Free and open source</h3>
-        <p>Every library here, <span class="nw">lib-installer</span> and terNIMA are free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
+        <p>Every library here, <span class="nw">libNIMA</span> and terNIMA are free. If one saved you an afternoon, a star helps other engineers find it, and a coffee keeps them coming.</p>
         <div class="ctas">
           <a class="btn ghost" href="https://github.com/nimaltd?tab=repositories"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg>Star on GitHub</a>
           <a class="btn amber" href="https://ko-fi.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=3#i-coffee"/></svg>Buy me a coffee</a>
@@ -174,7 +167,7 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
-    <span>terNIMA, lib-installer and the libraries under the Apache License 2.0</span>
+    <span>terNIMA, libNIMA and the libraries under the Apache License 2.0</span>
   </div>
 </footer>
 
