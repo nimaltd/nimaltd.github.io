@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>libNIMA help | Libraries into your project, step by step</title>
+<meta name="description" content="How to use libNIMA: getting it, opening a project, adding libraries, what OK, CHECK and NO mean, previewing, installing, updating and uninstalling, writing a libnima.yml, and the libnima command, with screenshots.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/libnima/help/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/libnima/help/">
+<meta property="og:title" content="libNIMA help | Libraries into your project, step by step">
+<meta property="og:description" content="How to use libNIMA: getting it, opening a project, adding libraries, what OK, CHECK and NO mean, previewing, installing, updating and uninstalling, writing a libnima.yml, and the libnima command, with screenshots.">
+<meta property="og:image" content="https://nimaltd.github.io/assets/help/libnima-project.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<script src="/assets/site.js?v=3" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=3#faravahar"/></svg>
+
+<!-- The same header is on every page: a change to the menu goes into each. -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="/" aria-label="NimaLTD, the home page">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Site">
+      <details class="menu-products current">
+        <summary>Products</summary>
+        <ul class="menu-products-list">
+          <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
+          <li><a href="/libnima/" aria-current="true"><b>libNIMA</b><span>A library into any project, from a window or a command</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+          <li><a href="/blenima/"><b>bleNIMA <em class="soon">Soon</em></b><span>A tool for Bluetooth Low Energy</span></a></li>
+        </ul>
+      </details>
+      <a href="/libraries/">Libraries</a>
+      <a href="/#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=3#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=3#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=3#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="/assets/icons.svg?v=3#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap page-hero" id="top">
+    <div class="hero-text">
+      <h1>libNIMA <span>help</span></h1>
+      <p class="lead">Every part of libNIMA, step by step, with what you see on the screen. The screenshots are of an STM32H503 project made by CubeMX, with the NimaLTD libraries going into it.</p>
+      <div class="ctas">
+        <a class="btn amber" href="/libnima/#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/libnima/">libNIMA <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap help">
+    <nav class="help-toc" aria-label="On this page">
+      <b>On this page</b>
+      <ol>
+        <li><a href="#start">Getting started</a></li>
+        <li><a href="#project">Opening a project</a></li>
+        <li><a href="#add">Adding libraries</a></li>
+        <li><a href="#marks">OK, CHECK and NO</a></li>
+        <li><a href="#preview">Preview</a></li>
+        <li><a href="#install">Installing</a></li>
+        <li><a href="#update">Updating and uninstalling</a></li>
+        <li><a href="#editor">Writing a libnima.yml</a></li>
+        <li><a href="#command">The command</a></li>
+        <li><a href="#platforms">Each platform</a></li>
+        <li><a href="#offline">Private repositories, proxies and no internet</a></li>
+        <li><a href="#settings">Settings and the keyboard</a></li>
+        <li><a href="#trouble">When something goes wrong</a></li>
+      </ol>
+    </nav>
+    <article class="help-body">
+      <section id="start">
+        <h2>Getting started</h2>
+
+<p>Download libNIMA for your computer from <a href="/libnima/#download">its page</a>: the <code>-setup.exe</code> or the <code>.msi</code> for Windows 10 and 11, the <code>.dmg</code> for macOS on Apple Silicon and Intel, and the AppImage, <code>.deb</code> or <code>.rpm</code> for Linux. It needs no Python.</p>
+<div class="note"><p><b>Not signed yet.</b> Windows may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. macOS may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/libNIMA.app</code> in Terminal. On Linux, make the AppImage runnable with <code>chmod +x</code>.</p></div>
+<p>libNIMA is a window and a command, <code>libnima</code>. The <code>-setup.exe</code>, <code>.msi</code>, <code>.deb</code> and <code>.rpm</code> put the command on your PATH, so it runs from the root of any project. From the <code>.dmg</code> or the AppImage, Tools &gt; Add libnima to the PATH does it. For a build server or a container the command also comes alone, in a zip: unpack it where it can stay, and run <code>libnima --add-to-path</code>.</p>
+<figure><img src="/assets/help/libnima-welcome.png" width="1200" height="760" loading="lazy" decoding="async" alt="libNIMA&#x27;s Welcome tab: its logo and version, the five platforms, how a library is given, the libnima command, MyBoard under Opened lately, and the Open folder button"><figcaption>The Welcome tab: open a project&#x27;s folder, or one opened lately</figcaption></figure>
+<p>The <b>Welcome</b> tab says what libNIMA does, and lists the projects opened lately. Help &gt; Check for updates looks on GitHub for a newer libNIMA.</p>
+      </section>
+      <section id="project">
+        <h2>Opening a project</h2>
+
+<p><b>Open folder</b>, File &gt; Open project (<kbd>Ctrl+O</kbd>), or a folder dropped on the window, opens your project in the <b>Project</b> tab. Open the folder the project lives in:</p>
+<table>
+<tr><th>Platform</th><th>The folder to open</th></tr>
+<tr><td>STM32</td><td>the one CubeMX made, with the <code>.ioc</code></td></tr>
+<tr><td>Zephyr and nRF Connect SDK</td><td>the application's, with <code>CMakeLists.txt</code> and <code>prj.conf</code></td></tr>
+<tr><td>ESP-IDF</td><td>the project's, with <code>CMakeLists.txt</code> and <code>main/</code></td></tr>
+<tr><td>Arduino</td><td>a sketch's, or any, for the libraries folder of your sketchbook</td></tr>
+<tr><td>PlatformIO</td><td>the project's, with <code>platformio.ini</code></td></tr>
+</table>
+<p>libNIMA reads the project and says which platform it is and which file told it, such as <i>STM32, from MyBoard.ioc</i>, with the IDEs it found beside it. When that is wrong, <b>Change</b> says which it is. A folder that is no Zephyr application, ESP-IDF project or PlatformIO project is not installed into: open the right folder.</p>
+      </section>
+      <section id="add">
+        <h2>Adding libraries</h2>
+
+<p>Give a library in the <b>Add library</b> box: its GitHub owner and name, such as <code>nimaltd/ee24</code>, its GitHub address, or one release of it, <code>nimaltd/ee24@v4.0.0</code>. <b>Zip</b> takes the zip of GitHub's <b>Code</b>, <b>Download ZIP</b>, with no need to unpack it, and <b>Folder</b> a library on your disk.</p>
+<figure><img src="/assets/help/libnima-project.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Project tab on E:/Work/MyBoard: STM32, from MyBoard.ioc, with CMake. To install: ee24 4.0.0 marked OK, needing osal 1.1.0 or newer, installed first; spif 3.0.0 marked CHECK, HAL SPI module is not enabled, opened to show its folder and its littlefs option; seq 2.1.0 marked OK; then Preview and Install all"><figcaption>A CubeMX project open, and three libraries checked against it</figcaption></figure>
+<p>Each library joins the list <b>To install</b>, with its version and what libNIMA found when it checked it against your project. A library it needs is named beside it, such as <i>needs osal &gt;= 1.1.0, installed first</i>, and goes in before it. <b>More</b> shows what the library is, the folder it goes into, and the parts of it you choose, such as spif's port for LittleFS. <b>yml</b> shows its <code>libnima.yml</code>, and <b>Remove</b> takes it off the list.</p>
+<p>A library in a private repository asks for a GitHub token that can read it. It is used for that run and never saved.</p>
+      </section>
+      <section id="marks">
+        <h2>OK, CHECK and NO</h2>
+
+<table>
+<tr><th>Mark</th><th>What it means</th></tr>
+<tr><td><b class="nw">OK</b></td><td>Nothing stands in its way.</td></tr>
+<tr><td><b class="nw">CHECK</b></td><td>It installs, and there is something to do first, with the way to do it. Never a refusal, since a project can be laid out in ways libNIMA cannot read.</td></tr>
+<tr><td><b class="nw">NO</b></td><td>It is not installed, and the reason is beside it: a library for another platform, one that needs a newer libNIMA, or one whose install would write over something of yours.</td></tr>
+</table>
+<figure><img src="/assets/help/libnima-check.png" width="1200" height="760" loading="lazy" decoding="async" alt="The dialog for spif: HAL SPI module is not enabled, so uncomment HAL_SPI_MODULE_ENABLED in stm32h5xx_hal_conf.h or enable it in CubeMX; and no SPI in the CubeMX configuration, where the library needs SPI, full duplex master, mode 0, 8 bit"><figcaption>How to fix a CHECK: what the check found, and what to do</figcaption></figure>
+<p><b>How to fix</b> by a CHECK lists what the check found, and what to do about each, such as a HAL module to switch on in <code>stm32xxxx_hal_conf.h</code>, or a peripheral to set up in CubeMX.</p>
+      </section>
+      <section id="preview">
+        <h2>Preview</h2>
+
+<figure><img src="/assets/help/libnima-preview.png" width="1200" height="760" loading="lazy" decoding="async" alt="What the install would change: CMakeLists.txt edited and 35 new files, and the lines it adds to CMakeLists.txt for osal, ee24 and spif, each in a block of its own"><figcaption>Preview: what the install would change, tried on a copy</figcaption></figure>
+<p><b>Preview</b> tries the whole list on a copy of the project, and shows what an install would change: the project's files it edits, and the new files. Click a file to see its changes. The project itself is left as it was. Questions take the answer they offer, and no step of a library is run. <b>Install all</b> from there installs the list.</p>
+      </section>
+      <section id="install">
+        <h2>Installing</h2>
+
+<p><b>Install all</b> installs the list, each library after what it needs. Every library is checked before the first is written, so a run that is refused writes nothing. Every file of the project is saved first, as a <code>.bak</code> with the date and time in its name.</p>
+<figure><img src="/assets/help/libnima-question.png" width="1200" height="760" loading="lazy" decoding="async" alt="During the install, the question Folder to install osal into, with osal offered, and the run log below it, where ee24 needs osal 1.1.0 or newer"><figcaption>A question while it installs: the folder of a library another needs</figcaption></figure>
+<p>What libNIMA needs to know, it asks: the folder of a library another one needs, a part of a library you can choose, a step a library runs, shown in full before it runs.</p>
+<figure><img src="/assets/help/libnima-install.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Installed list, ee24, osal, seq and spif, each with Update and Uninstall, and below it the run log, with a folded part for each of osal, ee24, spif and seq, each done"><figcaption>Installed, and what each library&#x27;s install did, in a part of its own</figcaption></figure>
+<p><b>What the last run did</b> has a part for each library, which opens and folds. <b>Copy</b> copies it all, to keep or to send.</p>
+<figure><img src="/assets/help/libnima-log.png" width="1200" height="760" loading="lazy" decoding="async" alt="The part of the run log for seq 2.1.0: its files written, CMake updated with seq added to CMakeLists.txt, the name of the backup, and Done, #include seq.h and you are away"><figcaption>One part of the run log: the files written and the project updated</figcaption></figure>
+<p>A part says which files were written, created or kept, which files of the project were updated and where their backup is, and ends with the line to <code>#include</code>.</p>
+      </section>
+      <section id="update">
+        <h2>Updating and uninstalling</h2>
+
+<p>The libraries in the project are under <b>Installed</b>, each with its version, its folder, and when there is one, the newer version on GitHub.</p>
+<p><b>Update</b> installs it again. What you wrote between its <code>USER CODE BEGIN</code> and <code>USER CODE END</code> lines is kept, the way CubeMX keeps your code, and anything else of yours that would be lost is saved as a <code>.bak</code> first.</p>
+<p><b>Uninstall</b> takes the library out of the build, every block it wrote in your project's files, and then its files. What was yours is saved first, as a <code>.bak</code>. A library another one needs stays, and the run says which needs it.</p>
+<p>A library stays in the folder it was installed in. To move it, uninstall it, then install it into the other folder.</p>
+      </section>
+      <section id="editor">
+        <h2>Writing a libnima.yml</h2>
+
+<p>A library says how it goes in with a <code>libnima.yml</code> at the root of its repository. The <b>libnima.yml</b> tab (<kbd>Ctrl+2</kbd>) writes one with you: <b>Open library</b> opens a library's folder, and <b>New</b> fills one in from what is in it, its headers and sources, its licence and its README.</p>
+<figure><img src="/assets/help/libnima-editor.png" width="1200" height="760" loading="lazy" decoding="async" alt="The libnima.yml tab on E:/Work/ee24: the About part of the form, with name, description, platforms, repository, licence, version and kind, and beside it what the file does: ee24 4.0.0 installs on STM32, with its headers, extras and what it needs"><figcaption>Writing a libnima.yml: the form, and what the file comes to</figcaption></figure>
+<p>The <b>Form</b> has a place for every key, part by part, with a line on each and the line of the file it is on. <b>Summary</b> says what the file comes to: the library's version and where it is read from, the platforms it installs on, its files and what it needs.</p>
+<figure><img src="/assets/help/libnima-editor-text.png" width="1200" height="760" loading="lazy" decoding="async" alt="The text of ee24&#x27;s libnima.yml with on typed on a line of its own, and what it offers: once, options and version, once explained as files made in the project when missing, then the person&#x27;s"><figcaption>The text: what can go at the cursor, and what each is</figcaption></figure>
+<p>The <b>Text</b> is the same file. Typing offers what can go at the cursor, with what each is, and the form and the text keep each other's changes, comments included.</p>
+<figure><img src="/assets/help/libnima-editor-fix.png" width="1200" height="760" loading="lazy" decoding="async" alt="The text with sources misspelt as source on line 50, marked, and under Problems: source is no key libNIMA reads, so it was left out, with the button Change it to sources; beside it, the summary finds src/ee24.c in the folder but not listed, with Add"><figcaption>A misspelt key, and the fix a click makes</figcaption></figure>
+<p>Each problem names its line, and many come with the fix a click makes. The summary also names the files of the folder the file does not list, with <b>Add</b>. <b>Save</b> (<kbd>Ctrl+S</kbd>) writes the file, and <b>Try on project</b> shows what it would install in the project open in the first tab.</p>
+<p>Every key is on <a href="https://github.com/nimaltd/libNIMA/blob/main/docs/FORMAT.md">the format page</a>. In VS Code, the YAML extension gives the same help with the line the format page gives.</p>
+      </section>
+      <section id="command">
+        <h2>The command</h2>
+
+<p>From the root of your project, <code>libnima</code> does what the window does:</p>
+<table>
+<tr><th>To</th><th>Run</th></tr>
+<tr><td>Install or update a library</td><td><code>libnima nimaltd/ee24</code></td></tr>
+<tr><td>One release of it, a branch or a commit</td><td><code>libnima nimaltd/ee24@v4.0.0</code></td></tr>
+<tr><td>From a zip or a folder</td><td><code>libnima D:/Downloads/ee24-main.zip</code></td></tr>
+<tr><td>Check it against the project, and write nothing</td><td><code>libnima nimaltd/ee24 --check</code></td></tr>
+<tr><td>Into a folder you choose</td><td><code>libnima nimaltd/ee24 --dir Libs/ee24</code></td></tr>
+<tr><td>Take a part of it, or leave it out</td><td><code>--with littlefs</code>, <code>--without littlefs</code></td></tr>
+<tr><td>Take every answer offered, for a script</td><td><code>--yes</code></td></tr>
+<tr><td>Uninstall</td><td><code>libnima --uninstall ee24</code></td></tr>
+<tr><td>Check a library's libnima.yml, for its CI</td><td><code>libnima --lint</code></td></tr>
+<tr><td>Open the window on this folder</td><td><code>libnima --gui</code></td></tr>
+<tr><td>Every option</td><td><code>libnima --help</code></td></tr>
+</table>
+<p><a href="https://github.com/nimaltd/libNIMA#every-command">The README</a> has every command.</p>
+      </section>
+      <section id="platforms">
+        <h2>Each platform</h2>
+
+<table>
+<tr><th>Platform</th><th>What libNIMA does there</th></tr>
+<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/stm32.md">STM32</a></td><td>Adds the library to CMake, STM32CubeIDE, Keil MDK, IAR or CubeMX's Makefile, every one it finds, and checks the HAL modules, peripherals and RTOS it needs.</td></tr>
+<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/zephyr.md">Zephyr</a></td><td>Makes the library a Zephyr module, adds it to the build and switches it on in <code>prj.conf</code>, with its settings in Kconfig.</td></tr>
+<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/esp32.md">ESP-IDF</a></td><td>Makes the library a component, with its settings in menuconfig and the symbols it needs in <code>sdkconfig.defaults</code>.</td></tr>
+<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/arduino.md">Arduino</a></td><td>Puts the library in your sketchbook's libraries folder, or one sketch's <code>src</code>, with its <code>library.properties</code>.</td></tr>
+<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/pio.md">PlatformIO</a></td><td>Puts the library in <code>lib/</code> with a <code>library.json</code>, and its defines and flags in <code>platformio.ini</code>.</td></tr>
+</table>
+<p>Each platform's guide has the rest.</p>
+      </section>
+      <section id="offline">
+        <h2>Private repositories, proxies and no internet</h2>
+
+<p><b>A private repository.</b> Make a GitHub token at <a href="https://github.com/settings/personal-access-tokens">github.com/settings/personal-access-tokens</a> that can read it, with <b>Contents</b> set to <b>Read-only</b>. The window asks for it; the command takes <code>--key</code>, or <code>GITHUB_TOKEN</code> or <code>GH_TOKEN</code> set to it. It is never saved, and is sent to GitHub and nowhere else.</p>
+<p><b>A proxy.</b> Set <code>HTTPS_PROXY</code>, such as <code>http://127.0.0.1:10809</code>. A file that does not arrive is tried again, and every file is fetched before anything is installed.</p>
+<p><b>No internet.</b> Download the library's zip on a machine that has it, and give libNIMA the zip, with the zip of each library it needs beside it. Forget one, and it stops before writing anything, naming the zip it is missing.</p>
+      </section>
+      <section id="settings">
+        <h2>Settings and the keyboard</h2>
+
+<p>Tools &gt; Settings has the theme, the check for a newer libNIMA, and the check for newer versions of the libraries installed. View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name.</p>
+<table>
+<tr><th>Do</th><th>Keys</th></tr>
+<tr><td>Open a project</td><td><kbd>Ctrl+O</kbd></td></tr>
+<tr><td>The Project tab, the libnima.yml tab</td><td><kbd>Ctrl+1</kbd> <kbd>Ctrl+2</kbd></td></tr>
+<tr><td>Save the libnima.yml</td><td><kbd>Ctrl+S</kbd></td></tr>
+<tr><td>Command palette</td><td><kbd>Ctrl+Shift+P</kbd></td></tr>
+</table>
+<p>On macOS, Cmd takes the place of Ctrl.</p>
+      </section>
+      <section id="trouble">
+        <h2>When something goes wrong</h2>
+
+<ul>
+<li><b>It says the folder is a git repository.</b> A clone of a library inside your project is not installed where it stands, since that would take its history. Install from a copy outside the project, or from GitHub.</li>
+<li><b>A file of yours is where the library's would go.</b> Nothing was installed. Move or rename your file, or give the library another folder.</li>
+<li><b>It is not a Zephyr application, ESP-IDF project or PlatformIO project.</b> Open the folder that holds <code>CMakeLists.txt</code> and <code>prj.conf</code>, <code>main/</code>, or <code>platformio.ini</code>.</li>
+<li><b>A library needs a newer libNIMA.</b> Help &gt; Check for updates, or download the latest from <a href="/libnima/#download">its page</a>.</li>
+<li><b>GitHub did not accept the token, or cannot see the repository.</b> The token has expired, has no <b>Contents: Read-only</b>, or the repository is not among those it can read.</li>
+<li><b>It says installed, and in no build yet.</b> libNIMA found no IDE it could add the library to: add it by hand, as the run says.</li>
+<li><b>Anything else</b>: <a href="https://github.com/nimaltd/libNIMA/issues/new">ask, or report a bug on GitHub</a>.</li>
+</ul>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>terNIMA, libNIMA and the libraries under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7024038399630106"
+     crossorigin="anonymous"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>libNIMA | Embedded libraries, from a window or a command</title>
+<title>libNIMA | Embedded libraries into any project, from a window or a command</title>
 <meta name="description" content="libNIMA puts a library into an STM32, Zephyr, ESP-IDF, Arduino or PlatformIO project, from a window or from the libnima command, on Windows, macOS and Linux.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/libnima/">
@@ -72,17 +72,96 @@
 <main id="main">
   <section class="hero wrap page-hero" id="top">
     <div class="hero-text">
-      <span class="news"><b>New</b><span>1.0.0 is out</span></span>
+      <a class="news" href="https://github.com/nimaltd/libNIMA/blob/main/CHANGELOG.md"><b>New</b><span>libNIMA 1.1.0: what changed</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <h1>libNIMA, <span>a library into any project.</span></h1>
-      <p class="lead">Open a project, add a library by its repository, see whether it fits, and install it. For STM32, Zephyr, ESP-IDF, Arduino and PlatformIO projects, from a window or from the <span class="nw">libnima</span> command, the same on Windows, macOS and Linux. It replaces lib-installer, and needs no Python.</p>
+      <p class="lead">Open a project, add a library by its repository, see whether it fits, and install it, from a window or from the <span class="nw">libnima</span> command: STM32 with CubeMX, Zephyr and nRF Connect SDK, ESP-IDF, Arduino and PlatformIO. Your settings survive every update, and every project file is saved before it changes. Free and open source, on Windows, macOS and Linux.</p>
       <div class="ctas">
-        <a class="btn amber" href="https://github.com/nimaltd/libNIMA/releases/latest"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
-        <a class="btn ghost" href="https://github.com/nimaltd/libNIMA#readme"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
+        <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/libnima/help/"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
         <a class="btn ghost" href="https://github.com/nimaltd/libNIMA">libNIMA on GitHub <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 
+  <section class="wrap sect" id="get">
+    <div class="shead"><span class="n">01</span><h2>See it, and get it</h2></div>
+    <div class="tn">
+      <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="libNIMA, step by step">
+        <div class="slides">
+          <img class="slide on" src="/assets/help/libnima-project.png" width="1200" height="760" loading="lazy" data-caption="A CubeMX project open, and three libraries checked against it" alt="The Project tab on E:/Work/MyBoard: STM32, from MyBoard.ioc, with CMake. To install: ee24 4.0.0 marked OK, needing osal 1.1.0 or newer, installed first; spif 3.0.0 marked CHECK, HAL SPI module is not enabled, opened to show its folder and its littlefs option; seq 2.1.0 marked OK; then Preview and Install all">
+          <img class="slide" src="/assets/help/libnima-install.png" width="1200" height="760" loading="lazy" data-caption="Installed, and what each library&#x27;s install did, in a part of its own" alt="The Installed list, ee24, osal, seq and spif, each with Update and Uninstall, and below it the run log, with a folded part for each of osal, ee24, spif and seq, each done">
+          <img class="slide" src="/assets/help/libnima-editor.png" width="1200" height="760" loading="lazy" data-caption="Writing a libnima.yml: the form, and what the file comes to" alt="The libnima.yml tab on E:/Work/ee24: the About part of the form, with name, description, platforms, repository, licence, version and kind, and beside it what the file does: ee24 4.0.0 installs on STM32, with its headers, extras and what it needs">
+          <img class="slide" src="/assets/help/libnima-preview.png" width="1200" height="760" loading="lazy" data-caption="Preview: what the install would change, tried on a copy" alt="What the install would change: CMakeLists.txt edited and 35 new files, and the lines it adds to CMakeLists.txt for osal, ee24 and spif, each in a block of its own">
+          <img class="slide" src="/assets/help/libnima-check.png" width="1200" height="760" loading="lazy" data-caption="How to fix a CHECK: what the check found, and what to do" alt="The dialog for spif: HAL SPI module is not enabled, so uncomment HAL_SPI_MODULE_ENABLED in stm32h5xx_hal_conf.h or enable it in CubeMX; and no SPI in the CubeMX configuration, where the library needs SPI, full duplex master, mode 0, 8 bit">
+          <img class="slide" src="/assets/help/libnima-welcome.png" width="1200" height="760" loading="lazy" data-caption="The Welcome tab: open a project&#x27;s folder, or one opened lately" alt="libNIMA&#x27;s Welcome tab: its logo and version, the five platforms, how a library is given, the libnima command, MyBoard under Opened lately, and the Open folder button">
+        </div>
+        <figcaption>
+          <span class="slide-caption">A CubeMX project open, and three libraries checked against it</span>
+          <span class="slide-tools"></span>
+        </figcaption>
+      </figure>
+
+      <div class="get" id="download">
+        <div class="get-head">
+          <h3>Download 1.1.0</h3>
+          <span class="stars" data-repo="libNIMA"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
+        </div>
+        <p>Released <time datetime="2026-11-05">5 November 2026</time>. Free, under the Apache License 2.0.</p>
+        <ul class="os">
+          <li data-os="windows">
+            <div><b>Windows</b><span>10 and 11, x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/libNIMA/releases/latest" aria-label="libNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/libNIMA/releases/latest" aria-label="libNIMA for Windows, the .msi installer">.msi</a>
+            </div>
+          </li>
+          <li data-os="mac">
+            <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/libNIMA/releases/latest" aria-label="libNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
+            </div>
+          </li>
+          <li data-os="linux">
+            <div><b>Linux</b><span>x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/libNIMA/releases/latest" aria-label="libNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/libNIMA/releases/latest" aria-label="libNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/libNIMA/releases/latest" aria-label="libNIMA for Linux, the .rpm package">.rpm</a>
+            </div>
+          </li>
+        </ul>
+        <p>The installers put the <span class="nw">libnima</span> command on your PATH. For a build server or a container, the command comes alone too, in a zip.</p>
+        <details class="unsigned">
+          <summary>Not signed yet: opening it the first time</summary>
+          <ul>
+            <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>.</li>
+            <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/libNIMA.app</code> in Terminal.</li>
+            <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>.</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/nimaltd/libNIMA/releases/latest">Every file, and the notes</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="wrap sect" id="features">
+    <div class="shead"><span class="n">02</span><h2>What it does</h2></div>
+    <ul class="features" aria-label="What libNIMA does">
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-cpu"/></svg><div><b>Five platforms, one file</b><span>STM32 with CMake, STM32CubeIDE, Keil, IAR or CubeMX&#x27;s Makefile; a Zephyr module, nRF Connect SDK too; an ESP-IDF component; an Arduino library; PlatformIO&#x27;s lib/. One libnima.yml serves them all.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-source"/></svg><div><b>It reads your project</b><span>It says which platform your project is and which file told it, and you can change it.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-check"/></svg><div><b>Checked before anything is written</b><span>Each library is marked OK, CHECK or NO against your project, with the way to put it right, and a run that is refused writes nothing.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-layers"/></svg><div><b>What a library needs comes first</b><span>The libraries it needs go in before it, each at a version that will do, and one already there is kept.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-undo"/></svg><div><b>Updates keep your settings</b><span>What you wrote between USER CODE lines survives every update, anything else of yours is saved as a .bak first, and an uninstall gives your files back.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-sliders"/></svg><div><b>Parts you choose, steps it asks about</b><span>Options are asked about at the first install, and a step a library runs is shown in full and asked about before it runs.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-terminal"/></svg><div><b>A window and a command</b><span>The libnima command is on your PATH and does what the window does, for a script or a build server: --check, --yes, --lint.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg><div><b>A libnima.yml written with you</b><span>New fills one in from what is in the library&#x27;s folder, a form beside the text has a place for every key, and each problem comes with a fix.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-lock"/></svg><div><b>Private repositories</b><span>A GitHub token that can read it, asked for and never saved, or from GITHUB_TOKEN.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-offline"/></svg><div><b>Without internet</b><span>From the zip of GitHub&#x27;s Download ZIP, with no need to unpack it, and the zip of each library it needs beside it.</span></div></li>
+    </ul>
+  </section>
 </main>
 
 <footer class="foot">
