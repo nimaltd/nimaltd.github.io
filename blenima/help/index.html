@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bleNIMA help | Bluetooth LE testing, step by step</title>
+<meta name="description" content="How to use bleNIMA: the scanner, a device's GATT table, the terminal, the log, tests, MCUmgr firmware update, pairing, the device simulator and Bluetooth mesh, with screenshots.">
+<meta name="author" content="Nima Askari">
+<link rel="canonical" href="https://nimaltd.github.io/blenima/help/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nimaltd.github.io/blenima/help/">
+<meta property="og:title" content="bleNIMA help | Bluetooth LE testing, step by step">
+<meta property="og:description" content="How to use bleNIMA: the scanner, a device's GATT table, the terminal, the log, tests, MCUmgr firmware update, pairing, the device simulator and Bluetooth mesh, with screenshots.">
+<meta property="og:image" content="https://nimaltd.github.io/assets/help/blenima-scanner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#071226">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script>
+  /* Before anything is drawn, so the page never flashes the other theme. */
+  document.documentElement.classList.add("js");
+  try { var t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
+<link rel="stylesheet" href="/assets/site.css?v=3">
+<script src="/assets/site.js?v=3" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+<svg class="faravahar" viewBox="150 90 700 380" aria-hidden="true" focusable="false"><use href="/assets/faravahar.svg?v=3#faravahar"/></svg>
+
+<!-- The same header is on every page: a change to the menu goes into each. -->
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="logo" href="/" aria-label="NimaLTD, the home page">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path class="mark-pins" d="M11 2v4M16 2v4M21 2v4M11 26v4M16 26v4M21 26v4M2 11h4M2 16h4M2 21h4M26 11h4M26 16h4M26 21h4"/>
+        <rect class="mark-body" x="6" y="6" width="20" height="20" rx="4"/>
+        <rect class="mark-die" x="10" y="10" width="12" height="12" rx="2"/>
+        <path class="mark-n" d="M13.6 19.2v-6.4l4.8 6.4v-6.4"/>
+      </svg>
+      <span class="word">Nima<em>LTD</em></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Site">
+      <details class="menu-products current">
+        <summary>Products</summary>
+        <ul class="menu-products-list">
+          <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
+          <li><a href="/libnima/"><b>libNIMA</b><span>A library into any project, from a window or a command</span></a></li>
+          <li><a href="/blenima/" aria-current="true"><b>bleNIMA</b><span>A Bluetooth LE tester for embedded developers</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+        </ul>
+      </details>
+      <a href="/libraries/">Libraries</a>
+      <a href="/#support">Support</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch to the light theme">
+        <svg class="ico ico-sun"><use href="/assets/icons.svg?v=3#i-sun"/></svg><svg class="ico ico-moon"><use href="/assets/icons.svg?v=3#i-moon"/></svg>
+      </button>
+      <a class="btn ghost small" href="https://github.com/nimaltd"><svg class="ico"><use href="/assets/icons.svg?v=3#i-github"/></svg><span>GitHub</span></a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Open the menu" aria-expanded="false" aria-controls="nav-links">
+        <svg class="ico"><use href="/assets/icons.svg?v=3#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap page-hero" id="top">
+    <div class="hero-text">
+      <h1>bleNIMA <span>help</span></h1>
+      <p class="lead">Every part of bleNIMA, step by step, with what you see on the screen. The screenshots are of made-up devices: an nRF52840 DK running the Zephyr shell and MCUmgr, and a small mesh network.</p>
+      <div class="ctas">
+        <a class="btn amber" href="/blenima/#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/blenima/">bleNIMA <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap help">
+    <nav class="help-toc" aria-label="On this page">
+      <b>On this page</b>
+      <ol>
+        <li><a href="#start">Getting started</a></li>
+        <li><a href="#scanner">The scanner</a></li>
+        <li><a href="#gatt">A device: its GATT table</a></li>
+        <li><a href="#terminal">The terminal</a></li>
+        <li><a href="#log">The log</a></li>
+        <li><a href="#tests">Tests</a></li>
+        <li><a href="#mcumgr">Firmware update: MCUmgr</a></li>
+        <li><a href="#pairing">Pairing and bonds</a></li>
+        <li><a href="#simulator">The device simulator</a></li>
+        <li><a href="#mesh">Bluetooth mesh</a></li>
+        <li><a href="#os">What each OS lets an app do</a></li>
+        <li><a href="#settings">Settings and the keyboard</a></li>
+        <li><a href="#trouble">When something goes wrong</a></li>
+      </ol>
+    </nav>
+    <article class="help-body">
+      <section id="start">
+        <h2>Getting started</h2>
+
+<p>Download bleNIMA for your computer from <a href="/blenima/#download">its page</a>: the <code>-setup.exe</code> or the <code>.msi</code> for Windows 10 and 11, the <code>.dmg</code> for macOS on Apple Silicon and Intel, and the AppImage, <code>.deb</code> or <code>.rpm</code> for Linux. It uses the computer's own Bluetooth: there is no dongle to buy.</p>
+<div class="note"><p><b>Not signed yet.</b> Windows may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. macOS may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/bleNIMA.app</code> in Terminal. On Linux, make the AppImage runnable with <code>chmod +x</code>.</p></div>
+<figure><img src="/assets/help/blenima-welcome.png" width="1200" height="760" loading="lazy" decoding="async" alt="bleNIMA&#x27;s welcome page: its logo and version, its GitHub and help addresses, the radio, what New tab opens, and the New scanner button"><figcaption>The welcome page: what bleNIMA is, the radio, and a button for the scanner</figcaption></figure>
+<p>With no tab open, the welcome page shows the Bluetooth radio bleNIMA found, and what File &gt; New tab and the <b>+</b> button open: the <b>Scanner</b>, a <b>Device simulator</b>, and the <b>Mesh network</b>. There is one scanner and one Mesh tab at most. Device and terminal tabs open from the scanner. Help &gt; Check for updates looks on GitHub for a newer bleNIMA.</p>
+      </section>
+      <section id="scanner">
+        <h2>The scanner</h2>
+
+<p><b>New scanner</b>, or <kbd>Ctrl+Shift+N</kbd>, opens the scanner, and it starts listening. Each device the computer hears is a row: its name and address, its RSSI, how often it advertises, how many adverts came, and what its advert says, such as a company, a service or a beacon.</p>
+<figure><img src="/assets/help/blenima-scanner.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Scanner tab with six devices, nRF52840 DK, Thermo Sensor, ESP32-C3 SMP, Mesh Light, an iBeacon and HR Monitor, each with its RSSI, interval, adverts and what it says; nRF52840 DK picked, with Connect and Terminal, its address, PDU, RSSI and TX power, and its advert&#x27;s structures"><figcaption>The scanner: every device around, and one&#x27;s advert in words and bytes</figcaption></figure>
+<p>Pick a device to see its advert on the right: each AD structure in words, then the bytes. iBeacon, Eddystone and AltBeacon are read out. On Windows the bytes are the advert as it was sent; on macOS and Linux bleNIMA makes them again from what the OS read.</p>
+<ul>
+<li><b>Filter</b> by name, address, company or service, by RSSI, or to the named, connectable or starred devices. The star keeps a device in the list as a favourite.</li>
+<li><b>Sort</b> keeps the list in the order devices were first heard, unless you choose RSSI, name or last heard.</li>
+<li><b>RSSI plot</b> (<kbd>Ctrl+Shift+G</kbd>) draws each device's RSSI over time.</li>
+<li><b>Active scan</b> asks for scan responses; <b>passive</b> only listens. <b>Coded PHY</b> hears long range adverts too, where the adapter has it. What an adapter or an OS cannot do is greyed out, saying why.</li>
+<li><b>CSV</b> saves the list. <b>Stop</b> (<kbd>Shift+F5</kbd>) and <b>Start</b> (<kbd>F5</kbd>) pause and go on.</li>
+</ul>
+<p><b>Connect</b>, or a double-click, opens a device tab. <b>Terminal</b> opens it straight in its terminal.</p>
+      </section>
+      <section id="gatt">
+        <h2>A device: its GATT table</h2>
+
+<p>A device tab connects, reads the GATT table, and keeps the connection: when the device goes, it connects again as soon as it is heard, and the log says how long it was gone.</p>
+<figure><img src="/assets/help/blenima-gatt.png" width="1200" height="760" loading="lazy" decoding="async" alt="The device tab of nRF52840 DK connected with MTU 247 and PHY 2M: the device information card, the services from Generic Access to the Nordic UART Service, and Battery Level picked, notifying, with its plot over twelve seconds"><figcaption>A device&#x27;s GATT table, its information read out, and a value plotted live</figcaption></figure>
+<p>The toolbar shows the MTU, the PHY each way, and the connection interval, latency and timeout, with a preset to ask for: balanced, throughput or low power. The card on top has the device's name, battery, maker, model, serial and firmware, read by themselves when it connects; Settings says where it goes, or hides it.</p>
+<p>Services and characteristics have their standard names, and their values are in words: Heart Rate, Blood Pressure, Glucose, Cycling Power, Current Time and many more. Pick one to:</p>
+<ul>
+<li><b>Read</b>, <b>Write</b> and <b>Notify</b> or <b>Indicate</b>, with a form for the standard values, such as setting the time or an alert.</li>
+<li>Choose how its value shows: hex, text, or any number format, either byte order. The choice stays for the next time.</li>
+<li><b>Plot</b> what comes, live, and see every value with its time.</li>
+<li>Read its descriptors, in words too.</li>
+</ul>
+<p>On Windows, <b>Pair</b> pairs and bonds, and Windows asks for a passkey itself when the device needs one.</p>
+      </section>
+      <section id="terminal">
+        <h2>The terminal</h2>
+
+<p>The <b>Terminal</b> view (<kbd>Ctrl+Shift+T</kbd>) is a real terminal, as in terNIMA, on a write and a notify characteristic. It finds the Nordic UART Service, HM-10 and Microchip's Transparent UART by itself, so the Zephyr shell works at once; any other pair can be chosen.</p>
+<figure><img src="/assets/help/blenima-terminal.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Terminal view writing to UART RX and showing UART TX: the nRF Connect SDK boot banner, then kernel version, device list and bt info typed at the uart prompt"><figcaption>The Zephyr shell over the Nordic UART Service, in a real terminal</figcaption></figure>
+<p><b>Enter sends</b> CR, LF or both, and <b>Local echo</b> shows what you type when the device does not send it back. Long writes are cut to fit the MTU.</p>
+      </section>
+      <section id="log">
+        <h2>The log</h2>
+
+<p>The <b>Log</b> view (<kbd>Ctrl+Shift+J</kbd>) has everything that happened on the connection, with times: each read, write and notification in words and in bytes, subscriptions, errors in words, and when it was lost and back.</p>
+<figure><img src="/assets/help/blenima-log.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Log view: the device information read when it connected, then Battery Level notified every 300 ms, each line with its time, kind, characteristic, value in words and bytes"><figcaption>The log: every read, write and notification, in words and bytes</figcaption></figure>
+<p>Type in the filter to see only the lines that have it (<kbd>Ctrl+Shift+F</kbd>). <b>Save log</b> writes it to a file, and Edit &gt; Clear (<kbd>Ctrl+Shift+K</kbd>) empties it.</p>
+      </section>
+      <section id="tests">
+        <h2>Tests</h2>
+
+<p>The <b>Tests</b> view has four, each with what it found at the end:</p>
+<table>
+<tr><th>Test</th><th>What it does</th></tr>
+<tr><td><b>Throughput</b></td><td>Counts the bytes the device notifies, second by second, and lost packets when the device counts them. A write flood sends packets the size of the MTU as fast as the OS takes them.</td></tr>
+<tr><td><b>Latency</b></td><td>Writes, and times the notification that answers, round after round.</td></tr>
+<tr><td><b>Connection soak</b></td><td>Disconnects and connects again, cycle after cycle, and times each connection to the end of discovery.</td></tr>
+<tr><td><b>Send and expect</b></td><td>A script of what to send and what to expect back, with a pass or fail report.</td></tr>
+</table>
+      </section>
+      <section id="mcumgr">
+        <h2>Firmware update: MCUmgr</h2>
+
+<p>A device with MCUmgr's SMP service, as Zephyr and nRF Connect SDK build it, has the <b>MCUmgr</b> view. <b>Read image slots</b> shows each image's slots, with their version, state, size and hash.</p>
+<figure><img src="/assets/help/blenima-mcumgr.png" width="1200" height="760" loading="lazy" decoding="async" alt="The MCUmgr view: image 0 slot 0 at version 1.4.2, active, confirmed and bootable, and slot 1 at 1.5.0, bootable, with Test and Erase; an SMP buffer of 2475 bytes, four times; and Pick an image under Update"><figcaption>Firmware update over MCUmgr: the image slots, and an update in one go</figcaption></figure>
+<ul>
+<li><b>Test</b> marks a slot's image to run once at the next reset; <b>Confirm</b> keeps the one that runs. <b>Erase</b> empties a slot that is not active.</li>
+<li><b>Pick an image</b> takes a signed MCUboot image, such as Zephyr's <code>zephyr.signed.bin</code>, and reads its version from its header.</li>
+<li><b>Update</b> does it all in one go: it uploads, marks the image to test, resets the device, waits for it to come back, checks that the new image runs, and confirms it, with each step shown. <b>Only a newer version</b> lets the device refuse an older one.</li>
+<li><b>Reset device</b> and <b>Echo</b> check that MCUmgr answers. The pieces of an upload fit the device's SMP buffer, as its MCUmgr parameters say.</li>
+</ul>
+      </section>
+      <section id="pairing">
+        <h2>Pairing and bonds</h2>
+
+<p>On Windows, Device &gt; Pair and Unpair act on the device in front, and Device &gt; Bonded devices lists every device Windows has a bond with, to take one away. Windows asks for a passkey itself when a device needs one. On macOS and Linux, pair in the OS's Bluetooth settings.</p>
+      </section>
+      <section id="simulator">
+        <h2>The device simulator</h2>
+
+<p>A <b>Device simulator</b> tab makes bleNIMA a device, to test a phone app or a central's firmware. It has two parts, as views, on one page or in two columns, as Settings says:</p>
+<figure><img src="/assets/help/blenima-simulator.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Device simulator&#x27;s GATT server with the Nordic UART Service and Heart Rate, and Heart Rate Measurement picked, notifying 80 bpm every second with live values"><figcaption>bleNIMA as a device: a GATT server from presets, with live values</figcaption></figure>
+<ul>
+<li><b>Advertiser:</b> iBeacon, Eddystone URL, manufacturer data, or AD structures by hand, with the bytes on the air. Its transmit power, a Bluetooth 5 extended advert and its PHYs can be chosen where the adapter has them.</li>
+<li><b>GATT server:</b> services by hand, picked by UUID or by name, or from 22 presets, such as the Nordic UART Service, Battery, Heart Rate, Environmental Sensing or Fitness Machine. Values are notified on a timer, by hand, or live, made up as a real device sends them. Every read, write and subscribe is in its log.</li>
+</ul>
+<p>One device simulator serves at a time: starting one stops the one that serves. It runs on Windows for now.</p>
+      </section>
+      <section id="mesh">
+        <h2>Bluetooth mesh</h2>
+
+<p>File &gt; New tab &gt; <b>Mesh network</b> opens bleNIMA's mesh network: bleNIMA is its provisioner, and talks to its nodes through a proxy node over GATT. The first time, it makes a new network with its own keys. It is kept in <code>mesh.toml</code> in the config folder, with each node's device key: keep that file to yourself, as its keys let anyone into the network.</p>
+<h3>Provisioning a device</h3>
+<p>Devices that wait to be provisioned, advertising the Mesh Provisioning Service, are listed on the left with their Device UUID and where their OOB information is. <b>Provision</b> connects to one over PB-GATT, and asks what it can do.</p>
+<figure><img src="/assets/help/blenima-mesh-provision.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Provision Mesh Light dialog: one element, so address 0x0005, with the BTM_ECDH_P256_HMAC_SHA256_AES_CCM algorithm; No OOB chosen, Output OOB offered, and Static and Input OOB greyed out as the device has neither"><figcaption>Provisioning: the OOB methods the device has</figcaption></figure>
+<table>
+<tr><th>Method</th><th>What you do</th></tr>
+<tr><td><b>No OOB</b></td><td>Nothing: no value is checked, so any device in range could have answered. A device that takes only OOB authentication does not offer it.</td></tr>
+<tr><td><b>Static OOB</b></td><td>Type the device's static value, as hex: 16 bytes, or 32 for the HMAC-SHA256 algorithm.</td></tr>
+<tr><td><b>Output OOB</b></td><td>The device blinks, beeps, vibrates or shows a number or letters: type in what it put out.</td></tr>
+<tr><td><b>Input OOB</b></td><td>bleNIMA shows a number or letters: push the device's button or twist its knob that many times, or type the value into it.</td></tr>
+</table>
+<p>bleNIMA picks the stronger algorithm the device has, and the first addresses free for its elements. A wrong value stops it with "the OOB value was wrong". Once provisioned, the device is a node, on the left under <b>Nodes</b>.</p>
+<h3>The proxy</h3>
+<p>bleNIMA connects by itself to a proxy of the network: one that advertises the network's ID, or a node's identity, as a node does for a minute after it was provisioned. It learns the network's IV index from the proxy's beacon, and asks it for what is addressed to bleNIMA. <b>Proxies</b> on the left lists those heard, to connect to another; <b>Disconnect</b> stops it.</p>
+<h3>A node's page</h3>
+<figure><img src="/assets/help/blenima-mesh.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Mesh network tab connected to a proxy: two nodes, Desk lamp and Room sensor, Mesh Light waiting to be provisioned, and Desk lamp&#x27;s page with its device key, its application key, and its two elements with their models"><figcaption>A node&#x27;s page: its composition, keys and models</figcaption></figure>
+<p>Pick a node to configure it, with its device key:</p>
+<ol>
+<li><b>Read composition</b>: its company, product and version, its features, and each element with its models.</li>
+<li><b>Add to the node</b> gives it an application key. <b>Which has it?</b> lists the keys it has.</li>
+<li>Open a model to <b>bind</b> it to the application key, set where it <b>publishes</b>, and <b>subscribe</b> it to group addresses, from <code>0xC000</code>.</li>
+<li><b>Reset node</b> makes it leave the network and forget its keys. <b>Forget</b> only takes it off bleNIMA's list, for a node that is gone.</li>
+</ol>
+<h3>Talking to its models</h3>
+<figure><img src="/assets/help/blenima-mesh-clients.png" width="1200" height="760" loading="lazy" decoding="async" alt="Desk lamp&#x27;s elements and models, and the clients for element 1: Generic OnOff with On, Off and Get, Generic Level, Light Lightness and Light CTL with Set and Get, Health with faults, test, attention and period, and Any message with its address, key, opcode and parameters"><figcaption>The clients: Generic OnOff and Level, the lights, Sensor and Health</figcaption></figure>
+<p>The clients send with the application key, to the element, or to a group in <b>Send to</b>: Generic OnOff and Level, Light Lightness, CTL and HSL, Sensor and Health, acknowledged or not. <b>Any message</b> sends any opcode and parameters, with the device key or an application key. The answer shows on the page, and every message sent and received is in the tab's <b>Log</b>, in words and bytes.</p>
+      </section>
+      <section id="os">
+        <h2>What each OS lets an app do</h2>
+
+<table>
+<tr><th>OS</th><th>What bleNIMA does there</th></tr>
+<tr><td><b>Windows 10 and 11</b></td><td>All of it: adverts as sent, the device simulator, pairing and bonds, passive scans, the Coded PHY and extended adverts where the adapter has them.</td></tr>
+<tr><td><b>macOS</b></td><td>Scanning, connecting, the terminal, tests, MCUmgr and mesh. macOS gives a device a UUID of its own, not its address.</td></tr>
+<tr><td><b>Linux</b></td><td>The same, with BlueZ. Pair with <code>bluetoothctl</code> or the desktop's Bluetooth settings.</td></tr>
+</table>
+<p>No OS lets an app choose a connection's PHY: the device's firmware asks for 2M or Coded, and the OS agrees where its adapter has that PHY. What cannot be done is greyed out in the app, saying why.</p>
+      </section>
+      <section id="settings">
+        <h2>Settings and the keyboard</h2>
+
+<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme, where the device information card goes, what comes back at startup (the tabs, their connections, the window), how a device simulator's parts are laid out, and the check for a newer bleNIMA. View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name.</p>
+<table>
+<tr><th>Do</th><th>Keys</th></tr>
+<tr><td>New scanner</td><td><kbd>Ctrl+Shift+N</kbd></td></tr>
+<tr><td>Close the tab</td><td><kbd>Ctrl+Shift+W</kbd></td></tr>
+<tr><td>Next tab, the one before</td><td><kbd>Ctrl+Tab</kbd> <kbd>Ctrl+Shift+Tab</kbd></td></tr>
+<tr><td>Start and stop scanning</td><td><kbd>F5</kbd> <kbd>Shift+F5</kbd></td></tr>
+<tr><td>RSSI plot</td><td><kbd>Ctrl+Shift+G</kbd></td></tr>
+<tr><td>A device's terminal, its log</td><td><kbd>Ctrl+Shift+T</kbd> <kbd>Ctrl+Shift+J</kbd></td></tr>
+<tr><td>Find, clear</td><td><kbd>Ctrl+Shift+F</kbd> <kbd>Ctrl+Shift+K</kbd></td></tr>
+<tr><td>Bigger and smaller text</td><td><kbd>Ctrl+=</kbd> <kbd>Ctrl+-</kbd> <kbd>Ctrl+0</kbd></td></tr>
+<tr><td>Command palette</td><td><kbd>Ctrl+Shift+P</kbd></td></tr>
+</table>
+<p>On macOS, Cmd takes the place of Ctrl, and Cmd+N, Cmd+W, Cmd+F and Cmd+K need no Shift.</p>
+      </section>
+      <section id="trouble">
+        <h2>When something goes wrong</h2>
+
+<ul>
+<li><b>It says Bluetooth is off, or there is no adapter.</b> Turn Bluetooth on in the OS's settings, and open the tab again.</li>
+<li><b>A device is not in the list.</b> It is not advertising, or a phone is connected to it: most devices stop advertising while connected.</li>
+<li><b>It does not connect, or loses the connection on Windows.</b> Unpair it in Windows' Bluetooth settings and try again: an old bond with keys the device lost stops it.</li>
+<li><b>MCUmgr does not answer.</b> The firmware needs MCUmgr over Bluetooth, such as Zephyr's <code>CONFIG_MCUMGR_TRANSPORT_BT</code>.</li>
+<li><b>No proxy of the mesh network is heard.</b> A node needs the GATT Proxy feature on to be one, as Zephyr's <code>CONFIG_BT_MESH_GATT_PROXY</code> does.</li>
+<li><b>Provisioning says the confirmation does not match.</b> The OOB value was wrong: provision again, and type what the device puts out.</li>
+<li><b>Anything else</b>: <a href="https://github.com/nimaltd/bleNIMA/issues/new">ask, or report a bug on GitHub</a>.</li>
+</ul>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
+    <span>terNIMA, libNIMA, bleNIMA and the libraries under the Apache License 2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7024038399630106"
+     crossorigin="anonymous"></script>
+</body>
+</html>

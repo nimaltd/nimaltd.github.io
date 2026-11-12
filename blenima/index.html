@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>bleNIMA | A Bluetooth LE tester for embedded developers</title>
-<meta name="description" content="bleNIMA tests Bluetooth LE devices with the computer's own Bluetooth, no dongle: adverts decoded, the GATT table in words, a terminal over the Nordic UART Service, throughput and latency tests, MCUmgr firmware update and a device simulator, on Windows, macOS and Linux. Free and open source.">
+<meta name="description" content="bleNIMA tests Bluetooth LE devices with the computer's own Bluetooth, no dongle: adverts decoded, the GATT table in words, a terminal over the Nordic UART Service, throughput and latency tests, MCUmgr firmware update, a device simulator and Bluetooth mesh through a proxy, on Windows, macOS and Linux. Free and open source.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/blenima/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/blenima/">
 <meta property="og:title" content="bleNIMA | A Bluetooth LE tester for embedded developers">
-<meta property="og:description" content="bleNIMA tests Bluetooth LE devices with the computer's own Bluetooth, no dongle: adverts decoded, the GATT table in words, a terminal over the Nordic UART Service, throughput and latency tests, MCUmgr firmware update and a device simulator, on Windows, macOS and Linux. Free and open source.">
-<meta property="og:image" content="https://github.com/nimaltd.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="bleNIMA tests Bluetooth LE devices with the computer's own Bluetooth, no dongle: adverts decoded, the GATT table in words, a terminal over the Nordic UART Service, throughput and latency tests, MCUmgr firmware update, a device simulator and Bluetooth mesh through a proxy, on Windows, macOS and Linux. Free and open source.">
+<meta property="og:image" content="https://nimaltd.github.io/assets/help/blenima-scanner.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071226">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>
@@ -50,8 +50,8 @@
         <ul class="menu-products-list">
           <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
           <li><a href="/libnima/"><b>libNIMA</b><span>A library into any project, from a window or a command</span></a></li>
-          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
           <li><a href="/blenima/" aria-current="page"><b>bleNIMA</b><span>A Bluetooth LE tester for embedded developers</span></a></li>
+          <li><a href="/netnima/"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
         </ul>
       </details>
       <a href="/libraries/">Libraries</a>
@@ -72,58 +72,77 @@
 <main id="main">
   <section class="hero wrap page-hero" id="top">
     <div class="hero-text">
-      <a class="news" href="https://github.com/nimaltd/bleNIMA/blob/main/CHANGELOG.md"><b>New</b><span>bleNIMA 0.3.0: what changed</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
+      <a class="news" href="https://github.com/nimaltd/bleNIMA/blob/main/CHANGELOG.md"><b>New</b><span>bleNIMA 1.0.0: Bluetooth mesh</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <h1>bleNIMA, <span>a Bluetooth LE tester for embedded developers.</span></h1>
-      <p class="lead">Scan, connect and test your Bluetooth LE devices with the computer's own Bluetooth, with no dongle to buy: every advert decoded, the GATT table in words, the Zephyr shell over the Nordic UART Service in a real terminal, throughput and latency tests, firmware update over MCUmgr, and bleNIMA as a device itself. Free and open source, on Windows, macOS and Linux.</p>
+      <p class="lead">Scan, connect and test your Bluetooth LE devices with the computer's own Bluetooth, with no dongle to buy: every advert decoded, the GATT table in words, the Zephyr shell over the Nordic UART Service in a real terminal, throughput and latency tests, firmware update over MCUmgr, bleNIMA as a device itself, and Bluetooth mesh: provisioning, configuration and the model clients through a proxy. Free and open source, on Windows, macOS and Linux.</p>
       <div class="ctas">
         <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="/blenima/help/"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
         <a class="btn ghost" href="https://github.com/nimaltd/bleNIMA">bleNIMA on GitHub <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 
   <section class="wrap sect" id="get">
-    <div class="shead"><span class="n">01</span><h2>Get it</h2></div>
-    <div class="get" id="download">
-      <div class="get-head">
-        <h3>Download 0.3.0</h3>
-        <span class="stars" data-repo="bleNIMA"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
-      </div>
-      <p>Released <time datetime="2026-11-11">11 November 2026</time>. Free, under the Apache License 2.0.</p>
-      <ul class="os">
-        <li data-os="windows">
-          <div><b>Windows</b><span>10 and 11, x64</span></div>
-          <div class="os-files">
-            <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
-            <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Windows, the .msi installer">.msi</a>
-          </div>
-        </li>
-        <li data-os="mac">
-          <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
-          <div class="os-files">
-            <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
-          </div>
-        </li>
-        <li data-os="linux">
-          <div><b>Linux</b><span>x64, with BlueZ</span></div>
-          <div class="os-files">
-            <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
-            <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Linux, the .deb package">.deb</a>
-            <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Linux, the .rpm package">.rpm</a>
-          </div>
-        </li>
-      </ul>
-      <p>Windows has it all. On macOS and Linux it scans, connects, tests and updates firmware; being a device, and pairing from bleNIMA, are on Windows for now. What an OS or an adapter does not let an app do is greyed out in the app, saying why.</p>
-      <details class="unsigned">
-        <summary>Not signed yet: opening it the first time</summary>
-        <ul>
-          <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>.</li>
-          <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/bleNIMA.app</code> in Terminal.</li>
-          <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>.</li>
+    <div class="shead"><span class="n">01</span><h2>See it, and get it</h2></div>
+    <div class="tn">
+      <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="bleNIMA, part by part">
+        <div class="slides">
+          <img class="slide on" src="/assets/help/blenima-scanner.png" width="1200" height="760" loading="lazy" data-caption="The scanner: every device around, and one&#x27;s advert in words and bytes" alt="The Scanner tab with six devices, nRF52840 DK, Thermo Sensor, ESP32-C3 SMP, Mesh Light, an iBeacon and HR Monitor, each with its RSSI, interval, adverts and what it says; nRF52840 DK picked, with Connect and Terminal, its address, PDU, RSSI and TX power, and its advert&#x27;s structures">
+          <img class="slide" src="/assets/help/blenima-gatt.png" width="1200" height="760" loading="lazy" data-caption="A device&#x27;s GATT table, its information read out, and a value plotted live" alt="The device tab of nRF52840 DK connected with MTU 247 and PHY 2M: the device information card, the services from Generic Access to the Nordic UART Service, and Battery Level picked, notifying, with its plot over twelve seconds">
+          <img class="slide" src="/assets/help/blenima-terminal.png" width="1200" height="760" loading="lazy" data-caption="The Zephyr shell over the Nordic UART Service, in a real terminal" alt="The Terminal view writing to UART RX and showing UART TX: the nRF Connect SDK boot banner, then kernel version, device list and bt info typed at the uart prompt">
+          <img class="slide" src="/assets/help/blenima-mcumgr.png" width="1200" height="760" loading="lazy" data-caption="Firmware update over MCUmgr: the image slots, and an update in one go" alt="The MCUmgr view: image 0 slot 0 at version 1.4.2, active, confirmed and bootable, and slot 1 at 1.5.0, bootable, with Test and Erase; an SMP buffer of 2475 bytes, four times; and Pick an image under Update">
+          <img class="slide" src="/assets/help/blenima-mesh.png" width="1200" height="760" loading="lazy" data-caption="Bluetooth mesh: a node&#x27;s composition, keys and models, through a proxy" alt="The Mesh network tab connected to a proxy: two nodes, Desk lamp and Room sensor, Mesh Light waiting to be provisioned, and Desk lamp&#x27;s page with its device key, its application key, and its two elements with their models">
+          <img class="slide" src="/assets/help/blenima-simulator.png" width="1200" height="760" loading="lazy" data-caption="bleNIMA as a device: a GATT server from presets, with live values" alt="The Device simulator&#x27;s GATT server with the Nordic UART Service and Heart Rate, and Heart Rate Measurement picked, notifying 80 bpm every second with live values">
+          <img class="slide" src="/assets/help/blenima-welcome.png" width="1200" height="760" loading="lazy" data-caption="The welcome page: what bleNIMA is, the radio, and a button for the scanner" alt="bleNIMA&#x27;s welcome page: its logo and version, its GitHub and help addresses, the radio, what New tab opens, and the New scanner button">
+        </div>
+        <figcaption>
+          <span class="slide-caption">The scanner: every device around, and one's advert in words and bytes</span>
+          <span class="slide-tools"></span>
+        </figcaption>
+      </figure>
+
+      <div class="get" id="download">
+        <div class="get-head">
+          <h3>Download 1.0.0</h3>
+          <span class="stars" data-repo="bleNIMA"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
+        </div>
+        <p>Released <time datetime="2026-11-12">12 November 2026</time>. Free, under the Apache License 2.0.</p>
+        <ul class="os">
+          <li data-os="windows">
+            <div><b>Windows</b><span>10 and 11, x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Windows, the .msi installer">.msi</a>
+            </div>
+          </li>
+          <li data-os="mac">
+            <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
+            </div>
+          </li>
+          <li data-os="linux">
+            <div><b>Linux</b><span>x64, with BlueZ</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/bleNIMA/releases/latest" aria-label="bleNIMA for Linux, the .rpm package">.rpm</a>
+            </div>
+          </li>
         </ul>
-      </details>
-      <div class="links">
-        <a href="https://github.com/nimaltd/bleNIMA/releases/latest">Every file, and the notes</a>
+        <p>Windows has it all. On macOS and Linux it scans, connects, tests and updates firmware; being a device, and pairing from bleNIMA, are on Windows for now. Mesh goes through a proxy node over GATT, on every OS. What an OS or an adapter does not let an app do is greyed out in the app, saying why.</p>
+        <details class="unsigned">
+          <summary>Not signed yet: opening it the first time</summary>
+          <ul>
+            <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>.</li>
+            <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/bleNIMA.app</code> in Terminal.</li>
+            <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>.</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/nimaltd/bleNIMA/releases/latest">Every file, and the notes</a>
+        </div>
       </div>
     </div>
   </section>
@@ -139,6 +158,7 @@
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-check"/></svg><div><b>Tests with a report</b><span>Throughput with lost packets, latency, connection soak tests, and send-and-expect scripts with a pass or fail report.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg><div><b>Firmware update over MCUmgr</b><span>For Zephyr and nRF Connect SDK: the image slots, test, confirm and erase, and an update that uploads, resets and confirms in one go.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-network"/></svg><div><b>bleNIMA as a device</b><span>An advertiser and a GATT server, from 22 presets or your own services, with live values, to test a phone app or a central's firmware. On Windows.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-layers"/></svg><div><b>Bluetooth mesh</b><span>Provision devices over PB-GATT with any OOB method, then read their composition, give them keys, bind, publish and subscribe, and talk to their models through a proxy.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-lock"/></svg><div><b>Pairing and bonds</b><span>Pair and unpair, and the bonded devices, with Windows asking for the passkey itself.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-sliders"/></svg><div><b>The link, as it is</b><span>The MTU, the PHY and the connection parameters, with a preset to ask for; active or passive scans, and the Coded PHY where the adapter has it.</span></div></li>
     </ul>
