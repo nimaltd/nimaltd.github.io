@@ -128,7 +128,7 @@
         <h2>Adding libraries</h2>
 
 <p>Give a library in the <b>Add library</b> box: its GitHub owner and name, such as <code>nimaltd/ee24</code>, its GitHub address, or one release of it, <code>nimaltd/ee24@v4.0.0</code>. <b>Zip</b> takes the zip of GitHub's <b>Code</b>, <b>Download ZIP</b>, with no need to unpack it, and <b>Folder</b> a library on your disk.</p>
-<figure><img src="/assets/help/libnima-project.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Project tab on E:/Work/MyBoard: STM32, from MyBoard.ioc, with CMake. To install: ee24 4.0.0 marked OK, needing osal 1.1.0 or newer, installed first; spif 3.0.0 marked CHECK, HAL SPI module is not enabled, opened to show its folder and its littlefs option; seq 2.1.0 marked OK; then Preview and Install all"><figcaption>A CubeMX project open, and three libraries checked against it</figcaption></figure>
+<figure><img src="/assets/help/libnima-project.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Project tab on E:/Work/MyBoard: STM32, from MyBoard.ioc, with CMake. To install: ee24 4.0.0 marked OK, needing osal 1.1.0 or newer, installed first; spif 3.0.0 marked CHECK, HAL SPI module is not enabled, with How to fix; seq 2.1.0 marked OK; each with yml, More and Remove, then Preview and Install all"><figcaption>A CubeMX project open, and three libraries checked against it</figcaption></figure>
 <p>Each library joins the list <b>To install</b>, with its version and what libNIMA found when it checked it against your project. A library it needs is named beside it, such as <i>needs osal &gt;= 1.1.0, installed first</i>, and goes in before it. <b>More</b> shows what the library is, the folder it goes into, and the parts of it you choose, such as spif's port for LittleFS. <b>yml</b> shows its <code>libnima.yml</code>, and <b>Remove</b> takes it off the list.</p>
 <p>A library in a private repository asks for a GitHub token that can read it. It is used for that run and never saved.</p>
       </section>
@@ -139,7 +139,7 @@
 <tr><th>Mark</th><th>What it means</th></tr>
 <tr><td><b class="nw">OK</b></td><td>Nothing stands in its way.</td></tr>
 <tr><td><b class="nw">CHECK</b></td><td>It installs, and there is something to do first, with the way to do it. Never a refusal, since a project can be laid out in ways libNIMA cannot read.</td></tr>
-<tr><td><b class="nw">NO</b></td><td>It is not installed, and the reason is beside it: a library for another platform, one that needs a newer libNIMA, or one whose install would write over something of yours.</td></tr>
+<tr><td><b class="nw">NO</b></td><td>It is not installed, and the reason is beside it: a library for another platform, one that needs a newer libNIMA, one that needs a library which cannot be had, or one whose install would write over something of yours.</td></tr>
 </table>
 <figure><img src="/assets/help/libnima-check.png" width="1200" height="760" loading="lazy" decoding="async" alt="The dialog for spif: HAL SPI module is not enabled, so uncomment HAL_SPI_MODULE_ENABLED in stm32h5xx_hal_conf.h or enable it in CubeMX; and no SPI in the CubeMX configuration, where the library needs SPI, full duplex master, mode 0, 8 bit"><figcaption>How to fix a CHECK: what the check found, and what to do</figcaption></figure>
 <p><b>How to fix</b> by a CHECK lists what the check found, and what to do about each, such as a HAL module to switch on in <code>stm32xxxx_hal_conf.h</code>, or a peripheral to set up in CubeMX.</p>
@@ -156,6 +156,8 @@
 <p><b>Install all</b> installs the list, each library after what it needs. Every library is checked before the first is written, so a run that is refused writes nothing. Every file of the project is saved first, as a <code>.bak</code> with the date and time in its name.</p>
 <figure><img src="/assets/help/libnima-question.png" width="1200" height="760" loading="lazy" decoding="async" alt="During the install, the question Folder to install osal into, with osal offered, and the run log below it, where ee24 needs osal 1.1.0 or newer"><figcaption>A question while it installs: the folder of a library another needs</figcaption></figure>
 <p>What libNIMA needs to know, it asks: the folder of a library another one needs, a part of a library you can choose, a step a library runs, shown in full before it runs.</p>
+<figure><img src="/assets/help/libnima-pick.png" width="1200" height="760" loading="lazy" decoding="async" alt="During an install into a Zephyr application, the question Overlay for the libraries&#x27; devicetree: a search box, and the application&#x27;s two overlays, boards/nrf52840dk_nrf52840.overlay and boards/nrf54l15dk_nrf54l15_cpuapp.overlay, each with a box to tick, the second ticked, with Tick all shown and OK"><figcaption>A question with a list: tick the overlays that get the library&#x27;s devicetree</figcaption></figure>
+<p>A question can offer a list to pick from, one or several, such as the overlays of a Zephyr application: tick each one you want, with a search above the list for a long one, and <b>Tick all shown</b>. Nothing ticked takes none, and the run says what is left to do by hand.</p>
 <figure><img src="/assets/help/libnima-install.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Installed list, ee24, osal, seq and spif, each with Update and Uninstall, and below it the run log, with a folded part for each of osal, ee24, spif and seq, each done"><figcaption>Installed, and what each library&#x27;s install did, in a part of its own</figcaption></figure>
 <p><b>What the last run did</b> has a part for each library, which opens and folds. <b>Copy</b> copies it all, to keep or to send.</p>
 <figure><img src="/assets/help/libnima-log.png" width="1200" height="760" loading="lazy" decoding="async" alt="The part of the run log for seq 2.1.0: its files written, CMake updated with seq added to CMakeLists.txt, the name of the backup, and Done, #include seq.h and you are away"><figcaption>One part of the run log: the files written and the project updated</figcaption></figure>
@@ -176,7 +178,7 @@
 <figure><img src="/assets/help/libnima-editor.png" width="1200" height="760" loading="lazy" decoding="async" alt="The libnima.yml tab on E:/Work/ee24: the About part of the form, with name, description, platforms, repository, licence, version and kind, and beside it what the file does: ee24 4.0.0 installs on STM32, with its headers, extras and what it needs"><figcaption>Writing a libnima.yml: the form, and what the file comes to</figcaption></figure>
 <p>The <b>Form</b> has a place for every key, part by part, with a line on each and the line of the file it is on. <b>Summary</b> says what the file comes to: the library's version and where it is read from, the platforms it installs on, its files and what it needs.</p>
 <figure><img src="/assets/help/libnima-editor-text.png" width="1200" height="760" loading="lazy" decoding="async" alt="The text of ee24&#x27;s libnima.yml with on typed on a line of its own, and what it offers: once, options and version, once explained as files made in the project when missing, then the person&#x27;s"><figcaption>The text: what can go at the cursor, and what each is</figcaption></figure>
-<p>The <b>Text</b> is the same file. Typing offers what can go at the cursor, with what each is, and the form and the text keep each other's changes, comments included.</p>
+<p>The <b>Text</b> is the same file. Typing offers what can go at the cursor, with what each is, and the form and the text keep each other's changes, comments included. What the form cannot show, such as a list written with titles or notes, is edited in the text.</p>
 <figure><img src="/assets/help/libnima-editor-fix.png" width="1200" height="760" loading="lazy" decoding="async" alt="The text with sources misspelt as source on line 50, marked, and under Problems: source is no key libNIMA reads, so it was left out, with the button Change it to sources; beside it, the summary finds src/ee24.c in the folder but not listed, with Add"><figcaption>A misspelt key, and the fix a click makes</figcaption></figure>
 <p>Each problem names its line, and many come with the fix a click makes. The summary also names the files of the folder the file does not list, with <b>Add</b>. <b>Save</b> (<kbd>Ctrl+S</kbd>) writes the file, and <b>Try on project</b> shows what it would install in the project open in the first tab.</p>
 <p>Every key is on <a href="https://github.com/nimaltd/libNIMA/blob/main/docs/FORMAT.md">the format page</a>. In VS Code, the YAML extension gives the same help with the line the format page gives.</p>
@@ -199,7 +201,7 @@
 <tr><td>Open the window on this folder</td><td><code>libnima --gui</code></td></tr>
 <tr><td>Every option</td><td><code>libnima --help</code></td></tr>
 </table>
-<p><a href="https://github.com/nimaltd/libNIMA#every-command">The README</a> has every command.</p>
+<p>A run ends with 0 when all is well, with 1 when <code>--check</code> or <code>--lint</code> found something, or a step of a library failed, and with 2 when it was refused, with nothing written. So a script can stop on what the check says: <code>libnima nimaltd/ee24 --check || exit 1</code>. <a href="https://github.com/nimaltd/libNIMA#every-command">The README</a> has every command.</p>
       </section>
       <section id="platforms">
         <h2>Each platform</h2>
@@ -207,7 +209,7 @@
 <table>
 <tr><th>Platform</th><th>What libNIMA does there</th></tr>
 <tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/stm32.md">STM32</a></td><td>Adds the library to CMake, STM32CubeIDE, Keil MDK, IAR or CubeMX's Makefile, every one it finds, and checks the HAL modules, peripherals and RTOS it needs.</td></tr>
-<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/zephyr.md">Zephyr</a></td><td>Makes the library a Zephyr module, adds it to the build and switches it on in <code>prj.conf</code>, with its settings in Kconfig.</td></tr>
+<tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/zephyr.md">Zephyr</a></td><td>Makes the library a Zephyr module, adds it to the build and switches it on in <code>prj.conf</code>, with its settings in Kconfig, and includes its devicetree in your overlay.</td></tr>
 <tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/esp32.md">ESP-IDF</a></td><td>Makes the library a component, with its settings in menuconfig and the symbols it needs in <code>sdkconfig.defaults</code>.</td></tr>
 <tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/arduino.md">Arduino</a></td><td>Puts the library in your sketchbook's libraries folder, or one sketch's <code>src</code>, with its <code>library.properties</code>.</td></tr>
 <tr><td><a href="https://github.com/nimaltd/libNIMA/blob/main/docs/pio.md">PlatformIO</a></td><td>Puts the library in <code>lib/</code> with a <code>library.json</code>, and its defines and flags in <code>platformio.ini</code>.</td></tr>
@@ -224,12 +226,14 @@
       <section id="settings">
         <h2>Settings and the keyboard</h2>
 
-<p>Tools &gt; Settings has the theme, the check for a newer libNIMA, and the check for newer versions of the libraries installed. View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name.</p>
+<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme, the two text sizes, the check for a newer libNIMA, and the check for newer versions of the libraries installed. The menu text size is for the menus, tabs, buttons and dialogs; the text size is for the libnima.yml editor and the run's report, and the View menu changes both. View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name.</p>
 <table>
 <tr><th>Do</th><th>Keys</th></tr>
 <tr><td>Open a project</td><td><kbd>Ctrl+O</kbd></td></tr>
 <tr><td>The Project tab, the libnima.yml tab</td><td><kbd>Ctrl+1</kbd> <kbd>Ctrl+2</kbd></td></tr>
 <tr><td>Save the libnima.yml</td><td><kbd>Ctrl+S</kbd></td></tr>
+<tr><td>Bigger, smaller, normal text</td><td><kbd>Ctrl+=</kbd> <kbd>Ctrl+-</kbd> <kbd>Ctrl+0</kbd></td></tr>
+<tr><td>Settings</td><td><kbd>Ctrl+,</kbd></td></tr>
 <tr><td>Command palette</td><td><kbd>Ctrl+Shift+P</kbd></td></tr>
 </table>
 <p>On macOS, Cmd takes the place of Ctrl.</p>
