@@ -11,8 +11,8 @@
 <meta property="og:url" content="https://nimaltd.github.io/netnima/">
 <meta property="og:title" content="netNIMA | A network tester for embedded developers">
 <meta property="og:description" content="netNIMA tests networked devices with each protocol as a client and as a server: UDP, TCP and Telnet, TLS and DTLS 1.0 to 1.3 with certificates or pre-shared keys, MQTT, CoAP, LwM2M, Modbus TCP, MCUmgr, HTTP, WebSocket, DHCP, mDNS and more, on Windows, macOS and Linux. Free and open source.">
-<meta property="og:image" content="https://github.com/nimaltd.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://nimaltd.github.io/assets/netnima-mqtt.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071226">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>
@@ -83,47 +83,65 @@
   </section>
 
   <section class="wrap sect" id="get">
-    <div class="shead"><span class="n">01</span><h2>Get it</h2></div>
-    <div class="get" id="download">
-      <div class="get-head">
-        <h3>Download</h3>
-        <span class="stars" data-repo="netNIMA"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
-      </div>
-      <p>Free, under the Apache License 2.0.</p>
-      <ul class="os">
-        <li data-os="windows">
-          <div><b>Windows</b><span>10 and 11, x64</span></div>
-          <div class="os-files">
-            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
-            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .msi installer">.msi</a>
-          </div>
-        </li>
-        <li data-os="mac">
-          <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
-          <div class="os-files">
-            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
-          </div>
-        </li>
-        <li data-os="linux">
-          <div><b>Linux</b><span>x64</span></div>
-          <div class="os-files">
-            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
-            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .deb package">.deb</a>
-            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .rpm package">.rpm</a>
-          </div>
-        </li>
-      </ul>
-      <p>The same on all three: every protocol, with both ends. On Linux, a server on a port below 1024, such as DHCP on 67 or Modbus on 502, needs root for now.</p>
-      <details class="unsigned">
-        <summary>Not signed yet: opening it the first time</summary>
-        <ul>
-          <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. The first tab that listens, such as a server, makes Windows Firewall ask whether other devices may reach netNIMA: allow it on the networks your boards are on.</li>
-          <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/netNIMA.app</code> in Terminal. It asks once to find devices on your local network: allow it.</li>
-          <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>.</li>
+    <div class="shead"><span class="n">01</span><h2>See it, and get it</h2></div>
+    <div class="tn">
+      <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="netNIMA, protocol by protocol">
+        <div class="slides">
+          <img class="slide on" src="/assets/netnima-mqtt.png" width="1200" height="760" loading="lazy" data-caption="MQTT: a client publishing to netNIMA&#x27;s own broker, and what it heard" alt="The MQTT client tab connected to netNIMA&#x27;s own broker on 127.0.0.1: three publishes, sensors/temp as text, board/raw as hex with QoS 1 and retain, and board/json; at the right the messages heard, by topic, and the JSON one in full">
+          <img class="slide" src="/assets/netnima-coap.png" width="1200" height="760" loading="lazy" data-caption="CoAP: GET, Observe and PUT, and the resources the server lists" alt="The CoAP client tab to netNIMA&#x27;s own CoAP server: a GET of /sensors/temp that got 21.5, an Observe of /led with two changes so far, and a PUT of JSON to /board/config answered 2.01 Created; at the right the server&#x27;s three resources, found with Discover">
+          <img class="slide" src="/assets/netnima-modbus.png" width="1200" height="760" loading="lazy" data-caption="Modbus TCP: a master polling netNIMA&#x27;s own slave, every frame below" alt="The Modbus TCP master tab polling a slave on 127.0.0.1:15020 every second: holding registers 0 to 9 read, 1234, 99 and -1 among them, register 1 written to 99, and each request and response below with its bytes">
+          <img class="slide" src="/assets/netnima-lwm2m.png" width="1200" height="760" loading="lazy" data-caption="LwM2M: a device registered, its objects read, observed and written" alt="The LwM2M server tab with netNIMA&#x27;s own LwM2M device registered at /rd/1, LwM2M 1.1 over UDP: the object browser at /3/0 with Read, Observe, Write and Execute, and below it the requests, observes, an execute and the device&#x27;s update">
+          <img class="slide" src="/assets/netnima-mcumgr.png" width="1200" height="760" loading="lazy" data-caption="MCUmgr over UDP: a board&#x27;s images, and firmware uploaded to it" alt="The MCUmgr client tab to a simulated Zephyr board: echo, info, date and params read, image 1.0.0 confirmed and 1.2.3+4 active after its upload and a reset, the upload done at 2125 KB/s, and each request at the right">
+          <img class="slide" src="/assets/netnima-http.png" width="1200" height="760" loading="lazy" data-caption="HTTP: requests with a header for all of them, and the answers in JSON" alt="The HTTP client tab to netNIMA&#x27;s own HTTP server: an Authorization header sent with every request, a GET of /api/status answered 200 OK with JSON, and a POST of JSON to /api/led answered 201 Created">
+          <img class="slide" src="/assets/netnima-newtab.png" width="1200" height="760" loading="lazy" data-caption="Every protocol with both ends, so one PC is enough to try it" alt="The New tab dialog over the welcome page: a box to find a protocol, then UDP, TCP and Telnet, TLS and DTLS, MQTT and MQTT-SN, each with a Client and a Server button, or a Broker or a Gateway">
+        </div>
+        <figcaption>
+          <span class="slide-caption">MQTT: a client publishing to netNIMA's own broker, and what it heard</span>
+          <span class="slide-tools"></span>
+        </figcaption>
+      </figure>
+
+      <div class="get" id="download">
+        <div class="get-head">
+          <h3>Download</h3>
+          <span class="stars" data-repo="netNIMA"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
+        </div>
+        <p>Free, under the Apache License 2.0.</p>
+        <ul class="os">
+          <li data-os="windows">
+            <div><b>Windows</b><span>10 and 11, x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .msi installer">.msi</a>
+            </div>
+          </li>
+          <li data-os="mac">
+            <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
+            </div>
+          </li>
+          <li data-os="linux">
+            <div><b>Linux</b><span>x64</span></div>
+            <div class="os-files">
+              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .rpm package">.rpm</a>
+            </div>
+          </li>
         </ul>
-      </details>
-      <div class="links">
-        <a href="https://github.com/nimaltd/netNIMA/releases/latest">Every file, and the notes</a>
+        <p>The same on all three: every protocol, with both ends. On Linux, a server on a port below 1024, such as DHCP on 67 or Modbus on 502, needs root for now.</p>
+        <details class="unsigned">
+          <summary>Not signed yet: opening it the first time</summary>
+          <ul>
+            <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. The first tab that listens, such as a server, makes Windows Firewall ask whether other devices may reach netNIMA: allow it on the networks your boards are on.</li>
+            <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/netNIMA.app</code> in Terminal. It asks once to find devices on your local network: allow it.</li>
+            <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>.</li>
+          </ul>
+        </details>
+        <div class="links">
+          <a href="https://github.com/nimaltd/netNIMA/releases/latest">Every file, and the notes</a>
+        </div>
       </div>
     </div>
   </section>
