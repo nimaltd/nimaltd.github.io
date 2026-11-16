@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>netNIMA | A packet sender, receiver and sniffer, coming soon</title>
-<meta name="description" content="netNIMA, coming soon: a packet sender, receiver and sniffer for networks, by NimaLTD.">
+<title>netNIMA | A network tester for embedded developers</title>
+<meta name="description" content="netNIMA tests networked devices with each protocol as a client and as a server: UDP, TCP and Telnet, TLS and DTLS 1.0 to 1.3 with certificates or pre-shared keys, MQTT, CoAP, LwM2M, Modbus TCP, MCUmgr, HTTP, WebSocket, DHCP, mDNS and more, on Windows, macOS and Linux. Free and open source.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/netnima/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/netnima/">
-<meta property="og:title" content="netNIMA | A packet sender, receiver and sniffer, coming soon">
-<meta property="og:description" content="netNIMA, coming soon: a packet sender, receiver and sniffer for networks, by NimaLTD.">
+<meta property="og:title" content="netNIMA | A network tester for embedded developers">
+<meta property="og:description" content="netNIMA tests networked devices with each protocol as a client and as a server: UDP, TCP and Telnet, TLS and DTLS 1.0 to 1.3 with certificates or pre-shared keys, MQTT, CoAP, LwM2M, Modbus TCP, MCUmgr, HTTP, WebSocket, DHCP, mDNS and more, on Windows, macOS and Linux. Free and open source.">
 <meta property="og:image" content="https://github.com/nimaltd.png">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#071226">
@@ -51,7 +51,7 @@
           <li><a href="/ternima/"><b>terNIMA</b><span>A terminal for embedded developers</span></a></li>
           <li><a href="/libnima/"><b>libNIMA</b><span>A library into any project, from a window or a command</span></a></li>
           <li><a href="/blenima/"><b>bleNIMA</b><span>A Bluetooth LE tester for embedded developers</span></a></li>
-          <li><a href="/netnima/" aria-current="page"><b>netNIMA <em class="soon">Soon</em></b><span>Send, receive and sniff network packets</span></a></li>
+          <li><a href="/netnima/" aria-current="page"><b>netNIMA</b><span>A network tester for embedded developers</span></a></li>
         </ul>
       </details>
       <a href="/libraries/">Libraries</a>
@@ -72,22 +72,85 @@
 <main id="main">
   <section class="hero wrap page-hero" id="top">
     <div class="hero-text">
-      <span class="news"><b>Soon</b><span>Not released yet</span></span>
-      <h1>netNIMA, <span>packets on the network.</span></h1>
-      <p class="lead">A packet sender, receiver and sniffer for networks. It is coming soon.</p>
+      <a class="news" href="https://github.com/nimaltd/netNIMA/blob/main/CHANGELOG.md"><b>Changelog</b><span>What changed in each release</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
+      <h1>netNIMA, <span>a network tester for embedded developers.</span></h1>
+      <p class="lead">Test your networked devices from the computer, with each protocol as a client and as a server: a board can be tried from either side, and a protocol with no board at all. UDP, TCP and Telnet, TLS and DTLS from 1.0 to 1.3 with certificates or pre-shared keys, and on top of them MQTT, CoAP, LwM2M, Modbus TCP, MCUmgr, HTTP, WebSocket, DHCP, mDNS and more. Free and open source, on Windows, macOS and Linux.</p>
       <div class="ctas">
-        <a class="btn ghost" href="https://github.com/nimaltd">Follow on GitHub <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
-        <a class="btn ghost" href="/#products">The other products <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
+        <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
+        <a class="btn ghost" href="https://github.com/nimaltd/netNIMA">netNIMA on GitHub <svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 
+  <section class="wrap sect" id="get">
+    <div class="shead"><span class="n">01</span><h2>Get it</h2></div>
+    <div class="get" id="download">
+      <div class="get-head">
+        <h3>Download</h3>
+        <span class="stars" data-repo="netNIMA"><svg class="ico"><use href="/assets/icons.svg?v=3#i-star"/></svg><span></span></span>
+      </div>
+      <p>Free, under the Apache License 2.0.</p>
+      <ul class="os">
+        <li data-os="windows">
+          <div><b>Windows</b><span>10 and 11, x64</span></div>
+          <div class="os-files">
+            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
+            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .msi installer">.msi</a>
+          </div>
+        </li>
+        <li data-os="mac">
+          <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
+          <div class="os-files">
+            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
+          </div>
+        </li>
+        <li data-os="linux">
+          <div><b>Linux</b><span>x64</span></div>
+          <div class="os-files">
+            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
+            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .deb package">.deb</a>
+            <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .rpm package">.rpm</a>
+          </div>
+        </li>
+      </ul>
+      <p>The same on all three: every protocol, with both ends. On Linux, a server on a port below 1024, such as DHCP on 67 or Modbus on 502, needs root for now.</p>
+      <details class="unsigned">
+        <summary>Not signed yet: opening it the first time</summary>
+        <ul>
+          <li><b>Windows</b> may say "Windows protected your PC": click <b>More info</b>, then <b>Run anyway</b>. The first tab that listens, such as a server, makes Windows Firewall ask whether other devices may reach netNIMA: allow it on the networks your boards are on.</li>
+          <li><b>macOS</b> may say the app is damaged or cannot be checked: move it to Applications, then run <code>xattr -cr /Applications/netNIMA.app</code> in Terminal. It asks once to find devices on your local network: allow it.</li>
+          <li><b>Linux</b>: make the AppImage runnable with <code>chmod +x</code>.</li>
+        </ul>
+      </details>
+      <div class="links">
+        <a href="https://github.com/nimaltd/netNIMA/releases/latest">Every file, and the notes</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="features">
+    <div class="shead"><span class="n">02</span><h2>What it does</h2></div>
+    <ul class="features" aria-label="What netNIMA does">
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-check"/></svg><div><b>Both ends on one PC</b><span>Every protocol has a client and a server in netNIMA, so each one can be tried with no device, and a device can be tested from either side.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-network"/></svg><div><b>Sockets</b><span>UDP with broadcast and multicast, TCP and Telnet.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-lock"/></svg><div><b>TLS and DTLS of every kind</b><span>From 1.0 to 1.3, with the certificate checked or not, client certificates or pre-shared keys, AES-CCM and the old CBC suites through a built-in OpenSSL, ALPN, a key log for Wireshark, and test certificates made in the app.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-activity"/></svg><div><b>MQTT and MQTT-SN</b><span>MQTT 3.1.1 and 5.0, a client and a broker, over TCP, TLS and WebSocket; MQTT-SN, a client and a gateway.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-binary"/></svg><div><b>CoAP and LwM2M</b><span>CoAP and CoAPS with Observe and block-wise, over UDP, DTLS, TCP, TLS and WebSocket; LwM2M as a server and as a device, in TLV and SenML, with bootstrap and firmware update.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-cpu"/></svg><div><b>Modbus TCP</b><span>Modbus TCP and RTU over TCP, as a master and as a slave.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg><div><b>MCUmgr over UDP</b><span>For Zephyr and nRF Connect SDK, with firmware upload.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-source"/></svg><div><b>HTTP and WebSocket</b><span>HTTP and HTTPS, and WebSocket over ws and wss.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-gauge"/></svg><div><b>Speed and round trips</b><span>iperf2 and zperf over TCP and UDP, Echo with timed round trips, and Ping.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-layers"/></svg><div><b>The network's services</b><span>DHCP, DNS over UDP, TCP and TLS, mDNS and DNS-SD, SSDP, NTP, STUN, SNMP v1 and v2c, Syslog, TFTP, FTP and FTPS, and Wake-on-LAN.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-terminal"/></svg><div><b>A form, or typed commands</b><span>A protocol tab opens on a form: pick a command, fill in its boxes and send. Text takes the same commands typed, such as <code>pub sensors/temp 21.5</code>. MQTT, CoAP, HTTP, LwM2M, MCUmgr and Modbus have views of their own, each request in a row with its answer under it.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-sliders"/></svg><div><b>The PC's interfaces</b><span>Every network card with its addresses, MAC address, gateway, DNS servers and traffic.</span></div></li>
+    </ul>
+  </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-row">
     <span>&copy; <span id="year">2026</span> Nima Askari (NimaLTD)</span>
-    <span>terNIMA, libNIMA, bleNIMA and the libraries under the Apache License 2.0</span>
+    <span>terNIMA, libNIMA, bleNIMA, netNIMA and the libraries under the Apache License 2.0</span>
   </div>
 </footer>
 
