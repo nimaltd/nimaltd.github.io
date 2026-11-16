@@ -117,8 +117,8 @@
       <section id="sessions">
         <h2>Opening a session</h2>
 
-<p>The <b>+</b> at the end of the tabs, or File &gt; New session, opens one of seven kinds:</p>
-<figure><img src="/assets/help/ternima-new-session.png" width="1200" height="760" loading="lazy" decoding="async" alt="The menu under the + of the tab bar: Serial port, RTT through a debug probe, RTT through a debugger&#x27;s server, SWO through a debug probe, TCP or Telnet, SSH, and A recording, each with a line on what it is for"><figcaption>+ in the tab bar: the six kinds of session</figcaption></figure>
+<p>The <b>+</b> at the end of the tabs, the <b>New session</b> button on the welcome tab, or File &gt; New session, opens one of seven kinds:</p>
+<figure><img src="/assets/help/ternima-new-session.png" width="1200" height="760" loading="lazy" decoding="async" alt="The menu under the + of the tab bar: Serial port, RTT through a debug probe, RTT through a debugger&#x27;s server, SWO through a debug probe, TCP or Telnet, SSH, and A recording, each with a line on what it is for"><figcaption>+ in the tab bar: the seven kinds of session</figcaption></figure>
 
 <ul>
 <li><b>Serial port</b>: a UART, a USB serial adapter, or a board's virtual COM port.</li>
@@ -239,6 +239,7 @@
 <figure><img src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Zephyr log view: log lines with their time, level and module, the warnings and errors highlighted, and a count of each level above them"><figcaption>Zephyr logs, by level and module</figcaption></figure>
 
 <p>View &gt; Zephyr log (<kbd>Ctrl+Shift+J</kbd>) lists every received line, with Zephyr's log lines read into time, level and module. The level chips and the module list show or hide lines, the search marks matches or keeps only them, Tools &gt; Highlight rules colors the lines that match, and bookmarks (<kbd>Ctrl+F2</kbd>, then <kbd>F2</kbd> and <kbd>Shift+F2</kbd>) mark lines to come back to.</p>
+<p>A row over the list names the columns: Time, Level, Module and Message. Drag the edge between two names to make the column on its left wider or narrower, so a long module name shows in full; a double-click on the edge makes the column just wide enough for its longest text. Each tab keeps its widths. A module's name has the color of its line's level. <b>Clear</b> and <b>Scroll lock</b> are in the toolbar, as for the terminal: Clear (<kbd>Ctrl+Shift+K</kbd>) forgets the lines, which the plot reads too, and Scroll lock keeps the list still while lines keep coming.</p>
       </section>
       <section id="crash">
         <h2>Crash decoding</h2>
@@ -280,7 +281,7 @@
 <figure><img src="/assets/ternima-plot.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Plot view: temperature, humidity, a sine and RSSI drawn over the last 10 seconds, with each one&#x27;s last, min, max, mean and deviation"><figcaption>Numbers from the lines, over time</figcaption></figure>
 
 <p>View &gt; Plot (<kbd>Ctrl+Shift+G</kbd>) draws numbers over time. <b>Read</b> picks where they come from: <b>Numbers</b> reads named values such as <code>temp=21.5</code>, the Arduino Serial Plotter's <code>temp:21.5,hum:40</code>, plain numbers and JSON lines; <b>Regex</b> takes the numbers your pattern captures; <b>Modbus</b> the values a serial tab's Modbus view reads; <b>Variables</b> the ones Watch reads.</p>
-<p>Four charts: <b>Time</b>, <b>XY</b>, <b>Histogram</b> and <b>FFT</b>. Drag or the wheel zooms, <kbd>Shift</kbd>+wheel moves, <kbd>Space</kbd> pauses, and a double-click follows the newest values again. Clicks place the cursors A and B: the time between them, as a period and a frequency, and each series' value at both; the table under the chart has each one's min, max and mean between them. <b>R</b> by a series puts it on a right axis of its own, for values far from the others. The <b>trigger</b> shows the time around a series crossing a level, rising, falling or either way, as a scope does, and <b>Single</b> holds the first crossing until <b>Arm</b>. <b>CSV...</b> and <b>PNG...</b> save the data and the chart.</p>
+<p>Four charts: <b>Time</b>, <b>XY</b>, <b>Histogram</b> and <b>FFT</b>. Drag or the wheel zooms, <kbd>Shift</kbd>+wheel moves, <kbd>Space</kbd> pauses, and a double-click follows the newest values again. Clicks place the cursors A and B: the time between them, as a period and a frequency, and each series' value at both; the table under the chart has each one's min, max and mean between them. The <b>Series</b> list shows or hides each series, with All and None, as the check boxes in the table do. <b>R</b> by a series puts it on a right axis of its own, for values far from the others. The <b>trigger</b> shows the time around a series crossing a level, rising, falling or either way, as a scope does, and <b>Single</b> holds the first crossing until <b>Arm</b>. <b>CSV...</b> and <b>PNG...</b> save the data and the chart.</p>
 <figure><img src="/assets/ternima-axis.png" width="1200" height="760" loading="lazy" decoding="async" alt="Humidity and temperature on the left axis and a sine on a right axis of its own, over the same 10 seconds"><figcaption>A series far from the others, on a right axis</figcaption></figure>
 
 <figure><img src="/assets/ternima-fft.png" width="1200" height="760" loading="lazy" decoding="async" alt="The FFT of a signal in dB, its peaks at 50 and 120 Hz"><figcaption>FFT, with its peak</figcaption></figure>
@@ -309,7 +310,7 @@
 
 <figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme and text size, the mouse in the terminal, crash decoding, what terNIMA brings back at startup, logging with its folder and format, and the update check"><figcaption>File > Settings</figcaption></figure>
 
-<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme and the text size, what the mouse does in the terminal, crash decoding, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
+<p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme, the menu text size for the menus, tabs, buttons and dialogs (13 pixels at first; View &gt; Bigger, Smaller and Normal menu text size change it too), the terminals' text size, what the mouse does in the terminal, crash decoding, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
 <figure><img src="/assets/help/ternima-palette.png" width="1200" height="760" loading="lazy" decoding="async" alt="The command palette with watch typed: the Watch view and Watch beside the terminal"><figcaption>The command palette finds any command</figcaption></figure>
 
 <p>View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name. The keys:</p>
