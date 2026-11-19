@@ -25,7 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
 <!-- ?v= is the version of the files in /assets: when one of them changes, raise it everywhere in the site at once, site.js too, so that no page is shown with an old copy of one. -->
 <link rel="stylesheet" href="/assets/site.css?v=3">
-<script src="/assets/site.js?v=3" defer></script>
+<script src="/assets/site.js?v=4" defer></script>
 </head>
 <body>
 
@@ -111,22 +111,22 @@
           <li data-os="windows">
             <div><b>Windows</b><span>10 and 11, x64</span></div>
             <div class="os-files">
-              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
-              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .msi installer">.msi</a>
+              <a class="btn ghost small" data-asset="-setup.exe" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .exe installer"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.exe</a>
+              <a class="btn ghost small" data-asset=".msi" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Windows, the .msi installer">.msi</a>
             </div>
           </li>
           <li data-os="mac">
             <div><b>macOS</b><span>Apple Silicon and Intel</span></div>
             <div class="os-files">
-              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
+              <a class="btn ghost small" data-asset=".dmg" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for macOS, the .dmg"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.dmg</a>
             </div>
           </li>
           <li data-os="linux">
             <div><b>Linux</b><span>x64</span></div>
             <div class="os-files">
-              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
-              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .deb package">.deb</a>
-              <a class="btn ghost small" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .rpm package">.rpm</a>
+              <a class="btn ghost small" data-asset=".AppImage" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the AppImage"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>.AppImage</a>
+              <a class="btn ghost small" data-asset=".deb" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .deb package">.deb</a>
+              <a class="btn ghost small" data-asset=".rpm" href="https://github.com/nimaltd/netNIMA/releases/latest" aria-label="netNIMA for Linux, the .rpm package">.rpm</a>
             </div>
           </li>
         </ul>

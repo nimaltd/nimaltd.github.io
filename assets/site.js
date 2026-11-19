@@ -335,17 +335,17 @@
   var CACHE = "github-numbers";
   var HOUR = 60 * 60 * 1000;
 
-  function cached() {
+  function cached(key) {
     try {
-      var data = JSON.parse(sessionStorage.getItem(CACHE));
+      var data = JSON.parse(sessionStorage.getItem(key));
       return data && Date.now() - data.at < HOUR ? data : null;
     } catch (e) {
       return null;
     }
   }
 
-  function remember(data) {
-    try { sessionStorage.setItem(CACHE, JSON.stringify(data)); } catch (e) { /* nothing to do */ }
+  function remember(key, data) {
+    try { sessionStorage.setItem(key, JSON.stringify(data)); } catch (e) { /* nothing to do */ }
   }
 
   function getJson(url) {
@@ -366,13 +366,18 @@
     });
   }
 
-  /* terNIMA's latest release, so a new version's files are linked without
-     the page changing. When it fails, the links in the HTML stay. */
-  function latestRelease() {
-    return getJson("https://api.github.com/repos/" + USER + "/ternima/releases/latest").then(function (release) {
+  /* The repository a download link's file is in, read from its address: the
+     releases page in the HTML, or the file once it is linked. */
+  function repoOf(link) {
+    var found = /github\.com\/[^\/]+\/([^\/]+)\/releases/i.exec(link.getAttribute("href") || "");
+    return found ? found[1] : "";
+  }
+
+  /* An app's latest release, so a new version's files are linked without the
+     page changing. When it fails, the links in the HTML stay. */
+  function latestRelease(repo) {
+    return getJson("https://api.github.com/repos/" + USER + "/" + repo + "/releases/latest").then(function (release) {
       return {
-        version: release.tag_name.replace(/^v/, ""),
-        date: release.published_at,
         files: release.assets.map(function (asset) {
           return { name: asset.name, url: asset.browser_download_url };
         })
@@ -383,15 +388,7 @@
   }
 
   function fetchNumbers() {
-    // The release on its own as well, so it shows even when the numbers do not come.
-    var release = latestRelease();
-    release.then(function (found) {
-      if (found) {
-        showRelease(found);
-      }
-    });
-
-    return Promise.all([getJson("https://api.github.com/users/" + USER), allRepos(1, []), release]).then(function (answers) {
+    return Promise.all([getJson("https://api.github.com/users/" + USER), allRepos(1, [])]).then(function (answers) {
       var stars = {};
       var total = 0;
 
@@ -403,8 +400,8 @@
         stars[repo.name] = repo.stargazers_count;
       });
 
-      var data = { at: Date.now(), followers: answers[0].followers, repos: answers[0].public_repos, total: total, stars: stars, release: answers[2] };
-      remember(data);
+      var data = { at: Date.now(), followers: answers[0].followers, repos: answers[0].public_repos, total: total, stars: stars };
+      remember(CACHE, data);
       return data;
     });
   }
@@ -435,39 +432,51 @@
         (el.querySelector("span") || el).textContent = format(count);
       }
     });
-
-    if (data.release) {
-      showRelease(data.release);
-    }
   }
 
-  /* Each link names the end of its file's name, such as ".msi". A link whose
-     file the release does not have keeps the address it had. */
-  function showRelease(release) {
+  /* Each link names the end of its file's name, such as ".msi", and its app's
+     releases page, whose latest release has the file. A link whose file the
+     release does not have keeps the address it had. */
+  function showRelease(repo, release) {
     Array.prototype.forEach.call(document.querySelectorAll("[data-asset]"), function (link) {
       var end = link.getAttribute("data-asset");
       var file = release.files.filter(function (f) { return f.name.slice(-end.length) === end; })[0];
 
-      if (file) {
+      if (file && repoOf(link).toLowerCase() === repo.toLowerCase()) {
         link.href = file.url;
       }
     });
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-ternima="version"]'), function (el) {
-      el.textContent = release.version;
-    });
-
-    /* On terNIMA's own page only. */
-    var date = document.querySelector('[data-ternima="date"]');
-    var published = new Date(release.date || "");
-
-    if (date && !isNaN(published)) {
-      date.setAttribute("datetime", release.date.slice(0, 10));
-      date.textContent = published.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-    }
   }
 
-  var known = cached();
+  /* The apps whose files this page links, each release kept for an hour in this
+     tab, as the numbers are. */
+  var linked = [];
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-asset]"), function (link) {
+    var repo = repoOf(link);
+
+    if (repo && linked.indexOf(repo) < 0) {
+      linked.push(repo);
+    }
+  });
+
+  linked.forEach(function (repo) {
+    var key = "github-release-" + repo.toLowerCase();
+    var kept = cached(key);
+
+    if (kept) {
+      showRelease(repo, kept.release);
+    } else if (window.fetch && window.Promise) {
+      latestRelease(repo).then(function (found) {
+        if (found) {
+          remember(key, { at: Date.now(), release: found });
+          showRelease(repo, found);
+        }
+      });
+    }
+  });
+
+  var known = cached(CACHE);
 
   if (known) {
     show(known);
