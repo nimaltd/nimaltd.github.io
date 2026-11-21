@@ -246,7 +246,7 @@
         <h2>Crash decoding</h2>
 
 <p>When firmware crashes, it prints addresses. With the firmware's ELF file in the tab, terNIMA writes the function, the file and the line under each address that is in the code:</p>
-<figure><img src="/assets/help/ternima-crash.png" width="1200" height="760" loading="lazy" decoding="async" alt="A HardFault on an STM32H503RB over RTT: under the line with r14/lr, src/main.rs:237 in __cortex_m_rt_main, and under the faulting instruction address, src/asm.rs:76 in read_sensor"><figcaption>A HardFault: the LR and the PC decoded, the other values left alone</figcaption></figure>
+<figure><img src="/assets/help/ternima-crash.png" width="1200" height="760" loading="lazy" decoding="async" alt="A HardFault on an STM32H503RB over RTT: under the line with r14/lr, src/main.c:79 in main, and under the faulting instruction address, src/sensor.c:12 in read_sensor; then the chip starts again"><figcaption>A HardFault: the LR and the PC decoded, the other values left alone</figcaption></figure>
 
 <p>It reads any line with an address written as <code>0x08001234</code>, as in a Zephyr fatal error, a HardFault handler's print or an ESP32 backtrace. On a line that speaks of the PC, the LR, a fault or a backtrace, <code>08001234</code> without the <code>0x</code> counts too. Only addresses inside the ELF file's functions count, so RAM addresses and other numbers stay as they are. A return address, as in the LR, gives the line of the call.</p>
 <ul>
@@ -269,7 +269,7 @@
 </ol>
 <figure><img src="/assets/help/ternima-watch-list.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Live view with its box clicked: the list of the ELF file&#x27;s variables, each with its type and address, over the table of the variables watched"><figcaption>A click on the box lists the ELF file's variables</figcaption></figure>
 
-<figure><img src="/assets/help/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Live view: four variables of an STM32H503RB, a temperature, a sine, a sample count and the uptime, each with its type, address, value, min and max"><figcaption>Each variable's value, min and max, as the chip runs</figcaption></figure>
+<figure><img src="/assets/help/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Live view of an STM32H503RB: its four variables, a temperature, a sine, a sample count and the uptime, drawn over time, then Zephyr&#x27;s threads, then the variables again, each with its type, address, value, min and max"><figcaption>Each variable's value, min and max, as the chip runs</figcaption></figure>
 
 <p>The table has each variable's value, min and max; <b>Reset min/max</b> starts them again. <b>Plot them</b> draws them over time, and <b>Beside the terminal</b> shows them at the right of the terminal, the hex view and the Log view, so what the firmware prints and its variables are in view together:</p>
 <figure><img src="/assets/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The firmware&#x27;s RTT shell at the left, and its variables at the right of it, read live"><figcaption>Watch beside the terminal</figcaption></figure>
@@ -353,7 +353,7 @@ CONFIG_TRACING_PM=n</pre></div>
       <section id="settings">
         <h2>Settings and the keyboard</h2>
 
-<figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme and text size, the mouse in the terminal, crash decoding, what terNIMA brings back at startup, logging with its folder and format, and the update check"><figcaption>File > Settings</figcaption></figure>
+<figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme, menu text size and text size, the mouse in the terminal, crash decoding, what terNIMA brings back at startup, and logging with its folder and format"><figcaption>File > Settings</figcaption></figure>
 
 <p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme, the menu text size for the menus, tabs, buttons and dialogs (13 pixels at first; View &gt; Bigger, Smaller and Normal menu text size change it too), the terminals' text size, what the mouse does in the terminal, crash decoding, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
 <figure><img src="/assets/help/ternima-palette.png" width="1200" height="760" loading="lazy" decoding="async" alt="The command palette with live typed: the Live view, ticked as the view shown"><figcaption>The command palette finds any command</figcaption></figure>
