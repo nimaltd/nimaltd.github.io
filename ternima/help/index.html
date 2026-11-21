@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>terNIMA help | Serial, RTT, SWO, SSH, crash decoding, Watch, Plot and Modbus, step by step</title>
-<meta name="description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, SSH, the terminal, the hex view, Zephyr logs, crash decoding, live variables, the plot, Modbus, logs and recordings, with screenshots.">
+<title>terNIMA help | Serial, RTT, SWO, SSH, crash decoding, Live, RTOS tasks, Plot and Modbus, step by step</title>
+<meta name="description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, SSH, the terminal, the hex view, Zephyr logs, crash decoding, live variables, RTOS tasks and the timeline of every task switch, the plot, Modbus, logs and recordings, with screenshots.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/ternima/help/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/ternima/help/">
-<meta property="og:title" content="terNIMA help | Serial, RTT, SWO, Watch, Plot and Modbus, step by step">
-<meta property="og:description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, SSH, the terminal, the hex view, Zephyr logs, crash decoding, live variables, the plot, Modbus, logs and recordings, with screenshots.">
+<meta property="og:title" content="terNIMA help | Serial, RTT, SWO, Live, RTOS tasks, Plot and Modbus, step by step">
+<meta property="og:description" content="How to use terNIMA: serial, RTT through a probe or a debugger&#x27;s server, SWO, TCP, SSH, the terminal, the hex view, Zephyr logs, crash decoding, live variables, RTOS tasks and the timeline of every task switch, the plot, Modbus, logs and recordings, with screenshots.">
 <meta property="og:image" content="https://nimaltd.github.io/assets/ternima-logs.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071226">
@@ -95,9 +95,10 @@
         <li><a href="#ssh">SSH</a></li>
         <li><a href="#terminal">The terminal</a></li>
         <li><a href="#hex">Hex view</a></li>
-        <li><a href="#zephyr">Zephyr log</a></li>
+        <li><a href="#zephyr">Log view</a></li>
         <li><a href="#crash">Crash decoding</a></li>
-        <li><a href="#watch">Watch: live variables</a></li>
+        <li><a href="#watch">Live: variables</a></li>
+        <li><a href="#rtos">RTOS tasks and the timeline</a></li>
         <li><a href="#plot">Plot</a></li>
         <li><a href="#modbus">Modbus</a></li>
         <li><a href="#log">Log, record and replay</a></li>
@@ -124,7 +125,7 @@
 <li><b>Serial port</b>: a UART, a USB serial adapter, or a board's virtual COM port.</li>
 <li><b>RTT through a debug probe</b>: terNIMA opens a CMSIS-DAP, J-Link or ST-Link probe itself.</li>
 <li><b>RTT through a debugger's server</b>: while your IDE debugs, from J-Link's or OpenOCD's own RTT server.</li>
-<li><b>SWO through a debug probe</b>: ITM output on the chip's trace pin, such as printf.</li>
+<li><b>SWO through a debug probe</b>: printf on the chip's trace pin, and the Live view: variables, RTOS tasks, every task switch and interrupt.</li>
 <li><b>TCP or Telnet</b>: a device on the network, a serial bridge, or a shell.</li>
 <li><b>SSH</b>: a shell on a Linux board or a server, in a real terminal.</li>
 <li><b>A recording</b>: plays back what a tab recorded, with its timing.</li>
@@ -149,10 +150,10 @@
 <ol>
 <li><b>Pick the probe.</b> One already open in another tab says so.</li>
 <li><b>The chip</b>, as probe-rs names it: type part of its name and pick it from the list, or press <b>Detect</b>.</li>
-<li><b>The firmware's ELF file</b>, if you have it: terNIMA finds the control block at once from its <code>_SEGGER_RTT</code> symbol, and the Watch view finds the variables in it. Without it, RAM is searched.</li>
+<li><b>The firmware's ELF file</b>, if you have it: terNIMA finds the control block at once from its <code>_SEGGER_RTT</code> symbol, and the Live view finds the variables and the RTOS's tasks in it. Without it, RAM is searched.</li>
 <li><b>Connect.</b></li>
 </ol>
-<p>The <b>up channel</b> is the one shown, the <b>down channel</b> the one typed into; channel 0 is the terminal. <b>Control block address</b> skips the search. <b>Connect under reset</b> is for firmware that sleeps or turns the debug pins off. With <b>Read RTT</b> off, the tab reads only the variables in the Watch view, for firmware without RTT. <b>Reset target</b> in the toolbar resets the chip, and RTT is found again.</p>
+<p>The <b>up channel</b> is the one shown, the <b>down channel</b> the one typed into; channel 0 is the terminal. <b>Control block address</b> skips the search. <b>Connect under reset</b> is for firmware that sleeps or turns the debug pins off. With <b>Read RTT</b> off, the tab reads only the variables and the tasks in the Live view, for firmware without RTT. <b>Reset target</b> in the toolbar resets the chip, and RTT is found again. With SEGGER SystemView in the firmware, the Live view's timeline has every task switch and interrupt: see <a href="#rtos">RTOS tasks and the timeline</a>.</p>
 <figure><img src="/assets/help/ternima-terminal.png" width="1200" height="760" loading="lazy" decoding="async" alt="An RTT tab on an STM32H503RB: the firmware&#x27;s shell, with help, uptime and colors typed into it, the colors shown, and its variables beside the terminal"><figcaption>The firmware's shell over RTT, its variables beside it</figcaption></figure>
 
 <div class="note"><p>A probe has one owner: while your IDE debugs through it, terNIMA cannot open it. Read RTT through the debugger's own server then, as below.</p></div>
@@ -171,16 +172,16 @@
 <span class="p">&gt;</span> rtt server start 9090 0</pre></div>
 
 <p>Then pick <b>OpenOCD's RTT server</b>, <code>localhost</code> and 9090.</p>
-<figure><img src="/assets/help/ternima-server-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New TCP session dialog set for OpenOCD&#x27;s RTT server: localhost, port 9090, the Tcl port 6666 for Watch, and a line on the OpenOCD commands that start the server"><figcaption>OpenOCD's RTT server, and its Tcl port for Watch</figcaption></figure>
+<figure><img src="/assets/help/ternima-server-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New TCP session dialog set for OpenOCD&#x27;s RTT server: localhost, port 9090, the Tcl port 6666 for Watch, and a line on the OpenOCD commands that start the server"><figcaption>OpenOCD's RTT server, and its Tcl port for the Live view</figcaption></figure>
 
-<p>With OpenOCD, the Watch view reads the variables through OpenOCD's <b>Tcl port</b>, 6666 unless OpenOCD is told otherwise. The chip runs on, and the debugger keeps working. J-Link's server gives no way to read them.</p>
+<p>With OpenOCD, the Live view reads the variables through OpenOCD's <b>Tcl port</b>, 6666 unless OpenOCD is told otherwise. The chip runs on, and the debugger keeps working. J-Link's server gives no way to read them.</p>
       </section>
       <section id="swo">
         <h2>SWO through a debug probe</h2>
 
-<figure><img src="/assets/help/ternima-swo-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New SWO session dialog: the probe, the chip, the core clock in Hz, the SWO baud rate, the ITM stimulus port with 0 for printf, and the All ports box"><figcaption>SWO: the core clock, the baud rate, the ITM port</figcaption></figure>
+<figure><img src="/assets/help/ternima-swo-dialog.png" width="1200" height="760" loading="lazy" decoding="async" alt="The New SWO session dialog: the STLink V3 probe picked, the chip STM32H503RB, the firmware&#x27;s ELF file, the core clock 240000000 and the SWO baud rate 24000000 found by Detect, the ITM stimulus port 0 for printf, and the line saying the clock is the firmware&#x27;s SystemCoreClock, checked on the core"><figcaption>Detect finds the core clock, and the fastest baud rate for it</figcaption></figure>
 
-<p>SWO is the chip's trace pin: what the firmware writes to the ITM, such as printf. Give the chip's <b>core clock</b> in Hz and the <b>SWO baud rate</b>, which must divide it exactly, and the ITM <b>stimulus port</b> shown (0 is printf), or <b>All ports</b>. The trace pin, often PB3 on STM32, must be wired to the probe; on STM32H5 terNIMA turns it on itself. SWO tabs have the Watch view too, read through the same probe.</p>
+<p>SWO is the chip's trace pin: what the firmware writes to the ITM, such as printf. Give the chip's <b>core clock</b> in Hz and the <b>SWO baud rate</b>, which must divide it exactly, and the ITM <b>stimulus port</b> shown (0 is printf), or <b>All ports</b>. <b>Detect</b> beside the clock finds both: it reads the firmware's own <code>SystemCoreClock</code> when the ELF file is given, checked against the core's cycle counter, or else counts the cycles alone, and takes the fastest baud rate the probe takes that divides the clock, 24 MHz on an ST-Link V3. The trace pin, often PB3 on STM32, must be wired to the probe; on STM32H5 terNIMA turns it on itself. SWO tabs have the Live view too, read through the same probe, and their timeline has every task switch and interrupt, timed by the chip: see <a href="#rtos">RTOS tasks and the timeline</a>.</p>
       </section>
       <section id="tcp">
         <h2>TCP or Telnet</h2>
@@ -234,11 +235,11 @@
 <p>View &gt; Hex (<kbd>Ctrl+Shift+H</kbd>) shows every byte sent (TX) and received (RX), with offsets and the bytes as characters. A line holds 8, 16 or 32 bytes, and a new one starts when the direction changes or after a chosen byte such as <code>0A</code>. The terminal keeps everything while the hex view is shown.</p>
       </section>
       <section id="zephyr">
-        <h2>Zephyr log</h2>
+        <h2>Log view</h2>
 
-<figure><img src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Zephyr log view: log lines with their time, level and module, the warnings and errors highlighted, and a count of each level above them"><figcaption>Zephyr logs, by level and module</figcaption></figure>
+<figure><img src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Log view: Zephyr&#x27;s log lines with their time, level and module, the warnings and errors highlighted, and a count of each level above them"><figcaption>Zephyr logs, by level and module</figcaption></figure>
 
-<p>View &gt; Zephyr log (<kbd>Ctrl+Shift+J</kbd>) lists every received line, with Zephyr's log lines read into time, level and module. The level chips and the module list show or hide lines, the search marks matches or keeps only them, Tools &gt; Highlight rules colors the lines that match, and bookmarks (<kbd>Ctrl+F2</kbd>, then <kbd>F2</kbd> and <kbd>Shift+F2</kbd>) mark lines to come back to.</p>
+<p>View &gt; Log (<kbd>Ctrl+Shift+J</kbd>) lists every received line, with Zephyr's log lines read into time, level and module. The level chips and the module list show or hide lines, the search marks matches or keeps only them, Tools &gt; Highlight rules colors the lines that match, and bookmarks (<kbd>Ctrl+F2</kbd>, then <kbd>F2</kbd> and <kbd>Shift+F2</kbd>) mark lines to come back to.</p>
 <p>A row over the list names the columns: Time, Level, Module and Message. Drag the edge between two names to make the column on its left wider or narrower, so a long module name shows in full; a double-click on the edge makes the column just wide enough for its longest text. Each tab keeps its widths. A module's name has the color of its line's level. <b>Clear</b> and <b>Scroll lock</b> are in the toolbar, as for the terminal: Clear (<kbd>Ctrl+Shift+K</kbd>) forgets the lines, which the plot reads too, and Scroll lock keeps the list still while lines keep coming.</p>
       </section>
       <section id="crash">
@@ -249,38 +250,82 @@
 
 <p>It reads any line with an address written as <code>0x08001234</code>, as in a Zephyr fatal error, a HardFault handler's print or an ESP32 backtrace. On a line that speaks of the PC, the LR, a fault or a backtrace, <code>08001234</code> without the <code>0x</code> counts too. Only addresses inside the ELF file's functions count, so RAM addresses and other numbers stay as they are. A return address, as in the LR, gives the line of the call.</p>
 <ul>
-<li><b>Where the ELF file goes:</b> in the settings of a serial, RTT or SWO tab; for a TCP tab, in its Watch view. It needs no probe, and works on a plain serial port.</li>
+<li><b>Where the ELF file goes:</b> in the settings of a serial, RTT or SWO tab; for a TCP tab, in its Live view. It needs no probe, and works on a plain serial port.</li>
 <li><b>Debug information:</b> a firmware built with it, as with <code>-g</code>, gives the file and the line. Without it you get the function, from the symbol table. A stripped file has neither, and the tab says so.</li>
 <li><b>The right file:</b> it must be the firmware that runs, or the addresses point somewhere else. A file built again is read again by itself.</li>
-<li><b>The Zephyr view</b> shows them at the end of the line. The hex view and log files keep only what the device sent.</li>
+<li><b>The Log view</b> shows them at the end of the line. The hex view and log files keep only what the device sent.</li>
 <li><b>Settings &gt; Crashes</b> turns it off.</li>
 </ul>
-<figure><img src="/assets/help/ternima-crash-lines.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Zephyr view of the same crash: the function, file and line at the end of the lines with the LR and the PC"><figcaption>The same crash in the Zephyr view</figcaption></figure>
+<figure><img src="/assets/help/ternima-crash-lines.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Log view of the same crash: the function, file and line at the end of the lines with the LR and the PC"><figcaption>The same crash in the Log view</figcaption></figure>
       </section>
       <section id="watch">
-        <h2>Watch: live variables</h2>
+        <h2>Live: variables</h2>
 
-<p>Watch reads the firmware's variables as the chip runs, without stopping it: globals and statics, a struct's members as <code>sensor.temp</code>, an array's elements as <code>buf[2]</code>, found by name in the ELF file's debug information. Build the firmware with debug information (<code>-g</code>).</p>
+<p>The Live view reads the firmware's variables as the chip runs, without stopping it: globals and statics, a struct's members as <code>sensor.temp</code>, an array's elements as <code>buf[2]</code>, found by name in the ELF file's debug information. Build the firmware with debug information (<code>-g</code>).</p>
 <ol>
-<li><b>Choose the ELF file</b> in the Watch view, or in the tab's settings.</li>
+<li><b>Choose the ELF file</b> in the Live view, or in the tab's settings.</li>
 <li><b>Click the box</b> for all the variables in the file, or type part of a name. <kbd>↑</kbd>, <kbd>↓</kbd> and <kbd>Enter</kbd> add one.</li>
 <li><b>Every</b> sets how often they are read, 10 ms to 1 s.</li>
 </ol>
-<figure><img src="/assets/help/ternima-watch-list.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Watch view with its box clicked: the list of the ELF file&#x27;s variables, each with its type and address, over the table of the variables watched"><figcaption>A click on the box lists the ELF file's variables</figcaption></figure>
+<figure><img src="/assets/help/ternima-watch-list.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Live view with its box clicked: the list of the ELF file&#x27;s variables, each with its type and address, over the table of the variables watched"><figcaption>A click on the box lists the ELF file's variables</figcaption></figure>
 
-<figure><img src="/assets/help/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Watch view: four variables of an STM32H503RB, a temperature, a sine, a sample count and the uptime, each with its type, address, value, min and max"><figcaption>Each variable's value, min and max, as the chip runs</figcaption></figure>
+<figure><img src="/assets/help/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Live view: four variables of an STM32H503RB, a temperature, a sine, a sample count and the uptime, each with its type, address, value, min and max"><figcaption>Each variable's value, min and max, as the chip runs</figcaption></figure>
 
-<p>The table has each variable's value, min and max; <b>Reset min/max</b> starts them again. <b>Plot them</b> draws them over time, and <b>Beside the terminal</b> shows them at the right of the terminal, the hex view and the Zephyr log, so what the firmware prints and its variables are in view together:</p>
+<p>The table has each variable's value, min and max; <b>Reset min/max</b> starts them again. <b>Plot them</b> draws them over time, and <b>Beside the terminal</b> shows them at the right of the terminal, the hex view and the Log view, so what the firmware prints and its variables are in view together:</p>
 <figure><img src="/assets/ternima-watch.png" width="1200" height="760" loading="lazy" decoding="async" alt="The firmware&#x27;s RTT shell at the left, and its variables at the right of it, read live"><figcaption>Watch beside the terminal</figcaption></figure>
 
-<p>Watch works on <b>RTT tabs</b>, with Read RTT off for firmware without RTT; on <b>SWO tabs</b>; and on <b>RTT through OpenOCD's server</b> while you debug. Statics of one name in two source files are named as GDB names them, <code>'uart.c'::state</code>. After the firmware is built anew, <b>Reload</b> reads the ELF file again.</p>
+<p>The Live view works on <b>RTT tabs</b>, with Read RTT off for firmware without RTT; on <b>SWO tabs</b>; and on <b>RTT through OpenOCD's server</b> while you debug. Statics of one name in two source files are named as GDB names them, <code>'uart.c'::state</code>. After the firmware is built anew, <b>Reload</b> reads the ELF file again.</p>
+<p>Over the variables, the Live view shows the RTOS's tasks and the timeline of which ran when: see <a href="#rtos">RTOS tasks and the timeline</a>.</p>
+      </section>
+      <section id="rtos">
+        <h2>RTOS tasks and the timeline</h2>
+
+<p>With the firmware's ELF file, the Live view shows its RTOS's tasks over the variables: Zephyr's threads or FreeRTOS's tasks, each with what it is doing, its priority, the most of its stack it has used and its share of the CPU, the running one picked out. FreeRTOS's heap shows too. They are read every second through the kernel's own lists as the chip runs, laid out as the ELF file's debug information says, so the firmware needs no RTT and nothing added. What it leaves out that would show more is named under the table, as <code>CONFIG_THREAD_NAME=y</code>.</p>
+<figure><img src="/assets/ternima-rtos.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Live view of an RTT tab on an STM32H503RB running Zephyr with SystemView: the timeline, 24.6 ms across, with a lane for each thread, waiter, pong, ping, busy, blink, idle and main, the SysTick and TIM7 interrupts under them and the variables rallies and spins over the same time; under it, the Zephyr threads with each one&#x27;s state, priority, stack and share of the CPU"><figcaption>Zephyr's threads, and every switch over them</figcaption></figure>
+
+<p>The <b>timeline</b> over them has a lane for each task, showing when it ran, a lane for each interrupt, named as the firmware names it, TIM7 rather than IRQ 50, and the watched variables over the same time. It records from when the Live view is first shown, in every view after that. Which task ran, it learns one of three ways:</p>
+<ul>
+<li><b>Sampled</b>, in any tab with a probe: the running task is read as fast as the probe answers, about 2,700 times a second with an ST-Link V3. A task that runs for less than that may go unseen.</li>
+<li><b>Traced over SWO</b>, in an SWO tab: the chip sends each task switch and each interrupt itself, timed to the clock cycle, and nothing in the firmware changes. It needs a Cortex-M3, M4, M7 or M33 with its trace pin wired to the probe.</li>
+<li><b>From SEGGER SystemView</b>, in an RTT tab: firmware built with SystemView sends each task switch and each interrupt over RTT, timed by its own clock, with no trace pin. For Zephyr, in <code>prj.conf</code>:</li>
+</ul>
+<div class="cmd"><button class="copy" type="button" data-copy="CONFIG_TRACING=y&#10;CONFIG_SEGGER_SYSTEMVIEW=y&#10;CONFIG_SEGGER_SYSVIEW_RTT_CHANNEL=1&#10;CONFIG_SEGGER_SYSVIEW_RTT_BUFFER_SIZE=16384&#10;CONFIG_TRACING_SYSCALL=n&#10;CONFIG_TRACING_WORK=n&#10;CONFIG_TRACING_SEMAPHORE=n&#10;CONFIG_TRACING_MUTEX=n&#10;CONFIG_TRACING_CONDVAR=n&#10;CONFIG_TRACING_QUEUE=n&#10;CONFIG_TRACING_FIFO=n&#10;CONFIG_TRACING_LIFO=n&#10;CONFIG_TRACING_STACK=n&#10;CONFIG_TRACING_MESSAGE_QUEUE=n&#10;CONFIG_TRACING_MAILBOX=n&#10;CONFIG_TRACING_PIPE=n&#10;CONFIG_TRACING_HEAP=n&#10;CONFIG_TRACING_MEMORY_SLAB=n&#10;CONFIG_TRACING_TIMER=n&#10;CONFIG_TRACING_EVENT=n&#10;CONFIG_TRACING_POLLING=n&#10;CONFIG_TRACING_PM=n" aria-label="Copy the settings"><svg class="ico"><use href="/assets/icons.svg?v=3#i-copy"/></svg></button>
+<pre>CONFIG_TRACING=y
+CONFIG_SEGGER_SYSTEMVIEW=y
+CONFIG_SEGGER_SYSVIEW_RTT_CHANNEL=1
+CONFIG_SEGGER_SYSVIEW_RTT_BUFFER_SIZE=16384
+CONFIG_TRACING_SYSCALL=n
+CONFIG_TRACING_WORK=n
+CONFIG_TRACING_SEMAPHORE=n
+CONFIG_TRACING_MUTEX=n
+CONFIG_TRACING_CONDVAR=n
+CONFIG_TRACING_QUEUE=n
+CONFIG_TRACING_FIFO=n
+CONFIG_TRACING_LIFO=n
+CONFIG_TRACING_STACK=n
+CONFIG_TRACING_MESSAGE_QUEUE=n
+CONFIG_TRACING_MAILBOX=n
+CONFIG_TRACING_PIPE=n
+CONFIG_TRACING_HEAP=n
+CONFIG_TRACING_MEMORY_SLAB=n
+CONFIG_TRACING_TIMER=n
+CONFIG_TRACING_EVENT=n
+CONFIG_TRACING_POLLING=n
+CONFIG_TRACING_PM=n</pre></div>
+
+<p>The lines with <code>=n</code> leave out the kernel's objects, so SystemView sends only the threads and the interrupts, and RTT has room for every switch. Switches microseconds apart can still take more than half of what the probe reads: set the tab's <b>SWD speed</b> to its fastest, 24 MHz on an ST-Link V3, and give SystemView 16 KB of buffer where the RAM allows, as above, since the probe stalls for a few milliseconds now and then.</p>
+<h3>Looking at it</h3>
+<p>The wheel zooms, down to a microsecond across; <kbd>Shift</kbd> with the wheel, a drag and the scrollbar under the timeline move along the time. <b>Newest</b> follows the newest again, and <b>All</b> shows all of it. Pointing at a run tells which task or interrupt it was and how long it lasted, to the nanosecond when the switches are traced. <b>Variables</b> and <b>Interrupts</b> show their lanes or leave them out; over SWO, without the interrupts the trace pin has more room for the switches. Where what ran is not known, as where some of the trace was lost, the lanes are tinted and say Lost.</p>
+<figure><img src="/assets/help/ternima-timeline.png" width="1200" height="760" loading="lazy" decoding="async" alt="The timeline zoomed to 202 µs across, the chip paused: ping and pong taking turns every few microseconds, a TIM7 interrupt between them, and the pointer on a run of pong, which lasted 9.625 µs"><figcaption>202 µs across: every switch, and how long each run lasted</figcaption></figure>
+
+<p><b>Pause</b> halts the chip, in a tab with a probe of its own, and holds the whole Live view still, the tasks and the variables too. <b>Resume</b> runs it again, and the timeline shows where it was halted, with nothing missed; closing the tab runs it again too. Through a debugger's server, whose debugger has the chip, Pause holds the view still while the recording goes on. <b>Save</b> keeps the timeline in a file, and <b>Open</b> brings one back to look at later.</p>
       </section>
       <section id="plot">
         <h2>Plot</h2>
 
 <figure><img src="/assets/ternima-plot.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Plot view: temperature, humidity, a sine and RSSI drawn over the last 10 seconds, with each one&#x27;s last, min, max, mean and deviation"><figcaption>Numbers from the lines, over time</figcaption></figure>
 
-<p>View &gt; Plot (<kbd>Ctrl+Shift+G</kbd>) draws numbers over time. <b>Read</b> picks where they come from: <b>Numbers</b> reads named values such as <code>temp=21.5</code>, the Arduino Serial Plotter's <code>temp:21.5,hum:40</code>, plain numbers and JSON lines; <b>Regex</b> takes the numbers your pattern captures; <b>Modbus</b> the values a serial tab's Modbus view reads; <b>Variables</b> the ones Watch reads.</p>
+<p>View &gt; Plot (<kbd>Ctrl+Shift+G</kbd>) draws numbers over time. <b>Read</b> picks where they come from: <b>Numbers</b> reads named values such as <code>temp=21.5</code>, the Arduino Serial Plotter's <code>temp:21.5,hum:40</code>, plain numbers and JSON lines; <b>Regex</b> takes the numbers your pattern captures; <b>Modbus</b> the values a serial tab's Modbus view reads; <b>Variables</b> the ones the Live view reads.</p>
 <p>Four charts: <b>Time</b>, <b>XY</b>, <b>Histogram</b> and <b>FFT</b>. Drag or the wheel zooms, <kbd>Shift</kbd>+wheel moves, <kbd>Space</kbd> pauses, and a double-click follows the newest values again. Clicks place the cursors A and B: the time between them, as a period and a frequency, and each series' value at both; the table under the chart has each one's min, max and mean between them. The <b>Series</b> list shows or hides each series, with All and None, as the check boxes in the table do. <b>R</b> by a series puts it on a right axis of its own, for values far from the others. The <b>trigger</b> shows the time around a series crossing a level, rising, falling or either way, as a scope does, and <b>Single</b> holds the first crossing until <b>Arm</b>. <b>CSV...</b> and <b>PNG...</b> save the data and the chart.</p>
 <figure><img src="/assets/ternima-axis.png" width="1200" height="760" loading="lazy" decoding="async" alt="Humidity and temperature on the left axis and a sine on a right axis of its own, over the same 10 seconds"><figcaption>A series far from the others, on a right axis</figcaption></figure>
 
@@ -311,7 +356,7 @@
 <figure><img src="/assets/help/ternima-settings.png" width="1200" height="760" loading="lazy" decoding="async" alt="The Settings dialog: theme and text size, the mouse in the terminal, crash decoding, what terNIMA brings back at startup, logging with its folder and format, and the update check"><figcaption>File > Settings</figcaption></figure>
 
 <p>File &gt; Settings (<kbd>Ctrl+,</kbd>) has the theme, the menu text size for the menus, tabs, buttons and dialogs (13 pixels at first; View &gt; Bigger, Smaller and Normal menu text size change it too), the terminals' text size, what the mouse does in the terminal, crash decoding, what terNIMA brings back when it starts, the log folder and format, and the update check.</p>
-<figure><img src="/assets/help/ternima-palette.png" width="1200" height="760" loading="lazy" decoding="async" alt="The command palette with watch typed: the Watch view and Watch beside the terminal"><figcaption>The command palette finds any command</figcaption></figure>
+<figure><img src="/assets/help/ternima-palette.png" width="1200" height="760" loading="lazy" decoding="async" alt="The command palette with live typed: the Live view, ticked as the view shown"><figcaption>The command palette finds any command</figcaption></figure>
 
 <p>View &gt; Command palette (<kbd>Ctrl+Shift+P</kbd>) finds any command by part of its name. The keys:</p>
 <table>
@@ -322,7 +367,7 @@
 <tr><td>Copy, paste, select all</td><td><kbd>Ctrl+Shift+C</kbd> <kbd>Ctrl+Shift+V</kbd> <kbd>Ctrl+Shift+A</kbd></td></tr>
 <tr><td>Find, next, previous</td><td><kbd>Ctrl+Shift+F</kbd> <kbd>F3</kbd> <kbd>Shift+F3</kbd></td></tr>
 <tr><td>Clear the screen</td><td><kbd>Ctrl+Shift+K</kbd></td></tr>
-<tr><td>Hex, Zephyr log, Plot, Modbus</td><td><kbd>Ctrl+Shift+H</kbd> <kbd>Ctrl+Shift+J</kbd> <kbd>Ctrl+Shift+G</kbd> <kbd>Ctrl+Shift+M</kbd></td></tr>
+<tr><td>Hex, Log, Plot, Modbus</td><td><kbd>Ctrl+Shift+H</kbd> <kbd>Ctrl+Shift+J</kbd> <kbd>Ctrl+Shift+G</kbd> <kbd>Ctrl+Shift+M</kbd></td></tr>
 <tr><td>Split right, down; the other pane</td><td><kbd>Ctrl+Shift+E</kbd> <kbd>Ctrl+Shift+D</kbd> <kbd>F6</kbd></td></tr>
 <tr><td>Bookmark a line; next, previous</td><td><kbd>Ctrl+F2</kbd> <kbd>F2</kbd> <kbd>Shift+F2</kbd></td></tr>
 <tr><td>Log the tab; save the output</td><td><kbd>Ctrl+Shift+L</kbd> <kbd>Ctrl+Shift+S</kbd></td></tr>
@@ -337,9 +382,10 @@
 
 <ul>
 <li><b>The probe does not open.</b> Another program has it: a debugger in an IDE, STM32CubeProgrammer, or another tab. Close it, or read RTT through the debugger's server. If nothing has it, unplug it and plug it in again. The message in the status bar says why.</li>
-<li><b>No RTT control block.</b> Is RTT on in the firmware, and has it started? Give the ELF file, or the control block's address. For firmware without RTT, turn <b>Read RTT</b> off and use Watch.</li>
+<li><b>No RTT control block.</b> Is RTT on in the firmware, and has it started? Give the ELF file, or the control block's address. For firmware without RTT, turn <b>Read RTT</b> off and use the Live view.</li>
 <li><b>A serial port is in use.</b> Another program has it open: close it, and terNIMA connects by itself.</li>
 <li><b>A variable is "not in the ELF".</b> The firmware was built anew: press <b>Reload</b>. Build it with debug information.</li>
+<li><b>The timeline says Lost.</b> Over SWO, the chip had more to send than the trace pin carries: leave the interrupts out. Over RTT, SystemView's buffer in the firmware filled: set the SWD speed higher, and give SystemView a bigger buffer.</li>
 <li><b>A crash shows no function or line.</b> Is the ELF file in the tab the firmware that runs, and was it built with debug information? Is Settings &gt; Crashes on?</li>
 <li><b>SSH says a server's key changed.</b> After flashing a board this is expected: the message has the command that takes the old key out. Otherwise, find out why first.</li>
 <li><b>Anything else</b>: <a href="https://github.com/nimaltd/ternima/issues/new">ask, or report a bug on GitHub</a>.</li>

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>terNIMA | A serial, RTT, SWO and TCP terminal for embedded developers</title>
-<meta name="description" content="terNIMA: serial, RTT, SWO, TCP and SSH in one window on Windows, macOS and Linux, with Zephyr logs, crash decoding and live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
+<meta name="description" content="terNIMA: serial, RTT, SWO, TCP and SSH in one window on Windows, macOS and Linux, with Zephyr logs, crash decoding, live variables and RTOS tasks from the ELF, a timeline of every task switch, a plotter, a Modbus tester, and record and replay. Free and open source.">
 <meta name="author" content="Nima Askari">
 <link rel="canonical" href="https://nimaltd.github.io/ternima/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nimaltd.github.io/ternima/">
 <meta property="og:title" content="terNIMA | A serial, RTT, SWO and TCP terminal for embedded developers">
-<meta property="og:description" content="terNIMA: serial, RTT, SWO, TCP and SSH in one window on Windows, macOS and Linux, with Zephyr logs, crash decoding and live variables from the ELF, a plotter, a Modbus tester, and record and replay. Free and open source.">
+<meta property="og:description" content="terNIMA: serial, RTT, SWO, TCP and SSH in one window on Windows, macOS and Linux, with Zephyr logs, crash decoding, live variables and RTOS tasks from the ELF, a timeline of every task switch, a plotter, a Modbus tester, and record and replay. Free and open source.">
 <meta property="og:image" content="https://nimaltd.github.io/assets/ternima-logs.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071226">
@@ -74,7 +74,7 @@
     <div class="hero-text">
       <a class="news" href="https://github.com/nimaltd/ternima/blob/main/CHANGELOG.md"><b>Changelog</b><span>What changed in each release</span><svg class="ico"><use href="/assets/icons.svg?v=3#i-arrow"/></svg></a>
       <h1>terNIMA, <span>a terminal for embedded developers.</span></h1>
-      <p class="lead">One window for everything your board says: serial, TCP and SSH, plus RTT and SWO straight from your debug probe, with no vendor software. Watch your firmware's variables change as it runs, plot them, follow its Zephyr logs, and see the file and line of a crash. Free and open source, on Windows, macOS and Linux.</p>
+      <p class="lead">One window for everything your board says: serial, TCP and SSH, plus RTT and SWO straight from your debug probe, with no vendor software. Watch your firmware's variables and its RTOS's tasks as it runs, see every task switch on a timeline, plot them, follow its Zephyr logs, and see the file and line of a crash. Free and open source, on Windows, macOS and Linux.</p>
       <div class="ctas">
         <a class="btn amber" href="#download"><svg class="ico"><use href="/assets/icons.svg?v=3#i-download"/></svg>Download</a>
         <a class="btn ghost" href="/ternima/help/"><svg class="ico"><use href="/assets/icons.svg?v=3#i-book"/></svg>Help</a>
@@ -88,7 +88,8 @@
     <div class="tn">
       <figure class="shot" id="shots" aria-roledescription="carousel" aria-label="terNIMA, feature by feature">
         <div class="slides">
-          <img class="slide on" src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" data-caption="Zephyr logs, by level and module, with highlights" alt="terNIMA's Lines view: Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them">
+          <img class="slide on" src="/assets/ternima-rtos.png" width="1200" height="760" loading="lazy" data-caption="RTOS tasks, and every task switch and interrupt on a timeline" alt="terNIMA&#x27;s Live view on an STM32H503RB running Zephyr: a timeline with a lane for each thread, the SysTick and TIM7 interrupts under them and two variables over the same time, 24.6 ms across, and under it the threads, each with its state, priority, stack and share of the CPU">
+          <img class="slide" src="/assets/ternima-logs.png" width="1200" height="760" loading="lazy" data-caption="Zephyr logs, by level and module, with highlights" alt="terNIMA's Lines view: Zephyr log lines, each with its time, level and module, the warnings and errors highlighted, and a count of each level above them">
           <img class="slide" src="/assets/ternima-crash.png" width="1200" height="760" loading="lazy" data-caption="A real HardFault, with the function, file and line under each address" alt="An RTT tab on an STM32H503RB after a HardFault: under the lines with the LR and the PC, the function, file and line of each address">
           <img class="slide" src="/assets/ternima-ssh.png" width="1200" height="760" loading="lazy" data-caption="SSH in a real terminal: htop on a Linux machine" alt="An SSH tab with htop running in it, with its colors, its bars and its F key menu">
           <img class="slide" src="/assets/ternima-rtt.png" width="1200" height="760" loading="lazy" data-caption="RTT through an ST-LINK, with no vendor software" alt="An RTT tab on an STM32H503RB through an ST-LINK: the firmware's shell, with help, colors and uptime typed into it">
@@ -102,7 +103,7 @@
           <img class="slide" src="/assets/ternima-replay.png" width="1200" height="760" loading="lazy" data-caption="A recording played back, with its timing" alt="A recording played back at its own speed, with Pause, Restart, the speed and the position, and its numbers drawn as they come">
         </div>
         <figcaption>
-          <span class="slide-caption">Zephyr logs, by level and module, with highlights</span>
+          <span class="slide-caption">RTOS tasks, and every task switch and interrupt on a timeline</span>
           <span class="slide-tools"></span>
         </figcaption>
       </figure>
@@ -160,6 +161,7 @@
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-terminal"/></svg><div><b>Zephyr shell and logs</b><span>A full VT100 terminal with 24-bit color, and logs you filter by level and module, search and bookmark, in columns you can widen.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-binary"/></svg><div><b>Crash decoding</b><span>Under a code address in the output, as in a Zephyr fatal error, a HardFault or an ESP32 backtrace, its function, file and line from the ELF, on plain serial too.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-gauge"/></svg><div><b>Live variables</b><span>The firmware's globals, struct members and array elements by name from its ELF, read as the chip runs, beside the terminal or plotted.</span></div></li>
+      <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-sliders"/></svg><div><b>RTOS tasks and a timeline</b><span>Zephyr's threads and FreeRTOS's tasks as the chip runs, and every task switch and interrupt on a timeline, traced over SWO or sent by SystemView over RTT, down to a microsecond.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-activity"/></svg><div><b>A live plotter</b><span>Time, XY, histogram and FFT charts with a scope trigger, a right axis for values far apart and the series you pick, Arduino Serial Plotter format included.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-network"/></svg><div><b>Modbus, and its traffic</b><span>RTU and ASCII as a master that polls and plots, or a slave that answers, and every frame on the bus, each response under its request.</span></div></li>
       <li><svg class="ico"><use href="/assets/icons.svg?v=3#i-history"/></svg><div><b>Record and replay</b><span>Save a session with its timing and play it back later, faster or slower, from any point.</span></div></li>
